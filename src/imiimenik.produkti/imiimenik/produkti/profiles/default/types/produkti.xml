@@ -6,7 +6,7 @@
   <property name="description" i18n:translate="">Contact person entry</property>
   <property name="icon_expr">string:${portal_url}/++resource++plone/document_icon.png</property>
   <property name="factory">produkti</property>
-  <property name="add_view_expr">string:${folder_url}/@@add-dexterity-type/produkti</property>
+  <property name="add_view_expr">string:${folder_url}/++add++produkti</property>
   <property name="link_target"></property>
   <property name="immediate_view">view</property>
   <property name="global_allow">True</property>

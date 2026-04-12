@@ -6,7 +6,7 @@
   <property name="description" i18n:translate="">Laboratory test entry</property>
   <property name="icon_expr">string:${portal_url}/++resource++plone/folder_icon.png</property>
   <property name="factory">imipreiskava</property>
-  <property name="add_view_expr">string:${folder_url}/@@add-dexterity-type/imipreiskava</property>
+  <property name="add_view_expr">string:${folder_url}/++add++imipreiskava</property>
   <property name="link_target"></property>
   <property name="immediate_view">view</property>
   <property name="global_allow">True</property>
@@ -30,7 +30,7 @@
   <alias from="sharing" to="@@sharing" />
   <alias from="view" to="(selected layout)" />
   <action title="View" action_id="view" category="object" condition_expr=""
-    url_expr="string:${folder_url}/" visible="True">
+    url_expr="string:${object_url}/" visible="True">
     <permission value="View" />
   </action>
   <action title="Edit" action_id="edit" category="object" condition_expr=""
