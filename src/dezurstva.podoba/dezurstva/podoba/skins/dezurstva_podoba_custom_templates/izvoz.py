@@ -60,7 +60,7 @@ elif mode == 'tekoci':
 elif mode == 'pretekli':
 	if DateTime().month() == 1:
 		first_day = DateTime('%s-%s-%s' % (DateTime().year()-1, 12, '1'))
-        	last_day = DateTime('%s-%s-%s' % (DateTime().year(), 1, '1')) - 1
+		last_day = DateTime('%s-%s-%s' % (DateTime().year(), 1, '1')) - 1
 	else:
 		first_day = DateTime('%s-%s-%s' % (DateTime().year(), DateTime().month() - 1, '1'))
 		last_day = DateTime('%s-%s-%s' % (DateTime().year(), DateTime().month(), '1')) - 1
@@ -71,6 +71,6 @@ elif mode == 'oddo':
 
 
 test = context.portal_catalog(portal_type = "dezurstvo")[0].getObject()
-print test.excel_export(first_day, last_day, oseba)
+return test.excel_export(first_day, last_day, oseba)
 
 return printed

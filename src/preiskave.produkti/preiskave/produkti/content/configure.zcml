@@ -1,22 +1,7 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
-    xmlns:five="http://namespaces.zope.org/five"
     i18n_domain="preiskave.produkti">
 
-  <!-- configure your content components here -->
-  
-  <!-- -*- extra stuff goes here -*- -->
-  <class class=".imiuvozipreiskavo.imiuvozipreiskavo">
-    <require
-        permission="zope2.View"
-        interface="..interfaces.Iimiuvozipreiskavo"
-        />
-  </class>
-  <class class=".imipreiskava.imipreiskava">
-    <require
-        permission="zope2.View"
-        interface="..interfaces.Iimipreiskava"
-        />
-  </class>
+  <!-- Dexterity content types are registered via the FTI in profiles/default/types/ -->
 
 </configure>

@@ -1,121 +1,62 @@
 # -*- encoding: utf-8 -*-
 
-"""Definition of the uvoz content type
+"""Definition of the uvoz content type (Dexterity)
 """
 
-from zope.interface import implements
-
-from Products.Archetypes import atapi
-from Products.ATContentTypes.content import folder
-from Products.ATContentTypes.content import schemata
-
-# -*- Message Factory Imported Here -*-
+from zope.interface import implementer
+from plone.dexterity.content import Container
+from AccessControl import ClassSecurityInfo
+from Products.CMFCore.exceptions import BadRequest
+from Products.CMFCore.permissions import ModifyPortalContent
 
 from imiimenik.produkti.interfaces import Iuvoz
-from imiimenik.produkti.config import PROJECTNAME
-
 from imiimenik.produkti import produktiMessageFactory as _
 
-from Products.CMFCore.exceptions import BadRequest
-from AccessControl import ClassSecurityInfo
-from Products.CMFCore.permissions import *
-
-from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
-
-import os
-from zipfile import ZipFile
-import mimetypes
-from StringIO import StringIO
-
 import csv
-
-uvozSchema = folder.ATFolderSchema.copy() + atapi.Schema((
-
-    # -*- Your Archetypes field definitions here ... -*-
-    
-    atapi.FileField(
-        'datoteka',
-        storage=atapi.AnnotationStorage(),
-        widget=atapi.FileWidget(
-            label=_(u"Datoteka"),
-            description=_(u""),
-        ),
-        validators=('isNonEmptyFile'),
-        
-    ),
-
-    atapi.FileField(
-        'datoteka2',
-        storage=atapi.AnnotationStorage(),
-        widget=atapi.FileWidget(
-            label=_(u"Datoteka s strukturo podrocij"),
-            description=_(u""),
-        ),
-        validators=('isNonEmptyFile'),
-        
-    ),
-
-))
-
-# Set storage on fields copied from ATFolderSchema, making sure
-# they work well with the python bridge properties.
-
-uvozSchema['title'].storage = atapi.AnnotationStorage()
-uvozSchema['description'].storage = atapi.AnnotationStorage()
-
-schemata.finalizeATCTSchema(
-    uvozSchema,
-    folderish=True,
-    moveDiscussion=False
-)
+import re
 
 
-class uvoz(folder.ATFolder):
-    """Description of the Example Type"""
-    implements(Iuvoz)
+@implementer(Iuvoz)
+class uvoz(Container):
+    """Dexterity-based uvoz content type."""
 
     meta_type = "uvoz"
-    schema = uvozSchema
+    portal_type = "uvoz"
 
-    title = atapi.ATFieldProperty('title')
-    description = atapi.ATFieldProperty('description')
+    datoteka = None
+    datoteka2 = None
 
-    # -*- Your ATSchema to Python Property Bridges Here ... -*-
-    datoteka = atapi.ATFieldProperty('datoteka')
-    datoteka2 = atapi.ATFieldProperty('datoteka2')
-    
     security = ClassSecurityInfo()
     
     
     security.declarePrivate('unpackArchive')
     def unpackArchive(self):
                       
-        field = self.getField('datoteka')
-        filetype = field.getContentType(self)
-        file = field.getRaw(self)
+        field_name = 'datoteka'
+        
+        file = getattr(self, 'datoteka', None)
 
-        field2 = self.getField('datoteka2')
-        filetype2 = field2.getContentType(self)
-        file2 = field2.getRaw(self)
+        field2_name = 'datoteka2'
+        
+        file2 = getattr(self, 'datoteka2', None)
                 
-        if file2.data:
+        if file2 and getattr(file2, 'data', None):
 
             try:
-                chunk = file2.data
-                filedata2 = ''
+                chunk = file2.data if hasattr(file2, 'next') else None
+                filedata2 = b''
                 while chunk is not None:
-                    filedata2 += chunk.data
+                    filedata2 += chunk.data if isinstance(chunk.data, bytes) else chunk.data.encode('utf-8')
                     chunk = chunk.next
             except AttributeError:
-                filedata2 = file2.data
+                filedata2 = file2.data if isinstance(file2.data, bytes) else file2.data.encode('utf-8')
          
                        
             import datetime
             import re
-            
 
-            
-            m1 = re.finditer('\n(("[^"]*";)|([^("|;)]*;)){2}(("[^"]*")|([^("|;|\n)]*)){1}', filedata2)
+            filedata2_str = filedata2.decode('utf-8', errors='replace') if isinstance(filedata2, bytes) else filedata2
+            m1 = re.finditer('\n(("[^"]*";)|([^("|;)]*;)){2}(("[^"]*")|([^("|;|\n)]*)){1}', filedata2_str)
             podatki = []
             
             
@@ -156,7 +97,7 @@ class uvoz(folder.ATFolder):
                 except:
                     pass
 
-        if file.data:
+        if file and getattr(file, 'data', None):
             
             self.plone_utils.addPortalMessage('UVOZ PODATKOV:') 
             stevec1 = 0
@@ -164,24 +105,25 @@ class uvoz(folder.ATFolder):
             stevec3 = 0
             
             
-            filename = field.getFilename(self)
+            filename = getattr(file, 'filename', 'file.csv')
 
             # get the full binary from file
             try:
-                chunk = file.data
-                filedata = ''
+                chunk = file.data if hasattr(file, 'next') else None
+                filedata = b''
                 while chunk is not None:
-                    filedata += chunk.data
+                    filedata += chunk.data if isinstance(chunk.data, bytes) else chunk.data.encode('utf-8')
                     chunk = chunk.next
             except AttributeError:
-                filedata = file.data
+                filedata = file.data if isinstance(file.data, bytes) else file.data.encode('utf-8')
          
                        
             import datetime
             import re
             
             
-            m1 = re.finditer('\n(("[^"]*";)|([^("|;)]*;)){21}(("[^"]*")|([^("|;|\n)]*)){1}', filedata)
+            filedata_str = filedata.decode('utf-8', errors='replace') if isinstance(filedata, bytes) else filedata
+            m1 = re.finditer('\n(("[^"]*";)|([^("|;)]*;)){21}(("[^"]*")|([^("|;|\n)]*)){1}', filedata_str)
             podatki = []
             
             for h in m1:  
@@ -403,7 +345,7 @@ class uvoz(folder.ATFolder):
             self.plone_utils.addPortalMessage('Ustvarjenih vnosov: ' + str(stevec2))  
             self.plone_utils.addPortalMessage('Neuspesno obdelanih vrstic: ' + str(stevec3))  
                                       
-            field.set(self, 'DELETE_FILE')
+            setattr(self, 'datoteka', None)
             
             
     security.declareProtected(ModifyPortalContent, 'at_post_create_script')
@@ -413,9 +355,8 @@ class uvoz(folder.ATFolder):
     security.declareProtected(ModifyPortalContent, 'at_post_edit_script')
     def at_post_edit_script(self):
         self.unpackArchive()
-        self.status = _('No changes')
+        
     
     
     
 
-atapi.registerType(uvoz, PROJECTNAME)
