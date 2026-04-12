@@ -5,7 +5,7 @@
 from zope.interface import implementer
 from plone.dexterity.content import Container
 from AccessControl import ClassSecurityInfo
-from Products.CMFCore.permissions import ModifyPortalContent
+from zope.lifecycleevent.interfaces import IObjectCreatedEvent
 
 from preiskave.produkti.interfaces import Iimipreiskava
 
@@ -60,7 +60,7 @@ class imipreiskava(Container):
             title='Datoteke'
         )
 
-    security.declareProtected(ModifyPortalContent, 'at_post_create_script')
-    def at_post_create_script(self):
-        if not hasattr(self, "datoteke"):
-            self.narediMape()
+
+def on_object_created(obj, event):
+    if not hasattr(obj, "datoteke"):
+        obj.narediMape()

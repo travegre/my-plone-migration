@@ -4,4 +4,15 @@
 
   <!-- Dexterity content types are registered via the FTI in profiles/default/types/ -->
 
+  <subscriber
+      for="imiimenik.produkti.content.uvoz.uvoz
+           zope.lifecycleevent.interfaces.IObjectCreatedEvent"
+      handler="imiimenik.produkti.content.uvoz.on_object_created"
+  />
+  <subscriber
+      for="imiimenik.produkti.content.uvoz.uvoz
+           zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+      handler="imiimenik.produkti.content.uvoz.on_object_modified"
+  />
+
 </configure>

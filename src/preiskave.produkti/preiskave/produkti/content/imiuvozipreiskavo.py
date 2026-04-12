@@ -7,7 +7,9 @@ from plone.dexterity.content import Item
 from AccessControl import ClassSecurityInfo
 from Products.CMFCore.exceptions import BadRequest
 from Products.CMFCore.permissions import ModifyPortalContent
+from zope.lifecycleevent.interfaces import IObjectCreatedEvent, IObjectModifiedEvent
 
+import plone.api
 from preiskave.produkti.interfaces import Iimiuvozipreiskavo
 
 import logging
@@ -36,7 +38,8 @@ class imiuvozipreiskavo(Item):
         filename1 = getattr(file1, 'filename', 'file1.xlsx')
         filename2 = getattr(file2, 'filename', 'file2.xlsx')
 
-        msg = self.plone_utils.addPortalMessage
+        def msg(message):
+            plone.api.portal.show_message(message=message, request=self.REQUEST)
 
         if file1 and getattr(file1, 'data', None):
             msg('UVOZ PREISKAV:')
@@ -243,7 +246,7 @@ class imiuvozipreiskavo(Item):
                     stevec1 = stevec1 + 1
                 else:
                     try:
-                        preiskava = self.portal.restrictedTraverse(
+                        preiskava = plone.api.portal.get().restrictedTraverse(
                             "portal/preiskave/preiskave-1/katalog-preiskav"
                         ).invokeFactory(
                             type_name='imipreiskava',
@@ -291,10 +294,10 @@ class imiuvozipreiskavo(Item):
             setattr(self, 'datoteka1', None)
             setattr(self, 'datoteka2', None)
 
-    security.declareProtected(ModifyPortalContent, 'at_post_create_script')
-    def at_post_create_script(self):
-        self.unpackArchive()
 
-    security.declareProtected(ModifyPortalContent, 'at_post_edit_script')
-    def at_post_edit_script(self):
-        self.unpackArchive()
+def on_object_created(obj, event):
+    obj.unpackArchive()
+
+
+def on_object_modified(obj, event):
+    obj.unpackArchive()
