@@ -7,7 +7,9 @@ RUN apt-get update && apt-get install -y gcc build-essential libssl-dev libxml2-
 
 RUN useradd -m -s /bin/bash plone
 
-RUN pip install --no-cache-dir "setuptools==65.7.0" "zc.buildout==3.0.1"
+# Upgrade pip first, then install compatible buildout toolchain for Plone 5.2.14 on Python 3.8
+RUN pip install --upgrade "pip==23.3.2" && \
+    pip install --no-cache-dir "setuptools==67.6.0" "zc.buildout==3.0.1" "wheel"
 
 WORKDIR /plone/instance
 
