@@ -19,7 +19,8 @@ RUN apt-get update && apt-get install -y \
 
 RUN useradd -m -s /bin/bash plone
 
-RUN pip install --no-cache-dir "zc.buildout==2.13.8" "setuptools==57.4.0"
+# zc.buildout 2.13.8 requires setuptools<52
+RUN pip install --no-cache-dir "setuptools==51.3.3" "zc.buildout==2.13.8"
 
 WORKDIR /plone/instance
 
