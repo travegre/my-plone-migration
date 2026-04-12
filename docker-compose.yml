@@ -9,6 +9,12 @@ services:
       - ./var/blobstorage:/plone/instance/var/blobstorage
     networks:
       - plone
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import socket; s=socket.socket(); s.connect(('localhost', 8100)); s.close()\""]
+      interval: 5s
+      timeout: 5s
+      retries: 15
+      start_period: 15s
 
   instance:
     build: .
@@ -18,9 +24,11 @@ services:
     volumes:
       - ./src:/plone/instance/src
     depends_on:
-      - zeoserver
+      zeoserver:
+        condition: service_healthy
     networks:
       - plone
+    restart: on-failure
 
 networks:
   plone:
