@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y gcc build-essential libssl-dev libxml2-
 
 RUN useradd -m -s /bin/bash plone
 
-RUN pip install --no-cache-dir wheel && pip install --no-cache-dir setuptools==65.7.0 zc.buildout==3.0.1
+RUN pip install --no-cache-dir wheel setuptools==65.7.0 zc.buildout==2.13.9
 
 WORKDIR /plone/instance
 
@@ -15,7 +15,7 @@ COPY --chown=plone:plone buildout-base.cfg /plone/instance/buildout-base.cfg
 COPY --chown=plone:plone buildout.cfg /plone/instance/buildout.cfg
 COPY --chown=plone:plone src/ /plone/instance/src/
 
-RUN mkdir -p var/filestorage var/blobstorage var/log var/.python-eggs && chown -R plone:plone /plone/instance
+RUN mkdir -p var/filestorage var/blobstorage var/log var/.python-eggs eggs && chown -R plone:plone /plone/instance
 
 USER plone
 
