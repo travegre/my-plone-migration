@@ -56,6 +56,7 @@ setup(name='kiestra.produkti',
       zip_safe=False,
       install_requires=['setuptools',
                         # -*- Extra requirements: -*-
+                        'plone.api',
                         ],
       tests_require=tests_require,
       extras_require=dict(tests=tests_require),

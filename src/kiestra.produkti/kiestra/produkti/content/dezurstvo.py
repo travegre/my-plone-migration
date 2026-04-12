@@ -6,6 +6,7 @@ from zope.interface import implementer
 from plone.dexterity.content import Container
 from AccessControl import ClassSecurityInfo
 
+import plone.api
 from kiestra.produkti.interfaces import Idezurstvo
 
 import openpyxl
@@ -22,7 +23,7 @@ class dezurstvo(Container):
     security = ClassSecurityInfo()
 
     def getSampleVocabulary40(self):
-        obj = self.portal.restrictedTraverse('dezurstva/seznam_zaposlenih')
+        obj = plone.api.portal.get().restrictedTraverse('dezurstva/seznam_zaposlenih')
         obj = obj.getFolderContents(contentFilter={'sort_on':'getObjPositionInParent'})
         xx = []
         for rows in obj:

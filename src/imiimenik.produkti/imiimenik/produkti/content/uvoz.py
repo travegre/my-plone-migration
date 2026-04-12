@@ -8,7 +8,10 @@ from plone.dexterity.content import Container
 from AccessControl import ClassSecurityInfo
 from Products.CMFCore.exceptions import BadRequest
 from Products.CMFCore.permissions import ModifyPortalContent
+from Products.CMFCore.utils import getToolByName
+from zope.lifecycleevent.interfaces import IObjectCreatedEvent, IObjectModifiedEvent
 
+import plone.api
 from imiimenik.produkti.interfaces import Iuvoz
 from imiimenik.produkti import produktiMessageFactory as _
 
@@ -89,7 +92,7 @@ class uvoz(Container):
                 nadoddelek = i[0]
                 #nadoddelek = ''.join(j for j in nadoddelek if (ord(j)<123 and ord(j)>96) or (ord(j) == 45) or (ord(j)<91 and ord(j)>64) or (ord(j)<58 and ord(j)>47));
                 try:
-                    mapa = self.portal.restrictedTraverse("portal/data2").invokeFactory(                            
+                    mapa = plone.api.portal.get().restrictedTraverse("portal/data2").invokeFactory(                            
                                 type_name='Folder',
                                 id=nadoddelek,
                                 title=i[1]                                                    
@@ -99,7 +102,7 @@ class uvoz(Container):
 
         if file and getattr(file, 'data', None):
             
-            self.plone_utils.addPortalMessage('UVOZ PODATKOV:') 
+            plone.api.portal.show_message(message='UVOZ PODATKOV:', request=self.REQUEST) 
             stevec1 = 0
             stevec2 = 0
             stevec3 = 0
@@ -127,14 +130,14 @@ class uvoz(Container):
             podatki = []
             
             for h in m1:  
-                #self.plone_utils.addPortalMessage(h.group(0)[:-1].decode('utf-8'))               
+                #plone.api.portal.show_message(message=h.group(0)[:-1].decode('utf-8'), request=self.REQUEST)               
                 podatki.append(h.group(0)[:-1])
 
             
-            #self.plone_utils.addPortalMessage(podatki[-1].decode('utf-8')) 
+            #plone.api.portal.show_message(message=podatki[-1].decode('utf-8'), request=self.REQUEST) 
 
             
-            self.plone_utils.addPortalMessage('Stevilo vseh zaznanih vrstic v datoteki ' + filename + ': ' + str(len(podatki)))                 
+            plone.api.portal.show_message(message='Stevilo vseh zaznanih vrstic v datoteki ' + filename + ': ' + str(len(podatki)), request=self.REQUEST)                 
             
             
             ignoreLine = 0
@@ -163,28 +166,28 @@ class uvoz(Container):
                         if sifra in oddelki.keys():
                             podrejeno = True                           
                             try:
-                                mapa = self.portal.restrictedTraverse("portal/data2/" + oddelki[sifra][0]).invokeFactory(                            
+                                mapa = plone.api.portal.get().restrictedTraverse("portal/data2/" + oddelki[sifra][0]).invokeFactory(                            
                                                 type_name='Folder',
                                                 id=oddelek2,
                                                 title=oddelek                                                     
                                 )
                             except:
                                 pass
-                            mapa = self.portal.restrictedTraverse("portal/data2/" + oddelki[sifra][0] + '/' + oddelek2)
-                            self.plone_utils.addPortalMessage('ustvarjena mapa: ' + oddelki[sifra][0] + '/' + oddelek2)
+                            mapa = plone.api.portal.get().restrictedTraverse("portal/data2/" + oddelki[sifra][0] + '/' + oddelek2)
+                            plone.api.portal.show_message(message='ustvarjena mapa: ' + oddelki[sifra][0] + '/' + oddelek2, request=self.REQUEST)
                         else:
                             podrejeno = False
 
                             try:
-                                mapa = self.portal.restrictedTraverse("portal/data2").invokeFactory(                            
+                                mapa = plone.api.portal.get().restrictedTraverse("portal/data2").invokeFactory(                            
                                                 type_name='Folder',
                                                 id=oddelek2,
                                                 title=oddelek                                                     
                                 )
                             except:
                                 pass
-                            mapa = self.portal.restrictedTraverse("portal/data2/" + oddelek2)
-                            self.plone_utils.addPortalMessage('ustvarjena mapa: ' + oddelek2)
+                            mapa = plone.api.portal.get().restrictedTraverse("portal/data2/" + oddelek2)
+                            plone.api.portal.show_message(message='ustvarjena mapa: ' + oddelek2, request=self.REQUEST)
                                 
 
                 if not row[0].strip().replace('"', "").startswith('#'):
@@ -278,7 +281,8 @@ class uvoz(Container):
                     novid = ''.join(i for i in novid if (ord(i)<123 and ord(i)>96) or (ord(i)<91 and ord(i)>64) or (ord(i)<58 and ord(i)>47));
                     
                    
-                    zadetek = self.portal.portal_catalog(portal_type="produkti", review_state='published', id=novid)
+                    catalog = getToolByName(self, 'portal_catalog')
+                    zadetek = catalog(portal_type="produkti", review_state='published', id=novid)
                     if zadetek:
                           continue
                           zadetek = zadetek[0].getObject()                      
@@ -305,11 +309,11 @@ class uvoz(Container):
                           zadetek.star=star                   
                           
                         
-                          #self.plone_utils.addPortalMessage('Upravicenec ' + novid[:15] + '... je bil posodobljen') 
+                          #plone.api.portal.show_message(message='Upravicenec ' + novid[:15] + '... je bil posodobljen', request=self.REQUEST) 
                           stevec1 = stevec1 + 1
                     else:                  
                         try:                       
-                            self.plone_utils.addPortalMessage(row) 
+                            plone.api.portal.show_message(message=row, request=self.REQUEST) 
                             produkt = mapa.invokeFactory(                            
                                 type_name='produkti',
                                 id=novid,
@@ -337,24 +341,23 @@ class uvoz(Container):
                             )
                             stevec2 = stevec2 + 1
                         except BadRequest:
-                            self.plone_utils.addPortalMessage('Neuspesen vnos: ' + novid) 
+                            plone.api.portal.show_message(message='Neuspesen vnos: ' + novid, request=self.REQUEST) 
                             stevec3 = stevec3 + 1
                                 
           
-            self.plone_utils.addPortalMessage('Posodobljenih vnosov: ' + str(stevec1))
-            self.plone_utils.addPortalMessage('Ustvarjenih vnosov: ' + str(stevec2))  
-            self.plone_utils.addPortalMessage('Neuspesno obdelanih vrstic: ' + str(stevec3))  
+            plone.api.portal.show_message(message='Posodobljenih vnosov: ' + str(stevec1), request=self.REQUEST)
+            plone.api.portal.show_message(message='Ustvarjenih vnosov: ' + str(stevec2), request=self.REQUEST)  
+            plone.api.portal.show_message(message='Neuspesno obdelanih vrstic: ' + str(stevec3), request=self.REQUEST)  
                                       
             setattr(self, 'datoteka', None)
             
             
-    security.declareProtected(ModifyPortalContent, 'at_post_create_script')
-    def at_post_create_script(self):
-        self.unpackArchive()
+def on_object_created(obj, event):
+    obj.unpackArchive()
 
-    security.declareProtected(ModifyPortalContent, 'at_post_edit_script')
-    def at_post_edit_script(self):
-        self.unpackArchive()
+
+def on_object_modified(obj, event):
+    obj.unpackArchive()
         
     
     

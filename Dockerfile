@@ -1,4 +1,4 @@
-FROM python:2.7-slim
+FROM python:3.8-slim
 
 ENV PYTHONUNBUFFERED 1
 ENV PLONE_VERSION 5.2.14
@@ -19,7 +19,7 @@ RUN apt-get update && apt-get install -y \
 
 RUN useradd -m -s /bin/bash plone
 
-RUN pip install --no-cache-dir zc.buildout==2.13.8 setuptools==44.1.1
+RUN pip install --no-cache-dir "zc.buildout==2.13.8" "setuptools==57.4.0"
 
 WORKDIR /plone/instance
 

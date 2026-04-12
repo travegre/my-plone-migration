@@ -5,7 +5,9 @@ from zope.interface import implementer
 from plone.dexterity.content import Container
 from AccessControl import ClassSecurityInfo
 from Products.CMFCore.permissions import ModifyPortalContent
+from zope.lifecycleevent.interfaces import IObjectCreatedEvent, IObjectModifiedEvent
 
+import plone.api
 from dezurstva.produkti.interfaces import Iseznam_zaposlenih
 
 import os
@@ -32,9 +34,6 @@ class seznam_zaposlenih(Container):
 
     security = ClassSecurityInfo()
 
-    security = ClassSecurityInfo()        
-    
-    
     security.declarePrivate('unpackArchive')
     def unpackArchive(self):
                 
@@ -47,8 +46,8 @@ class seznam_zaposlenih(Container):
         
         file2 = getattr(self, 'datoteka2', None)
 
-        msg = self.plone_utils.addPortalMessage
-        
+        def msg(message):
+            plone.api.portal.show_message(message=message, request=self.REQUEST)
         
         if file1 and getattr(file1, 'data', None):       
             
@@ -163,11 +162,11 @@ class seznam_zaposlenih(Container):
 
         setattr(self, 'datoteka2', None)  
 
-    security.declareProtected(ModifyPortalContent, 'at_post_create_script')
-    def at_post_create_script(self):
-        self.unpackArchive()
 
-    security.declareProtected(ModifyPortalContent, 'at_post_edit_script')
-    def at_post_edit_script(self):
-        self.unpackArchive()
+def on_object_created(obj, event):
+    obj.unpackArchive()
+
+
+def on_object_modified(obj, event):
+    obj.unpackArchive()
 

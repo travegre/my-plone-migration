@@ -9,7 +9,9 @@ from Products.CMFCore.exceptions import BadRequest
 from Products.CMFCore.permissions import ModifyPortalContent
 from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.WorkflowCore import WorkflowException
+from zope.lifecycleevent.interfaces import IObjectCreatedEvent, IObjectModifiedEvent
 
+import plone.api
 from dezurstva.produkti.interfaces import Idezurstvo
 
 import os
@@ -34,7 +36,7 @@ class dezurstvo(Container):
     security = ClassSecurityInfo()
 
     def getSampleVocabulary40(self):
-        obj = self.portal.restrictedTraverse('dezurstva/seznam_zaposlenih')
+        obj = plone.api.portal.get().restrictedTraverse('dezurstva/seznam_zaposlenih')
         obj = obj.getFolderContents(contentFilter={'sort_on':'getObjPositionInParent'})             
                                  
         xx = []
@@ -44,11 +46,9 @@ class dezurstvo(Container):
         
         return xx
 
-    security = ClassSecurityInfo()
-
     # this is used in the spremeni dezurstvo form
     def getSampleVocabulary50(self):
-        obj = self.portal.restrictedTraverse('dezurstva/seznam_zaposlenih')
+        obj = plone.api.portal.get().restrictedTraverse('dezurstva/seznam_zaposlenih')
         obj = obj.getFolderContents(contentFilter={'sort_on':'getObjPositionInParent'})             
                                  
         xx = [('','')]
@@ -57,8 +57,6 @@ class dezurstvo(Container):
                 xx.append((str(x.Description).split('|')[1] == '-' and x.id or str(x.Description).split('|')[1], x.Title))
         
         return xx
-
-    security = ClassSecurityInfo()
 
     # -*- Your ATSchema to Python Property Bridges Here ... -*-
 
@@ -381,7 +379,7 @@ class dezurstvo(Container):
         workBookDocument.save(dat)
 
         # output zip file
-        r = self.portal.REQUEST  
+        r = self.REQUEST  
         r.RESPONSE.setHeader("Content-type","application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")        
         od = first_day.Date()
         od = '_'.join([od.split('/')[2], od.split('/')[1], od.split('/')[0]])
@@ -444,10 +442,10 @@ class dezurstvo(Container):
                 start = start + timedelta(days=1)
             self.klukca = 0
 
-    security.declareProtected(ModifyPortalContent, 'at_post_edit_script')
-    def at_post_edit_script(self):
-        self.ustvari_cel_teden()
 
-    security.declareProtected(ModifyPortalContent, 'at_post_create_script')
-    def at_post_create_script(self):
-        self.ustvari_cel_teden()
+def on_object_created(obj, event):
+    obj.ustvari_cel_teden()
+
+
+def on_object_modified(obj, event):
+    obj.ustvari_cel_teden()

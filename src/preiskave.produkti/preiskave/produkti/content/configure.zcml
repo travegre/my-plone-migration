@@ -4,4 +4,21 @@
 
   <!-- Dexterity content types are registered via the FTI in profiles/default/types/ -->
 
+  <subscriber
+      for="preiskave.produkti.content.imiuvozipreiskavo.imiuvozipreiskavo
+           zope.lifecycleevent.interfaces.IObjectCreatedEvent"
+      handler="preiskave.produkti.content.imiuvozipreiskavo.on_object_created"
+  />
+  <subscriber
+      for="preiskave.produkti.content.imiuvozipreiskavo.imiuvozipreiskavo
+           zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+      handler="preiskave.produkti.content.imiuvozipreiskavo.on_object_modified"
+  />
+
+  <subscriber
+      for="preiskave.produkti.content.imipreiskava.imipreiskava
+           zope.lifecycleevent.interfaces.IObjectCreatedEvent"
+      handler="preiskave.produkti.content.imipreiskava.on_object_created"
+  />
+
 </configure>
