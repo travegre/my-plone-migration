@@ -1,0 +1,691 @@
+<metal:page define-macro="master">
+<tal:doctype tal:replace="structure string:&lt;!DOCTYPE html PUBLIC
+  &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot;
+  &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;" />
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    tal:define="portal_state context/@@plone_portal_state;
+        context_state context/@@plone_context_state;
+        plone_view context/@@plone;
+        lang portal_state/language;
+        view nocall:view | nocall: plone_view;
+        dummy python: plone_view.mark_view(view);
+        portal_url portal_state/portal_url;
+        checkPermission nocall: context/portal_membership/checkPermission;
+        site_properties context/portal_properties/site_properties;
+        ajax_load request/ajax_load | nothing;
+        ajax_include_head request/ajax_include_head | nothing"
+    tal:attributes="lang lang;">
+
+    <metal:cache use-macro="context/global_cache_settings/macros/cacheheaders">
+    Get the global cache headers located in global_cache_settings.
+    </metal:cache>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <tal:comment replace="nothing">
+      Forces IE8+ into newest rendering engine even if on an intranet. This has to be defined before any script/style tags.
+    </tal:comment>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <metal:baseslot define-slot="base">
+        <base tal:attributes="href plone_view/renderBase" /><!--[if lt IE 7]></base><![endif]-->
+    </metal:baseslot>
+
+    
+    <script type="text/javascript" src="/dezurstva/jquery-1.5.1.min.js"></script> 
+    <link rel="stylesheet" href="/dezurstva/dezurstva.css" type="text/css" />  
+
+    <script type="text/javascript" src="/dezurstva/jquery.tinysort.js"></script>
+
+    <script>
+	$(document).ready(function() {
+		$('select#oseba option, select#izvoz-2-oseba option').tsort();
+	});
+
+
+
+    </script> 
+    
+</head>
+
+<body tal:define="isRTL portal_state/is_rtl;
+                  sl python:plone_view.have_portlets('plone.leftcolumn', view);
+                  sr python:plone_view.have_portlets('plone.rightcolumn', view);
+                  body_class python:plone_view.bodyClass(template, view);
+                  sunburst_view python:context.restrictedTraverse('@@sunburstview');
+		lan python: context.portal_languages.getPreferredLanguage();
+                    dod python: lan != 'sl' and ('-' + lan) or '';
+                    
+                    url_tokens python: context.REQUEST.getURL().split('/');
+                    is_front python: context.absolute_url() == portal_url;
+                    
+                    prva python: is_front and 'prva_stran' or '';
+		 last_change python: context.portal_catalog(portal_type = 'dezurstvo', sort_on = 'modified', sort_order = 'descending')[0]"
+    tal:attributes="class body_class;
+                    dir python:isRTL and 'rtl' or 'ltr'">
+
+	<div id="last-change">	
+		<span>Zadnja sprememba: </span><span tal:define="datum last_change/modified; dat python: '.'.join([str(datum).split(' ')[0].split('/')[2], str(datum).split(' ')[0].split('/')[1], str(datum).split(' ')[0].split('/')[0]])" tal:content="dat" /> 
+		<span> ob </span>
+		<span tal:define="datum last_change/modified; dat python: ':'.join([str(datum).split(' ')[1].split(':')[0], str(datum).split(' ')[1].split(':')[1]])" tal:content="dat" />
+	</div>
+                    
+    
+	<script type="text/JavaScript">
+        	var now = new Date();
+		var night = new Date(
+		    now.getFullYear(),
+		    now.getMonth(),
+		    now.getDate() + 1, // the next day, ...
+		    0, 0, 10 // ...at 00:00:00 hours
+		);
+		var msTillMidnight = night.getTime() - now.getTime();
+		if (msTillMidnight > 0) setTimeout('location.reload(true)', msTillMidnight);
+
+      </script>
+	<div id="okolo">
+          <div id="okol" >              
+		            <a tal:attributes="href portal_url"><img id="logo" src="dezurstva/logo.png" /></a>
+		            
+		            <h1><a tal:attributes="href portal_url"> DEŽURSTVA IN PRIPRAVLJENOST</a></h1>               
+              		
+			
+
+
+
+
+
+		
+	
+
+
+
+
+
+	<div tal:define="dans python: str(DateTime()).split(' ')[0].replace('/', '-'); dat here/REQUEST/form/datum|nothing; danes python: dat and dat or str(DateTime()).split(' ')[0].replace('/', '-'); dezurstvo python: context.portal_catalog(portal_type = 'dezurstvo', id = danes); dezurstvo python: len(dezurstvo) > 0 and dezurstvo[0] or nothing; oseba here/REQUEST/form/oseba|nothing; seznam python: oseba and context.portal_catalog.searchResults(dezurni_zdravnik = oseba, portal_type = 'dezurstvo', sort_on='id', sort_order='ascending') or nothing; dnevi python: {'Monday':'ponedeljek', 'Tuesday':'torek', 'Wednesday':'sreda', 'Thursday':'četrtek', 'Friday':'petek', 'Saturday':'sobota', 'Sunday':'nedelja'}" tal:condition="python: 'spremeni-dezurstvo' not in url_tokens">
+
+	
+<tal:ret condition="not: oseba">
+		
+	<a style="margin-top: 14px; width: 28%; margin-right: 5%; float: left; text-align: right; font-size: 24px; font-family: Tahoma, sans-serif" tal:attributes="href python: '?datum=' + str(DateTime(danes) - 1).split(' ')[0].replace('/', '-')">Nazaj</a>
+	<h2 style="width: 33%; float: left; text-align: center"><tal:tr condition="python: dans == danes">danes, </tal:tr><tal:tr content="python: dnevi[DateTime(danes).strftime('%A')] + ', ' + '.'.join([danes.split('-')[2], danes.split('-')[1], danes.split('-')[0]])"></tal:tr></h2>
+	<a style="margin-top: 14px; width: 25%; margin-left: 5%; float: left; text-align: left; font-size: 24px;  font-family: Tahoma, sans-serif" tal:attributes="href python: '?datum=' + str(DateTime(danes) + 1).split(' ')[0].replace('/', '-')">Naprej</a>		
+	<div style="clear: both">&nbsp;</div>
+	
+	<br />
+	
+	<tal:kerw condition="dezurstvo">
+	<div style="display: inline-block; width:49%; float: left;">
+	  <h2 style="text-align: left">DEŽURNA EKIPA</h2>
+	  <p></p>
+	  <table id = "levaTabela" cellpading="0" cellspacing="0" tal:condition="dezurstvo" style="vertical-align: top">
+		  <tal:kr define="lista python: dezurstvo.getObject().dezurni_zdravnik">
+			  <tr style="background: white !important" tal:repeat="el lista">
+				  <td>dežurni zdravnik</td>
+				  <td style="background: white !important" tal:define="oseba python: context.portal.restrictedTraverse('dezurstva/seznam_zaposlenih/' + el)" tal:content="oseba/Title"></td>
+				  <!--<td tal:define="oseba python: context.portal.restrictedTraverse('dezurstva/seznam_zaposlenih/' + el)" tal:content="oseba/Description"></td>-->
+			  </tr>
+		  </tal:kr>
+		  <tal:kr define="lista python: dezurstvo.getObject().nadzorni_zdravnik">
+			  <tr style="background: white !important" tal:repeat="el lista">
+				  <td>nadzorni zdravnik</td>
+				  <td style="background: white !important" tal:define="oseba python: context.portal.restrictedTraverse('dezurstva/seznam_zaposlenih/' + el)" tal:content="oseba/Title"></td>
+				  <!--<td tal:define="oseba python: context.portal.restrictedTraverse('dezurstva/seznam_zaposlenih/' + el)" tal:content="oseba/Description"></td>-->
+			  </tr>
+		  </tal:kr>
+		  <tal:kr define="lista python: dezurstvo.getObject().specializant">
+			  <tr style="background: white !important" tal:repeat="el lista">
+				  <td>specializant na usposabljanju</td>
+				  <td style="background: white !important" tal:define="oseba python: context.portal.restrictedTraverse('dezurstva/seznam_zaposlenih/' + el)" tal:content="oseba/Title"></td>
+				  <!--<td tal:define="oseba python: context.portal.restrictedTraverse('dezurstva/seznam_zaposlenih/' + el)" tal:content="oseba/Description"></td>-->
+			  </tr>
+		  </tal:kr>
+
+		  <tal:kr define="lista python: dezurstvo.getObject().sarsifon">
+			  <tr style="background: white !important" tal:repeat="el lista">
+				  <td>Virološki laboratoriji</td>
+				  <td class="dezurnit" tal:define="oseba python: context.portal.restrictedTraverse('dezurstva/seznam_zaposlenih/' + el)" tal:content="oseba/Title"></td>
+			  </tr>
+		  </tal:kr>
+
+		  
+<!--
+		  <tal:kr define="lista python: dezurstvo.getObject().dezurni_tehnik">
+			  <tr style="background: white !important" tal:repeat="el lista">
+				  <td>dežurni tehnik</td>
+				  <td style="background: white !important" tal:define="oseba python: context.portal.restrictedTraverse('dezurstva/seznam_zaposlenih/' + el)" tal:content="oseba/Title"></td>
+		
+			  </tr>
+		  </tal:kr>
+
+		  <tal:kr define="lista python: dezurstvo.getObject().izobrazevanje">
+			  <tr style="background: white !important" tal:repeat="el lista">
+				  <td>izobraževanje</td>
+				  <td style="background: white !important" tal:define="oseba python: context.portal.restrictedTraverse('dezurstva/seznam_zaposlenih/' + el)" tal:content="oseba/Title"></td>
+				
+			  </tr>
+		  </tal:kr>
+-->
+		  
+		  
+
+
+<tal:kr define="lista python: dezurstvo.getObject().bakterioloski_tehnik">
+			  <tr style="background: white !important" tal:repeat="el lista">
+				  <td>Urgentni laboratorij</td>
+				  
+
+
+<td class="dezurnit" tal:define="oseba python: context.portal.restrictedTraverse('dezurstva/seznam_zaposlenih/' + el)" tal:content="oseba/Title"></td>
+
+	  
+
+				  <!--<td tal:define="oseba python: context.portal.restrictedTraverse('dezurstva/seznam_zaposlenih/' + el)" tal:content="oseba/Description"></td>-->
+			  </tr>
+		  </tal:kr>
+
+
+
+
+<!-- SKRIPTA, KI UREDI DEŽURNE TEHNIKE PO ABECEDI 
+
+<script>
+
+$(document).ready(function() {	
+	list = [];	
+	unsorted = $("td.dezurnit");
+		
+	sorted = $("td.dezurnit").tsort();	
+	
+	for (i = 0; i < sorted.length; i++) { 
+		list[i] = sorted[i].innerHTML;		
+	}	
+
+	for (i = 0; i < sorted.length; i++) { 
+		unsorted[i].innerHTML = list[i];		
+	}	
+});
+
+</script>
+
+KONEC ZAKOMENTIRANE SKRIPTE -->
+
+
+
+		<!--
+		  <tal:kr define="lista python: dezurstvo.getObject().kiestra_tehnik">
+			  <tr style="background: white !important" tal:repeat="el lista">
+				  <td>kiestra tehnik</td>
+				  <td style="background: white !important" tal:define="oseba python: context.portal.restrictedTraverse('dezurstva/seznam_zaposlenih/' + el)" tal:content="oseba/Title"></td>
+			  </tr>
+		  </tal:kr>
+		-->
+		  <tal:kr define="lista python: dezurstvo.getObject().inoqula_tehnik">
+			  <tr style="background: white !important" tal:repeat="el lista">
+				  <td>BMK laboratorij</td>
+				  <td style="background: white !important" tal:define="oseba python: context.portal.restrictedTraverse('dezurstva/seznam_zaposlenih/' + el)" tal:content="oseba/Title"></td>
+				  <!--<td tal:define="oseba python: context.portal.restrictedTraverse('dezurstva/seznam_zaposlenih/' + el)" tal:content="oseba/Description"></td>-->
+			  </tr>
+		  </tal:kr>
+		  
+		  <tal:kr define="lista python: dezurstvo.getObject().sprejem_predpriprava_tehnik">
+			  <tr style="background: white !important" tal:repeat="el lista">
+				  <td>sprejem/predpriprava</td>
+				  <td style="background: white !important" tal:define="oseba python: context.portal.restrictedTraverse('dezurstva/seznam_zaposlenih/' + el)" tal:content="oseba/Title"></td>
+				  <!--<td tal:define="oseba python: context.portal.restrictedTraverse('dezurstva/seznam_zaposlenih/' + el)" tal:content="oseba/Description"></td>-->
+			  </tr>
+		  </tal:kr>
+
+
+		  <tal:kr define="lista python: dezurstvo.getObject().vpis[::-1]">
+			  <tr style="background: white !important" tal:repeat="el lista">
+				  <td>vpis</td>
+				  <td style="background: white !important" tal:define="oseba python: context.portal.restrictedTraverse('dezurstva/seznam_zaposlenih/' + el)" tal:content="oseba/Title"></td>
+				  <!--<td tal:define="oseba python: context.portal.restrictedTraverse('dezurstva/seznam_zaposlenih/' + el)" tal:content="oseba/Description"></td>-->
+			  </tr>
+		  </tal:kr>
+	  </table>
+
+
+  	<table id = "levaTabela" cellpading="0" cellspacing="0" tal:condition="dezurstvo" style="vertical-align: top; margin-top: 10px;">
+	  	<tal:kr define="lista python: dezurstvo.getObject().intervencijska_skupina">				  
+			  <tr style="background: white !important" tal:repeat="el lista">
+		  		<td tal:condition="python: repeat['el'].index == 0" rowspan="3" style="font-size: 1em;"><h2 style="text-align:center; color: #624C9C; font-weight: bold;">INTERVENCIJSKA <br/> SKUPINA <br/></h2><p style="text-align: center;" tal:content="python: dezurstvo.getObject().intervencijska_skupina_telefon and dezurstvo.getObject().intervencijska_skupina_telefon or '040 190 945'"></p></td>
+				  <td style="background: white !important; font-weight: bold; font-size: 2.05em;" tal:define="oseba python: context.portal.restrictedTraverse('dezurstva/seznam_zaposlenih/' + el)" tal:content="oseba/Title"></td>
+			  </tr>
+	  	</tal:kr>
+  	</table>
+
+
+
+		  
+
+
+	</div>
+
+	<div style="display: inline-block; width:49%">
+	  <h2 style="text-align: left">STANJE PRIPRAVLJENOSTI</h2>
+	  <p></p>
+	  <table cellpading="0" cellspacing="0" tal:condition="dezurstvo" style="vertical-align: top">
+		  <tal:kr define="lista python: dezurstvo.getObject().BOR">
+			  <tr style="background: white !important" tal:repeat="el lista">
+				  <td>BOR</td>
+				  <td style="background: white !important" tal:define="oseba python: context.portal.restrictedTraverse('dezurstva/seznam_zaposlenih/' + el)" tal:content="oseba/Title"></td>
+				  <td tal:condition="python: 'dezurstva_brez_kontaktov' not in url_tokens" style="width: 150px" tal:define="oseba python: context.portal.restrictedTraverse('dezurstva/seznam_zaposlenih/' + el)" tal:content="python: oseba.Description().split('|')[0]"></td>
+			  </tr>
+		  </tal:kr>
+		  <tal:kr define="lista python: dezurstvo.getObject().HIV">
+			  <tr style="background: white !important" tal:repeat="el lista">
+				  <td>HIV</td>
+				  <td tal:define="oseba python: context.portal.restrictedTraverse('dezurstva/seznam_zaposlenih/' + el)" tal:content="oseba/Title"></td>
+				  <td tal:condition="python: 'dezurstva_brez_kontaktov' not in url_tokens" tal:define="oseba python: context.portal.restrictedTraverse('dezurstva/seznam_zaposlenih/' + el)" tal:content="python: oseba.Description().split('|')[0]"></td>
+			  </tr>
+		  </tal:kr>
+		  <tal:kr define="lista python: dezurstvo.getObject().HUM">
+			  <tr style="background: white !important" tal:repeat="el lista">
+				  <td>HUM</td>
+				  <td style="background: white !important" tal:define="oseba python: context.portal.restrictedTraverse('dezurstva/seznam_zaposlenih/' + el)" tal:content="oseba/Title"></td>
+				  <td tal:condition="python: 'dezurstva_brez_kontaktov' not in url_tokens" tal:define="oseba python: context.portal.restrictedTraverse('dezurstva/seznam_zaposlenih/' + el)" tal:content="python: oseba.Description().split('|')[0]"></td>
+			  </tr>
+		  </tal:kr>
+		  <tal:kr define="lista python: dezurstvo.getObject().IT">
+			  <tr style="background: white !important" tal:repeat="el lista">
+				  <td>IT</td>
+				  <td style="background: white !important" tal:define="oseba python: context.portal.restrictedTraverse('dezurstva/seznam_zaposlenih/' + el)" tal:content="oseba/Title"></td>
+				  <td tal:condition="python: 'dezurstva_brez_kontaktov' not in url_tokens" tal:define="oseba python: context.portal.restrictedTraverse('dezurstva/seznam_zaposlenih/' + el)" tal:content="python: oseba.Description().split('|')[0]"></td>
+			  </tr>
+		  </tal:kr>	  
+		  <tal:kr define="lista python: dezurstvo.getObject().KLM">
+			  <tr style="background: white !important" tal:repeat="el lista">
+				  <td>KLM</td>
+				  <td style="background: white !important" tal:define="oseba python: context.portal.restrictedTraverse('dezurstva/seznam_zaposlenih/' + el)" tal:content="oseba/Title"></td>
+				  <td tal:condition="python: 'dezurstva_brez_kontaktov' not in url_tokens" tal:define="oseba python: context.portal.restrictedTraverse('dezurstva/seznam_zaposlenih/' + el)" tal:content="python: oseba.Description().split('|')[0]"></td>
+			  </tr>
+		  </tal:kr>
+		  <tal:kr define="lista python: dezurstvo.getObject().KOV">
+			  <tr style="background: white !important" tal:repeat="el lista">
+				  <td>VZ</td>
+				  <td style="background: white !important" tal:define="oseba python: context.portal.restrictedTraverse('dezurstva/seznam_zaposlenih/' + el)" tal:content="oseba/Title"></td>
+				  <td tal:condition="python: 'dezurstva_brez_kontaktov' not in url_tokens" tal:define="oseba python: context.portal.restrictedTraverse('dezurstva/seznam_zaposlenih/' + el)" tal:content="python: oseba.Description().split('|')[0]"></td>
+			  </tr>
+		  </tal:kr>
+		  <tal:kr define="lista python: dezurstvo.getObject().PRZ">
+			  <tr style="background: white !important" tal:repeat="el lista">
+				  <td>PRZ</td>
+				  <td style="background: white !important" tal:define="oseba python: context.portal.restrictedTraverse('dezurstva/seznam_zaposlenih/' + el)" tal:content="oseba/Title"></td>
+				  <td tal:condition="python: 'dezurstva_brez_kontaktov' not in url_tokens" tal:define="oseba python: context.portal.restrictedTraverse('dezurstva/seznam_zaposlenih/' + el)" tal:content="python: oseba.Description().split('|')[0]"></td>
+			  </tr>
+		  </tal:kr>	
+		  <tal:kr define="lista python: dezurstvo.getObject().VINDIF" tal:content="nothing">
+			  <tr style="background: white !important" tal:repeat="el lista">
+				  <td>VIN (DIF ali PCR)</td>
+				  <td style="background: white !important" tal:define="oseba python: context.portal.restrictedTraverse('dezurstva/seznam_zaposlenih/' + el)" tal:content="oseba/Title"></td>
+				  <td tal:condition="python: 'dezurstva_brez_kontaktov' not in url_tokens" tal:define="oseba python: context.portal.restrictedTraverse('dezurstva/seznam_zaposlenih/' + el)" tal:content="python: oseba.Description().split('|')[0]"></td>
+			  </tr>
+		  </tal:kr>
+		  <tal:kr define="lista python: dezurstvo.getObject().VINVZV" tal:content="nothing">
+			  <tr style="background: white !important" tal:repeat="el lista">
+				  <td>VIN (VZV, EBV)</td>
+				  <td style="background: white !important" tal:define="oseba python: context.portal.restrictedTraverse('dezurstva/seznam_zaposlenih/' + el)" tal:content="oseba/Title"></td>
+				  <td tal:condition="python: 'dezurstva_brez_kontaktov' not in url_tokens" tal:define="oseba python: context.portal.restrictedTraverse('dezurstva/seznam_zaposlenih/' + el)" tal:content="python: oseba.Description().split('|')[0]"></td>
+			  </tr>
+		  </tal:kr>
+		  <tal:kr define="lista python: dezurstvo.getObject().WHO">
+			  <tr style="background: white !important" tal:repeat="el lista">
+				  <td>WHO</td>
+				  <td style="background: white !important" tal:define="oseba python: context.portal.restrictedTraverse('dezurstva/seznam_zaposlenih/' + el)" tal:content="oseba/Title"></td>
+				  <td tal:condition="python: 'dezurstva_brez_kontaktov' not in url_tokens" tal:define="oseba python: context.portal.restrictedTraverse('dezurstva/seznam_zaposlenih/' + el)" tal:content="python: oseba.Description().split('|')[0]"></td>
+			  </tr>
+		  </tal:kr>
+		  <tal:kr define="lista python: dezurstvo.getObject().kiestra">
+			  <tr style="background: white !important" tal:repeat="el lista">
+				  <td>KIESTRA</td>
+				  <td style="background: white !important" tal:define="oseba python: context.portal.restrictedTraverse('dezurstva/seznam_zaposlenih/' + el)" tal:content="oseba/Title"></td>
+				  <td tal:condition="python: 'dezurstva_brez_kontaktov' not in url_tokens" tal:define="oseba python: context.portal.restrictedTraverse('dezurstva/seznam_zaposlenih/' + el)" tal:content="python: oseba.Description().split('|')[0]"></td>
+			  </tr>
+		  </tal:kr>
+	  </table>
+	</div>
+
+
+	
+	</tal:kerw>
+	<p tal:condition="not: dezurstvo">Dežurne ekipe in razpored stanja pripravljenosti za ta datum še niso določeni.</p> 
+	
+
+	
+	
+
+
+</tal:ret>
+
+<tal:ret condition="oseba" define="leta python: []; mesci python: []; dummy python: oseba and [leta.append(x.id[:4]) for x in seznam if x.id[:4] not in leta]; dummy python: oseba and [mesci.append(x.id[5:7]) for x in seznam if x.id[5:7] not in mesci]; meseci python: {'01':'januar', '02':'februar', '03':'marec', '04':'april', '05':'maj', '06':'junij', '07':'julij', '08':'avgust', '09':'september', '10':'oktober', '11':'november', '12':'december'}; dummy python: mesci.sort(reverse=True); dummy python: leta.sort(reverse=True)">
+	
+
+
+
+	<h2>Dežurstva za osebo <span style="color: #5fb11e" tal:content="python: context.portal_catalog(id=oseba)[0].getObject().Title()"></span></h2>
+		
+	<p>&nbsp;</p>
+	<tal:rep1 repeat="leto leta">
+		<h3 tal:content="leto"></h3>	
+		<tal:rep2 repeat="mesec mesci">	
+			<h4 tal:content="python: meseci[mesec]"></h4>	
+			<tal:rep3 define="seznam2 python: [x.id for x in seznam if (leto + '-' + mesec) in x.id]; dummy python: seznam2.sort(reverse=True)" repeat="item seznam2">				
+				<a style="font-family: Tahoma, sans-serif;" tal:attributes="href python: '?datum=' + item" tal:content="python: '.'.join([item.split('-')[2], item.split('-')[1], item.split('-')[0]])">Nazaj</a><br />
+			</tal:rep3>
+		</tal:rep2>
+	</tal:rep1>
+	<p>&nbsp;</p>
+	
+
+	
+
+</tal:ret>
+
+
+<p>&nbsp;</p>
+<hr />
+
+	<link rel="stylesheet" href="jquery-ui.min.css" type="text/css" media="screen, projection" />	  
+	<script type="text/javascript" src="jquery-ui.min.js"></script> 
+  	
+	<script>
+
+	function DoSubmit(){
+		var nov = document.poslji_datum.datum.value;	 
+		nov = nov.split('.')[2] + '-' + nov.split('.')[1] + '-' + nov.split('.')[0];
+		document.poslji_datum.datum.value = nov;
+	  	return true;
+	}
+
+
+
+	  $(function() {
+	    $( ".datepicker" ).datepicker({
+	      dateFormat: "dd.mm.yy",
+	      firstDay: 1 // Start with Monday
+	    });
+	  });
+	</script>
+	
+	<div style="float: left; width: 49%">	
+	<form action="" onsubmit="DoSubmit();" name="poslji_datum">
+		<p>Prikaži razpored na izbrani datum: </p><input name="datum" tal:attributes="value python: '.'.join([danes.split('-')[2], danes.split('-')[1], danes.split('-')[0]])" type="text" class="datepicker">
+		<input style="display: inline" type="submit" value="Prikaži" style="cursor: pointer" />
+	</form>
+	</div>
+	
+	<div style="float: left; width: 49%">	
+	<form action="">
+		<p>Prikaži vsa dežurstva za osebo:</p>
+		<select name="oseba" id="oseba">
+			<option></option>				
+			<tal:rep repeat="os python: context['seznam_zaposlenih'].getFolderContents(contentFilter={'sort_on':'getObjPositionInParent'})">
+				<option tal:attributes="value os/id" tal:content="os/Title"></option>
+			</tal:rep>
+		</select>
+		<input style="display: inline" type="submit" value="Prikaži" style="cursor: pointer" />
+	</form>
+	</div>
+
+	<div style="clear: both">&nbsp;</div>
+	<div style="clear: both">&nbsp;</div>
+	<div style="clear: both">&nbsp;</div>
+	
+	<a tal:condition="python: dezurstvo and not oseba" style="text-align: center; font-size: 16px" tal:attributes="href python: '/dezurstva/spremeni-dezurstvo?datum=' + danes">Za spremembo dežurstva lahko zaprosite tukaj</a>
+
+
+
+	
+
+
+	<!-- IZVOZ -->
+
+
+
+
+
+	
+	<p>&nbsp;</p>
+	<hr />
+	<br />
+
+	<h2>IZVOZ</h2>
+	<div style="clear: both">&nbsp;</div>
+		
+	<script>
+	$('#izvoz-1-izbira').live('change', function (e) {	    
+	    var optionSelected = $("option:selected", this);
+	    var valueSelected = this.value;
+	    
+	    if (valueSelected == 'oddo') $('#oddo').show();
+	    else $('#oddo').hide();
+
+	    if (valueSelected != '') $('#izvoz-1 .submit').show();
+	    else $('#izvoz-1 .submit').hide();
+	});
+
+	$('#izvoz-2-oseba').live('change', function (e) {	    
+	    var optionSelected = $("option:selected", this);
+	    var valueSelected = this.value;
+	    
+	    if (valueSelected != '') {
+		$('#obdobje').show();
+	    }
+	    else {
+		$('#obdobje').hide();
+		$('#oddo-2').hide();
+		$('#izvoz-2 .submit').hide();
+	    }
+	});
+
+	$('#izvoz-2-izbira').live('change', function (e) {	    
+	    var optionSelected = $("option:selected", this);
+	    var valueSelected = this.value;
+	    
+	    if (valueSelected == 'oddo') $('#oddo-2').show();
+	    else $('#oddo-2').hide();
+
+	    if (valueSelected != '') $('#izvoz-2 .submit').show();
+	    else $('#izvoz-2 .submit').hide();
+	});
+
+	
+	</script>
+
+
+
+
+
+
+
+
+	<div style="float: left; width: 49%">	
+	<form action="/dezurstva/izvoz" name="izvoz-1" id="izvoz-1">
+		<p>Izberite obdobje: </p>
+		<select name="izvoz-1-izbira" id="izvoz-1-izbira">
+			<option></option>
+			<option value="teden">za prejšnji teden</option>
+			<option value="tedenplus2">za naslednja 2 tedna</option>
+			<option value="tekoci">za tekoči mesec</option>
+			<option value="pretekli">za pretekli mesec</option>
+			<option value="oddo">izvozi od do</option>
+		</select>
+		<br />
+		<br />
+
+		<div id="oddo">
+			Od: <input name="od" tal:attributes="value python: '.'.join([danes.split('-')[2], danes.split('-')[1], danes.split('-')[0]])" type="text" class="datepicker">
+			<br />
+			Do: <input name="do" tal:attributes="value python: '.'.join([danes.split('-')[2], danes.split('-')[1], danes.split('-')[0]])" type="text" class="datepicker">
+		</div>
+		<br />
+		
+
+		<input class="submit" type="submit" value="Izvozi" style="cursor: pointer" />
+	</form>
+	</div>
+	
+	
+
+	
+
+
+
+
+
+	<div style="float: left; width: 49%">	
+	<form action="/dezurstva/izvoz" name="izvoz-2" id="izvoz-2">
+		<p>Izberite osebo in nato obdobje:</p>
+		<select name="izvoz-2-oseba" id="izvoz-2-oseba">
+			<option value=""></option>				
+			<tal:rep repeat="os python: context['seznam_zaposlenih'].getFolderContents(contentFilter={'sort_on':'getObjPositionInParent'})">
+				<option tal:attributes="value os/id" tal:content="os/Title"></option>
+			</tal:rep>
+		</select>
+		
+		<div id="obdobje">
+		<p>Izberite obdobje: </p>
+		<select name="izvoz-2-izbira" id="izvoz-2-izbira">
+			<option></option>
+			<option value="teden">za prejšnji teden</option>
+			<option value="tedenplus2">za naslednja 2 tedna</option>
+			<option value="tekoci">za tekoči mesec</option>
+			<option value="pretekli">za pretekli mesec</option>
+			<option value="oddo">izvozi od do</option>
+		</select>
+		<br />
+		<br />
+		</div>
+
+		<div id="oddo-2">
+			Od: <input name="od" tal:attributes="value python: '.'.join([danes.split('-')[2], danes.split('-')[1], danes.split('-')[0]])" type="text" class="datepicker">
+			<br />
+			Do: <input name="do" tal:attributes="value python: '.'.join([danes.split('-')[2], danes.split('-')[1], danes.split('-')[0]])" type="text" class="datepicker">
+		</div>
+		<br />
+		
+		<input class="submit" type="submit" value="Izvozi" style="cursor: pointer" />
+	</form>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+<metal:bodytext define-slot="main" tal:condition="python: 'spremeni-dezurstvo' in url_tokens">
+
+                             <div id="viewlet-above-content-title" tal:content="structure provider:plone.abovecontenttitle" tal:condition="not:ajax_load" />
+                             <metal:title define-slot="content-title">
+                                 <metal:comment tal:content="nothing">
+                                     If you write a custom title always use
+                                     <h1 class="documentFirstHeading"></h1> for it
+                                 </metal:comment>
+                                 <h1 metal:use-macro="context/kss_generic_macros/macros/generic_title_view">
+                                     Generic KSS Title. Is rendered with class="documentFirstHeading".
+                                 </h1>
+                             </metal:title>
+                             <div id="viewlet-below-content-title" tal:content="structure provider:plone.belowcontenttitle" tal:condition="not:ajax_load" />
+
+                             <metal:description define-slot="content-description">
+                                 <metal:comment tal:content="nothing">
+                                     If you write a custom description always use
+                                     <div class="documentDescription"></div> for it
+                                 </metal:comment>
+                                 <div metal:use-macro="context/kss_generic_macros/macros/generic_description_view">
+                                     Generic KSS Description. Is rendered with class="documentDescription".
+                                 </div>
+                             </metal:description>
+
+                             <div id="viewlet-above-content-body" tal:content="structure provider:plone.abovecontentbody" tal:condition="not:ajax_load" />
+                             <div id="content-core">
+                                 <metal:text define-slot="content-core" tal:content="nothing">
+                                     Page body text
+                                 </metal:text>
+                             </div>
+                             <div id="viewlet-below-content-body" tal:content="structure provider:plone.belowcontentbody" tal:condition="not:ajax_load" />
+
+                            </metal:bodytext>
+
+				<script>
+					  $( "#archetypes-fieldname-ime-in-priimek select" ).change(function () {
+						
+					    if ($('#archetypes-fieldname-ime-in-priimek option:selected').val().substring(0, 2) != '41') $('#archetypes-fieldname-replyto input').val($( "#archetypes-fieldname-ime-in-priimek option:selected" ).val());
+					    else $('#archetypes-fieldname-replyto input').val('');
+					  });
+
+
+
+				  	var options = $('#archetypes-fieldname-ime-in-priimek select#ime-in-priimek option');
+						var arr = options.map(function(_, o) {
+							return {
+								t: $(o).text(), v: o.value };
+						 	}).get();
+
+						arr.sort(function(o1, o2) { 
+							return o1.t.localeCompare(o2.t, 'sl-nedis');
+							//return o1.t > o2.t ? 1 : o1.t < o2.t ? -1 : 0; 
+						});
+								
+						options.each(function(i, o) {
+			  			o.value = arr[i].v;
+			  			$(o).text(arr[i].t);
+						});
+
+
+				</script>
+
+
+
+
+
+
+
+
+
+                 
+             
+                
+     	</div>
+             
+             
+              
+              
+              
+              
+              
+            
+          
+        
+     </div>   
+
+
+
+<script>
+	$('span.required').html('*');
+	</script>
+</body>
+</html>
+
+</metal:page>

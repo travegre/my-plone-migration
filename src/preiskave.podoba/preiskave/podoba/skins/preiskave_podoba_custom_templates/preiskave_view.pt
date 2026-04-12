@@ -1,0 +1,73 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+
+<body>
+
+    <div metal:fill-slot="main">
+    <metal:main-macro define-macro="main"
+                      tal:define="kssClassesView context/@@kss_field_decorator_view;
+                                  getKssClasses nocall:kssClassesView/getKssClassesInlineEditable;
+                                  templateId template/getId">
+
+       
+     
+      
+        <h1 metal:use-macro="here/kss_generic_macros/macros/generic_title_view">
+            Title or id
+        </h1>
+
+        
+
+        <p metal:use-macro="here/kss_generic_macros/macros/generic_description_view">
+            Description
+        </p>
+        
+      
+
+       <div class="slikce_filtrov row">
+       
+          <div class="small-12 medium-6 large-3 columns search-opcija">
+             <a tal:attributes="href context/hitro-iskanje/absolute_url">
+              <img src="search-quick.png" /><!--Search graphic by <a href="http://www.flaticon.com/authors/freepik">freepik</a> from <a href="http://www.flaticon.com/">Flaticon</a> is licensed under <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a>. Made with <a href="http://logomakr.com" title="Logo Maker">Logo Maker</a>-->
+               <p class="text text-12">Hitro iskanje</p>
+            </a>
+          </div>
+          
+          <div class="small-12 medium-6 large-3 columns search-opcija">
+              <a tal:attributes="href context/preiskave-po-podrocjih/absolute_url">
+                <img src="search-podrocja.png" /><!--File graphic by <a href="http://www.flaticon.com/authors/freepik">freepik</a> from <a href="http://www.flaticon.com/">Flaticon</a> is licensed under <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a>. Made with <a href="http://logomakr.com" title="Logo Maker">Logo Maker</a>-->
+                 <p class="text text-12">Po področjih</p>
+              </a>
+          </div>
+          
+          <div class="small-12 medium-6 large-3 columns search-opcija">
+              <a tal:attributes="href context/preiskave-po-vzorcih/absolute_url">
+                <img src="search-vzorci.png" /><!--Medical graphic by <a href="http://www.flaticon.com/authors/freepik">freepik</a> from <a href="http://www.flaticon.com/">Flaticon</a> is licensed under <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a>. Made with <a href="http://logomakr.com" title="Logo Maker">Logo Maker</a>-->
+                <p class="text text-12">Po vzorcih</p>
+              </a>
+          </div>
+
+          <div class="small-12 medium-6 large-3 columns search-opcija end">
+              <a tal:attributes="href context/preiskave-po-laboratorijih/absolute_url">
+                <img src="search-lab.png" /><!--Medical graphic by <a href="http://www.flaticon.com/authors/freepik">freepik</a> from <a href="http://www.flaticon.com/">Flaticon</a> is licensed under <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a>. Made with <a href="http://logomakr.com" title="Logo Maker">Logo Maker</a>-->
+                <p class="text text-12">Po laboratorijih</p>
+              </a>
+          </div>
+       
+       <!--Medical graphic by <a href="http://www.flaticon.com/authors/freepik">freepik</a> from <a href="http://www.flaticon.com/">Flaticon</a> is licensed under <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a>. Made with <a href="http://logomakr.com" title="Logo Maker">Logo Maker</a>-->
+       </div>
+       
+
+
+    </metal:main-macro>
+    </div>
+    
+    
+
+</body>
+</html>

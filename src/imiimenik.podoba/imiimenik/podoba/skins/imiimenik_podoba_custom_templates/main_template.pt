@@ -1,0 +1,155 @@
+<metal:page define-macro="master">
+<tal:doctype tal:replace="structure string:&lt;!DOCTYPE html PUBLIC
+  &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot;
+  &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;" />
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    tal:define="portal_state context/@@plone_portal_state;
+        context_state context/@@plone_context_state;
+        plone_view context/@@plone;
+        lang portal_state/language;
+        view nocall:view | nocall: plone_view;
+        dummy python: plone_view.mark_view(view);
+        portal_url portal_state/portal_url;
+        checkPermission nocall: context/portal_membership/checkPermission;
+        site_properties context/portal_properties/site_properties;
+        ajax_load request/ajax_load | nothing;
+        ajax_include_head request/ajax_include_head | nothing"
+    tal:attributes="lang lang;">
+
+    <metal:cache use-macro="context/global_cache_settings/macros/cacheheaders">
+    Get the global cache headers located in global_cache_settings.
+    </metal:cache>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <tal:comment replace="nothing">
+      Forces IE8+ into newest rendering engine even if on an intranet. This has to be defined before any script/style tags.
+    </tal:comment>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <metal:baseslot define-slot="base">
+        <base tal:attributes="href plone_view/renderBase" /><!--[if lt IE 7]></base><![endif]-->
+    </metal:baseslot>
+
+    <tal:notajax tal:condition="python:not ajax_load or ajax_include_head">
+        <div tal:replace="structure provider:plone.htmlhead" />
+        <link tal:replace="structure provider:plone.htmlhead.links" />
+
+        <tal:comment replace="nothing">
+            Various slots where you can insert elements in the header from a template.
+        </tal:comment>
+        <metal:topslot define-slot="top_slot" />
+        <metal:headslot define-slot="head_slot" />
+        <metal:styleslot define-slot="style_slot" />
+        <metal:javascriptslot define-slot="javascript_head_slot" />
+
+        <meta name="viewport" content="width=device-width; initial-scale=0.6666; maximum-scale=1.0; minimum-scale=0.6666" />
+        <meta name="generator" content="Plone - http://plone.org" />
+    </tal:notajax>
+    
+    <link rel="stylesheet" href="/portal/prettyPhoto.css" type="text/css" />  
+    <link rel="stylesheet" href="/portal/imiimenik.css" type="text/css" />  
+    
+    <script type="text/javascript" src="/portal/jquery-1.5.1.min.js"></script>
+    
+    <script type="text/javascript" src="/portal/jquery.prettyPhoto.js"></script>
+    <script type="text/javascript" src="/portal/jquery.tinysort.js"></script>
+    
+    <script type="text/javascript" src="/portal/imiimenik.js"></script>
+    
+    
+    
+    
+    
+</head>
+
+<body tal:define="isRTL portal_state/is_rtl;
+                  sl python:plone_view.have_portlets('plone.leftcolumn', view);
+                  sr python:plone_view.have_portlets('plone.rightcolumn', view);
+                  body_class python:plone_view.bodyClass(template, view);
+                  sunburst_view python:context.restrictedTraverse('@@sunburstview');
+		lan python: context.portal_languages.getPreferredLanguage();
+                    dod python: lan != 'sl' and ('-' + lan) or '';
+                    
+                    url_tokens python: context.REQUEST.getURL().split('/');
+                    is_front python: context.absolute_url() == portal_url;
+                    
+                    prva python: is_front and 'prva_stran' or '';"
+    tal:attributes="class body_class;
+                    dir python:isRTL and 'rtl' or 'ltr'">
+                    
+    <div id="okolo" tal:condition="is_front">
+          <div id="okol" >              
+		            <a tal:attributes="href portal_url"><img id="logo" src="portal/logo.png" /></a>
+		            
+		            <h1><a tal:attributes="href portal_url">IMENIK</a></h1>               
+             
+              
+              
+             
+                 
+             <div class="forma">
+		            <form name="searchform" action="search" class="searchPage">
+                                <div class="LSBox">
+                                    <p class="opozorilo">Za novo iskanje kliknite zgoraj na <em>IMENIK</em></p>
+					<input class="searchPage" id="searchGadget" name="searchGadget" value="" />
+                                    
+                                       
+
+
+
+					<div id="listing" tal:define="mape python: context.portal_catalog(path={'query': '/portal/data2', 'depth': 0}); vsebina python: mape[0].getObject().getFolderContents(contentFilter={'portal_type': 'Folder'})">
+              
+                                              
+                                               <tal:list repeat="mapa vsebina">
+						<div style="margin: 1em" class="razvrsti" tal:define="podmape python: context.portal_catalog(path={'query': '/portal/data2/' + mapa.id, 'depth': 0}); podmape python: podmape[0].getObject().getFolderContents(contentFilter={'portal_type': 'Folder'});">						
+							<a tal:attributes="class python: podmape and 'kategorija nad' or 'kategorija klik'" tal:content="mapa/Title"></a>
+						
+
+							<div class="listing3" style="display: none; margin: 0.6em 0 1em 2em"  tal:condition="podmape">
+
+								<tal:list2 repeat="podmapa podmape">
+						                         <div>
+						                           <a style="color: #333" class="kategorija klik" tal:content="podmapa/Title"></a>
+						                         </div>
+								</tal:list2>
+		                                         
+		                                           
+		                                        </div> 
+
+						</div>
+
+						
+                                               </tal:list>
+                                        
+                                          
+                                        </div>
+                          
+                                    <div class="rezultati" style="display: block; "><div class="LSShadow" id="LSShadow">
+                                    </div></div>
+                                </div>
+                            
+                </form>
+                
+             </div>
+             
+             
+              
+              
+              
+              
+              
+            
+          </div>
+        
+     </div>   
+
+
+
+
+</body>
+</html>
+
+</metal:page>

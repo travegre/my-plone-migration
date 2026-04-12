@@ -1,0 +1,3863 @@
+body {
+	background: url(ozadje_body.png);
+}
+
+#zunanji_okvir {
+	background: url(krivulja.png) no-repeat 0px 301px;
+	min-height: 1150px;
+}
+
+#vsebina_podstran .documentByLine, #vsebina_podstran #kss-menu, .printskrit {
+	display: none;
+}
+
+
+
+ul {
+margin: 0;
+padding: 0;
+list-style-type: none;
+}
+
+
+
+span {
+	font-family: Arial, Helvetica, sans-serif;
+	/*font-size: 12px; odstranil Ziga*/
+	color: #333;
+}
+
+.datum {
+	color: #666 !important;
+}
+
+.zelena {
+	color: #5FB11E !important;
+
+}
+
+.necrta:hover {
+	text-decoration: none;
+}
+
+h1 {
+/*	font-family: 'AauxNextRegular', Arial, Helvetica, sans-serif; */
+/*	font-weight: bold; */
+	font-family: Lucida Grande, sans-serif;	
+	font-size: 25px;
+	line-height: 36px;
+	color: #5FB11E !important;
+	margin: 0;
+	margin-bottom: 26px;
+	padding-bottom: 0px;
+	border: none;
+	border-bottom: 3px solid #e7e7e9;
+}
+
+h1 span {
+/*	font-family: 'AauxNextRegular', Arial, Helvetica, sans-serif; */
+	font-family: Lucida Grande, sans-serif;	
+	font-size: 25px;
+	line-height: 36px;
+	color: #5FB11E;
+	
+}
+
+h2 {
+	font-family: Lucida Grande, sans-serif;	 /* was aaux... */
+	font-size: 16px;
+	color: #414152  !important;;
+	margin: 0;
+	border: none;
+	font-weight: normal;
+
+}
+
+h3 {
+	font-family: Lucida Grande, sans-serif;	/* was aaux... */
+	/*font-size: 14px; odstranil Ziga*/
+	color: #414152 !important;;
+	margin: 0;
+	border: none;
+	font-weight: normal;
+}
+
+h4 {
+	font-family: Lucida Grande, sans-serif;	/* was aaux... */
+	/*font-size: 11px; odstranil Ziga*/
+	color: #414152 !important;;
+	margin: 0;
+	border: none;
+	font-weight: normal;
+
+}
+
+.novice_list a {
+	font-size: 14px;
+	color: #5FB11E !important;
+}
+
+p, div {
+	font-family: Arial, Helvetica, sans-serif; /* was aaux... */
+	/*font-size: 12px; odstanil Ziga*/
+	color: #333;
+}
+
+
+
+a {
+font-family: Arial, Helvetica, sans-serif;
+	/*font-size: 12px; odstranil Ziga*/
+	color: #000;
+	text-decoration: none; 
+/*	text-decoration: underline; */
+}
+
+a:hover {
+	text-decoration: none;
+	color: rgb(165, 69, 191);
+}
+ 
+.breadcrumbSeparator {
+	color: #666;
+	font-size: 11px;
+}
+
+#drobtine span {
+	color: #666;
+}
+
+#okvir {
+	width: 1098px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#content-history, .suppressVisualEditor {
+	display:none;
+}
+
+/* GLAVA */
+
+#glava {
+	background: url(ozadje_zgor.png) no-repeat;
+	height: 39px;
+	padding: 13px 0 0 70px;
+}
+
+#glava a {
+	text-decoration: none;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #333;
+}
+
+#glava a.oznacen, #glava a:hover  {
+	color: #666;
+}
+
+#logo {
+	/*height: 90px;*/
+	padding: 20px 0 0 65px;
+}
+
+#jezik {
+	float: left;
+	padding-left: 10px;
+}
+
+#portal-siteactions {
+	float: right;
+	margin: 0;
+	padding: 0;
+	margin-right: 95px;
+}
+
+#portal-siteactions #nacrt {	
+	margin-left: 0px;
+	padding-left: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+#portal-siteactions #kon {	
+	padding-right: 5px;
+	padding-left: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+
+#nav {
+	float: right;
+	width: 85px;
+	margin-right: 0px;	
+		
+}
+
+#hitri, #hit { 
+padding-left: 9px;
+padding-right: 15px;
+padding-top: 10px;
+padding-bottom: 10px;
+}
+
+#hitri ul {
+	width: 130px;	
+	border: 1px solid #ccc;
+	padding-top: 5px !important;
+	list-style-type: none;
+	background: white;
+	padding: 0;	
+	margin-left: -47px;
+}
+
+#hitri ul li {
+	padding: 3px 8px 3px 8px;
+}
+
+#hitri ul li a {
+	padding: 5px 130px 5px 8px;
+}
+
+#hitri ul li:hover {
+	background: #e7e7e9;	
+	color: #333 !important;
+}
+
+#hitri ul a:hover {
+	color: #333 !important;
+}
+
+
+
+#hitri div {	
+	margin-bottom: 13px;
+}
+
+#portal-searchbox {
+	float: right;
+	width: 170px;
+	margin: -2px 56px 0 0px;
+	background: transparent;
+	border: none;
+	padding: 0;
+	
+}
+
+#portal-searchbox div, #portal-searchbox form, #portal-searchbox input {
+	padding: 0;
+	margin: 0;
+	background: none;
+	border: none;	
+	float: none;
+}
+
+#portal-searchbox input {
+	width: 117px;
+	float: left;
+	margin-left: 15px;
+	margin-top: 2px;
+}
+
+#LSResult div, #LSResult fieldset {
+	margin: 0 !important;
+	padding: 0 !important;
+	border: none;
+	width: 240px !important;	
+	
+}
+
+#LSResult {
+	margin-left: -69px !important;
+	margin-top: 27px !important;
+	left: 0px !important;
+}
+
+fieldset.livesearchContainer {
+	border: 1px solid #ccc !important;
+	
+}
+
+fieldset.livesearchContainer img {
+	display: none !important;
+	
+}
+
+#portal-searchbox .LSRow {
+	background: white !important;
+	padding: 4px 8px !important;
+	width: 222px !important;
+}
+
+#portal-searchbox .LSRow a {
+	padding: 5px 0px 5px 0 !important;
+}
+
+#portal-searchbox .LSRow:hover {
+	background: #e7e7e9 !important;
+}
+
+#portal-searchbox a:hover {
+	color: #333 !important;
+}
+
+#LSResult legend {
+	display: none;
+}
+
+/* hitri skoki */
+
+#nav {
+	position: relative;
+}
+
+#hitri {
+	padding: 0;
+	margin: 0;
+	background: none;
+	border: 0;
+	position: absolute;
+	
+}
+
+#hitri ul {
+	display: none;
+}
+
+#hit {
+	cursor: pointer;
+}
+/* GLAVNI MENI */
+
+#glavni_meni {
+	height: 59px;
+	background: url(ozadje_meni.png) no-repeat;
+	padding: 12px 0 0 70px;
+	margin: 0;
+}
+
+#glavni_meni ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+#glavni_meni .domov {
+	height: 20px;
+	width: 35px;
+	overflow: hidden;
+	background: url(domov2.png)  0px 1px !important;
+}
+
+#glavni_meni ul li {
+	height: 32px;
+	padding: 14px 16px 0 16px;
+	float: left;
+	background: url(locnica.png) left top no-repeat;
+	cursor: pointer;
+}
+
+#glavni_meni ul li:hover, #glavni_meni ul li.oznacen {
+	background: url(hover_meni.jpg);
+}
+
+#glavni_meni ul li.domov:hover {
+	background: none;
+}
+
+#glavni_meni ul li.domov {
+	padding: 0px 2px 0 0;
+	height: 46px;
+}
+
+#glavni_meni ul li a {
+	text-decoration: none;
+	font-family: Arial, sans-serif;
+	font-size: 13px;
+	color: #414152;
+}
+
+#glavni_meni ul li:hover a, #glavni_meni ul li.oznacen a {
+	color: white;
+}
+
+
+
+/* PODMENI */
+
+#podmeni {
+	width: 220px;
+	min-height: 20px;
+	float: left;
+	padding: 0;
+/*	padding-top:73px; */
+	margin: 0;
+	margin-bottom: 20px;
+}
+
+#podmeni ul li {
+	height: 26px;	
+	cursor: pointer;
+	padding: 0;
+	margin: 0;
+	padding-left: 5px;
+	padding-right: 10px;
+	overflow: hidden;
+}
+
+.podmeni_crta {
+	height: 2px;
+	background: #e7e7e9;
+	width: 200px;
+}
+
+#podmeni ul li a {
+	line-height: 26px;
+	text-decoration: none;	
+}
+
+#podmeni ul li:hover a, #podmeni ul li.oznacen a {
+text-decoration: none;
+color: white;
+}
+
+#podmeni ul li.oznacen, #podmeni ul li:hover {
+ background: url(hover_podmeni.jpg) no-repeat;	
+/* background: url(podmeni_zeleno.png) no-repeat; */
+color: white;
+}
+
+/* VSEBINA PODSTRANI */
+
+#naslov_podstran {
+	padding: 25px 0 13px 0;
+	
+}
+
+#vsebina_podstran {
+	padding: 18px 0 20px 0;
+	float: left;
+	width: 760px;
+}
+
+#podstran_levo {
+	width: 450px;
+	margin-right: 40px;
+	float: left;
+}
+
+#podstran_levo.sirsa {
+	width: 500px;
+}
+
+#podstran_desno.ozje {
+	width: 220px;
+
+}
+
+#podstran_desno.brez_roba {
+	margin-top: 0px !important; 
+}
+
+#podstran_desno {
+	width: 270px;
+	float:left;
+}
+
+.podstran_meni p {
+	margin: 0;
+	padding: 0;
+	background: url(puscica_velika.jpg) 0px 6px no-repeat;
+	margin-left: 0px; /* changed from -8px */
+	padding-left: 8px;
+	line-height: 20px;
+}
+
+.podstran_meni, .podstran_preiskava, .podstran_meni_ziv {
+	margin-bottom: 20px;
+}
+
+.podrocje_fajli {
+	padding-left: 15px;
+	margin-bottom: 20px;
+}
+
+#podstran_levo .ostali_fajli, .predmeti .ostali_fajli, .predmet.obvestila .ostali_fajli {
+	display: none;
+}
+
+#podstran_levo h3 {
+	margin-bottom: 8px;
+}
+
+.vzorec_levo {
+	padding-right: 1%;
+	float: left;
+	margin-bottom: 6px;
+	width: 100%;
+	font-weight: bold;
+	
+}
+
+.vzorec_desno {
+	float: left;
+	margin-bottom: 6px;
+	width: 100%;
+	padding-bottom: 10px;
+}
+
+.vzorec_desno.lab .tel {
+	font-weight: bold;
+	color: #5FB11E !important;
+}
+
+#sifra_p {
+	float: right;
+	margin-top: -52px;
+}
+
+#sifra_p span {
+	font-weight: bold;
+}
+
+.div_vzorci {
+	margin-bottom: 20px;
+	margin-top: 20px; /*dodal Ziga*/
+}
+
+.lab {
+	/*padding-top: 10px;
+	padding-bottom: 10px;*/
+	
+}
+
+
+.podrocje_fajli.predmeti {
+	width: 635px;
+	margin-top: 30px;
+}
+
+.podrocje_fajli h4.vec {
+	background: url(fajli_dol.png) no-repeat 417px 0px;
+	cursor: pointer;
+	border-top: 2px solid #e7e7e9;
+	padding-bottom: 6px;
+	padding-top: 4px;
+}
+
+.prei_sprem .zelena {
+	color: #5FB11E;
+	font-size: 14px;
+}
+
+.podrocje_fajli.predmeti h4.vec {
+	background: url(fajli_dol.png) no-repeat 617px 0px;
+}
+
+.podrocje_fajli h4.vec.odprt {
+	background: url(fajli_gor.png) no-repeat 417px 0px;
+	cursor: pointer;
+}
+
+.podrocje_fajli.predmeti h4.vec.odprt {
+	background: url(fajli_gor.png) no-repeat 617px 0px;
+}
+
+.podrocje_fajli.obvestila h4.vec {
+	background: url(fajli_dol.png) no-repeat 252px 0px;
+}
+
+.podrocje_fajli.obvestila h4.vec.odprt {
+	background: url(fajli_gor.png) no-repeat 252px 0px !important;
+	cursor: pointer;
+}
+
+
+.sodelavec_kontakt {
+	padding-bottom: 15px;
+	border-bottom: 3px solid #e7e7e9;
+	border-top: 3px solid #e7e7e9;
+	padding-top: 8px;
+	margin-top:0px;
+}
+
+.sodelavec_kontakt.vzorci {
+	border: none;
+	padding-top: 0;
+}
+
+#podstran_desno p {
+	padding: 0px;
+	margin: 0px;
+}
+
+#podstran_desno h4 {
+	margin-bottom: 8px;
+}
+
+.sodelavec_govorilne {
+	padding-bottom: 15px;
+	border-bottom: 3px solid #e7e7e9;
+	padding-top: 8px;
+	
+}
+
+.sodelavec_govorilne2 {
+	padding-bottom: 25px;
+	border-bottom: none;
+	padding-top: 8px;
+	
+}
+
+/* PREDMETI */
+
+.predmet.podrocje_fajli {
+	padding-left: 0px;
+	
+}
+
+.predmet.podrocje_fajli h4 {
+	font-size: 13px;
+	background: url(fajli_dol.png) no-repeat 433px 0px;
+}
+
+.predmet.podrocje_fajli h4.vec.odprt {
+	background: url(fajli_gor.png) no-repeat 433px 0px;
+}
+
+.predmet_levo {
+	float: left;
+}
+
+.predmet_desno {
+	float: right;
+	text-align: right;
+}
+
+#listing_preiskav.predmeti ul li {
+	background: url(puscica_velika.jpg) 0px 5px no-repeat;
+	padding: 0 0 0 8px;
+	margin-left: -8px;
+}
+
+#listing_preiskav.predmeti ul li a {
+	color: #5FB11E;
+}
+
+h3.pedagoska {
+	margin-bottom: 15px;
+}
+
+.pedagoskavec a {
+	cursor: pointer;
+}
+
+
+#listing_preiskav.predmeti div.program {
+	padding-left: 10px;
+}
+#listing_preiskav.predmeti div.program ul {
+	margin-top: 8px;
+	padding-left: 10px;
+}
+#listing_preiskav.predmeti div.program ul li {
+	margin-bottom: 0;
+}
+
+#listing_preiskav.predmeti h3 {
+	padding-left: 10px;
+}
+
+#listing_preiskav.predmeti h1 {
+	border: none;
+	margin-bottom: 10px;
+	font-size: 18px;
+}
+
+
+
+
+/* PREISKAVE */
+
+
+
+#divi_preiskav {
+	clear: both;
+	padding-top: 50px;
+}
+
+#divi_preiskav.hitro {
+	
+	padding-top: 0px;
+}
+
+#divi_preiskav ul {
+	
+	list-style-type: none !important;
+}
+
+#divi_preiskav li {	
+	background: url(puscica_velika.jpg) 0px 5px no-repeat;
+	padding: 0 0 0 8px;
+	margin-left: -8px;
+}
+
+li.preiskave_podrocje {
+	float: left;
+	padding: 5px 13px 4px 13px;
+	cursor: pointer;
+}
+
+li.preiskave_podrocje:hover a {
+	color:  #5FB11E;
+	
+}
+
+.crke_skrito ul li a {
+	font-size: 14px;
+	color: 
+}
+
+li.preiskave_podrocje.odprt {
+	background:  #5FB11E;
+}
+
+li.preiskave_podrocje.odprt a {
+	color:  white !important;
+	font-weight: bold;
+}
+
+ul.izbirnik_crk li {
+	font-size: 14px;
+	background: none !important;
+	margin-right: 15px;
+	float: left;
+	cursor: pointer;
+}
+
+ul.izbirnik_crk li.odprt, ul.izbirnik_crk li:hover {
+	color: #5FB11E;
+}
+
+ul.izbirnik_crk {
+	clear: both;
+	margin-left: 30px;
+}
+
+.velika_crka {
+	font-size: 20px;
+	margin: 10px 0 6px 0;
+	color: #5FB11E;
+}
+
+
+.podrocje_skrito {
+	display: none;
+}
+
+/* PREDMET */
+
+.podrocje_fajli a {
+color: #5FB11E !important;
+margin-bottom: 4px;
+}
+
+.novice_list {
+	margin-top: 16px;
+}
+
+
+/* VSEBINA PRVA STRAN */
+
+#vsebina {
+	background: url(ozadje.png);
+	padding: 5px 55px 10px 63px;
+	margin: 0;
+	
+}
+
+#noga {
+	background: url(ozadje_spod.png) no-repeat;
+	padding: 30px 0 20px 63px;
+	margin: 0;
+}
+
+.locnica_prva {
+	height: 10px;
+	margin-bottom: 15px;
+	border-bottom: 3px solid #e7e7e9;
+	clear: both;
+}
+
+.locnica_druga {
+	height: 10px;
+	margin-bottom: 15px;
+	border-bottom: 2px solid #e7e7e9;
+	clear: both;
+}
+
+#prva_levo_zgor {
+	float: left;
+	width: 668px;
+	margin-right: 40px;
+}
+    						
+#prva_levo_zgor_zgori {
+	width: 668px;
+	height: 290px;
+	position: relative;
+	overflow: hidden;
+}
+
+#prva_levo_zgor_zgori h1 {
+	margin-bottom: 0;
+	line-height: 44px;
+	border: none;
+}
+
+#prva_levo_zgor_zgori #imaz {
+	width: 450px;
+	z-index: 1;
+	position: absolute;
+}
+
+#prva_levo_zgor_zgori .naslov {
+	padding: 4px 100px 0 15px;
+	float: right;	
+	position: absolute;
+	right: 0px;
+	z-index: 2;
+	margin-top: 15px;
+	background: url(trans.png);
+}
+
+#prva_levo_zgor_zgori .opis {
+	width: 150px;
+	float: right;	
+	clear: right;
+	margin-top: 80px;
+}
+
+
+#prva_levo_zgor_sreda {
+		margin-bottom: 14px;
+}
+
+#prva_levo_zgor_sreda li {
+		background: url(puscica_velika.jpg) 0px 5px no-repeat;
+		padding: 0 0 0 8px;
+}
+
+#raziskovanje {
+	width: 290px;
+	padding-right: 24px;
+	float: left;
+	background: url(film.png) top right no-repeat;
+	border-right: 2px solid #e7e7e9;
+}
+
+#studij {
+	width: 310px;
+	padding-right: 22px;
+	padding-left: 20px;
+	float: left;
+	background: url(stud.png) top right no-repeat;
+}
+#studij ul,
+#raziskovanje ul {
+	margin-top:5px;
+}
+
+
+#prva_levo_zgor_spodi {
+	position: relative;
+	width: 648px;
+	height: 155px;
+	padding: 10px;
+	padding-bottom: 13px;
+	background: #ebebf6;
+	margin-top: 30px;
+	
+}
+
+#prva_desno_zgor {
+	float:left;
+	width: 272px;
+	
+}
+
+#prva_desno_zgor_zgori {	
+	background: #e7e7e9;
+	padding: 10px 10px;
+}
+
+#prva_desno_zgor_zgori img {	
+	float: right;
+margin-right: -18px;
+}
+
+#prva_desno_zgor_zgori .tekst {	
+	padding: 20px 0 0 0;
+	
+}
+
+#prva_desno_zgor_sreda {
+	padding: 0px 0 0 0;
+}
+
+#prva_desno_zgor_sreda #rss {
+	float: right;
+	margin-top: -40px;
+}
+
+#prva_desno_zgor_spodi #podlaga {
+	background: url(izpostaviti.jpg);
+	height: 200px;
+	margin: 20px 0 0 -15px;
+}
+
+#prva_desno_zgor_spodi #cez_podlaga:hover {
+	text-decoration:none;
+}
+
+#prva_desno_zgor_spodi #podlaga #not1 {
+	height: 28px;
+	padding: 19px 10px 20px 35px;
+	font-size: 20px !important;
+	color: #5FB11E !important;
+}
+
+#prva_desno_zgor_spodi #podlaga #not1 a {	
+	font-size: 20px !important;
+	color: #5FB11E !important;
+}
+
+#prva_desno_zgor_spodi #podlaga #not2 {
+	height: 28px;
+	padding: 5px 20px 5px 35px;
+	font-size: 22px !important;
+	color: white !important;
+}
+
+#prva_desno_zgor_spodi #podlaga #not2 a {
+	font-size: 22px !important;
+	color: white !important;
+}
+
+#prva_desno_zgor_spodi #podlaga #not3 {
+	height: 57px;
+	padding: 0px 20px 0px 35px;
+	font-size: 13px !important;
+	color: white !important;
+}
+
+#prva_desno_zgor_spodi #podlaga #not3 a {
+	font-size: 13px !important;
+	color: white !important;
+}
+
+#prva_desno_zgor_spodi #podlaga #not4 {
+	height: 28px;
+	width: 120px;
+	margin-left: 35px;
+}
+
+
+
+#prva_sreda {
+	height: 170px;
+}
+
+.vstev {
+	background: url(modra_podlaga.png) no-repeat;
+	width: 126px;
+	height: 50px;
+	padding: 10px 0 0 10px;
+	font-size: 16px;
+/*	font-family: 'AauxNextRegular', Arial, Helvetica, sans-serif; */
+	font-family: Lucida Grande, sans-serif;		
+	color: white;
+	font-weight: normal; /* was bold */
+}
+
+
+
+#prva_sreda .vseb {
+	padding-top: 20px;
+}
+
+#prva_sreda .vseb2 {
+	float:left;
+}
+
+#prva_sreda .pdf {
+	margin-left: 10px;
+}
+
+#prva_sreda_levo {
+	width: 330px;
+	margin-right: 22px;
+	float: left;
+	border-right: 2px solid #e7e7e9;
+}
+#prva_sreda_sreda {
+	width: 310px;
+	margin-right: 22px;
+	float: left;
+	border-right: 2px solid #e7e7e9;
+}
+#prva_sreda_desno {
+	width: 290px;
+	float: left;	
+}
+
+#prva_sreda img.ta {
+	float: left;	
+}
+
+#prva_sreda_desno ul div, #prva_sreda_desno ul a, #prva_sreda_desno ul {
+	float: left;
+}
+
+#prva_sreda_desno ul li {
+	clear: both;
+}
+
+#prva_sreda_desno ul li .leto {
+	margin-right: 10px;
+}
+
+#prva_spodi {
+	padding: 20px;
+	background: #e7e7e9;
+}
+
+#prva_spodi_levo {
+	width: 310px;
+	
+	margin-right: 22px;
+	float: left;
+	border-right: 2px solid #ddd;
+}
+
+#prva_spodi_levo a {
+	color: #5FB11E;
+}
+
+#prva_spodi_sreda {
+	width: 310px;
+	margin-right: 22px;
+	float: left;
+	border-right: 2px solid #ddd;
+}
+#prva_spodi_desno {
+	width: 270px;
+	float: left;
+}
+
+/* PRED NOGO */
+
+#prva_spodi h3 {
+	margin-bottom: 12px;
+}
+
+#prva_spodi_sreda ul li {
+	background: url(puscica_mala.jpg) no-repeat 0px 6px;
+	padding-left: 7px;
+	margin-left: -7px;
+}
+
+#prva_spodi_desno img {
+	float: left;
+	margin-right: 10px;
+}
+
+/* SODELAVCI na prvi strani */
+
+
+
+#prva_levo_zgor_spodi li {
+	width:  324px;
+	float: left;
+	height: 130px;
+	overflow: hidden;
+	padding-top: 5px;
+}
+
+#prva_levo_zgor_spodi li img {	
+	float: left;	
+	margin-left: 10px;
+}
+
+#prva_levo_zgor_spodi li .naprej {	
+	float: left;	
+	margin-left: -17px;
+	margin-top: 95px;
+	cursor: pointer;
+}
+
+#prva_levo_zgor_spodi li div {	
+	float: left;
+	width: 156px;
+	padding: 0px 20px;	
+}
+
+#prva_levo_zgor_spodi h3 a {	
+	color:  #5FB11E !important;	
+}
+
+#slider {
+	position: relative;
+	margin-top: 5px;
+}
+
+#foo2_prev {
+	position: absolute;
+	left: -11px;
+	top:  66px;
+	background: url(slide_levo.png) no-repeat;
+	width: 20px;
+	height: 38px;
+	border: none;
+	padding: 0;
+	margin: 0;
+	color: transparent;
+	cursor: pointer;
+}
+
+#foo2_next {
+	position: absolute;
+	left: 660px;
+	top:  66px;
+	background: url(slide_desno.png) no-repeat;
+	width: 20px;
+	height: 38px;
+	border: none;
+	padding: 0;
+	margin: 0;
+	color: transparent;
+	cursor: pointer;
+}
+
+#slider:focus {
+	outline: none;
+}
+
+
+/* NOGA */
+
+#noga {
+	clear: both;
+}
+
+
+/* PRINT stili */
+
+#document-action-sendto {
+
+}
+
+#document-action-sendto a {
+background: url(permail_p.gif) no-repeat;
+color: transparent !important;
+padding: 0;
+float: right;
+font-size: 0.5em;
+width: 16px;
+height: 16px;
+}
+
+#document-action-print a {
+background: url(print_p.gif) no-repeat;
+color: transparent !important;
+padding: 0;
+float: right;
+font-size: 0.5em;
+width: 16px;
+height: 16px;
+margin-right: 5px;
+}
+
+.documentActions  {
+	border: none;
+	margin-top: 30px;
+}
+
+/* NOVICE */
+
+#prva_desno_zgor_sreda h3 {
+	margin-bottom: 15px;
+}
+
+#prva_desno_zgor_sreda h4 a {
+	color: #5FB11E !important;
+	font-size: 13px;
+}
+
+#prva_desno_zgor_sreda h4 {
+	margin-bottom: 4px;
+}
+
+
+
+/* ARTICLE */
+
+.template-pa_model1 #vsebina .documentDescription, 
+.template-pa_model9 #vsebina .documentDescription {
+	margin-bottom: 17px;
+}
+
+.article a {
+	padding: 0px !important;
+}
+
+.article p {
+	margin: 0;
+	padding: 0;
+	background: url(puscica_velika.jpg) 0px 6px no-repeat;
+	margin-left: -8px !important;
+	padding-left: 8px !important;
+	line-height: 20px !important;
+}
+
+.article #prva_desno_zgor_zgori p {
+	background: none;
+}
+
+.article #prva_desno_zgor_zgori {
+	margin-bottom: 10px;
+}
+
+.article_desno {
+	float: right;
+	width: 270px;
+}
+
+.article_desno #prva_desno_zgor_zgori {
+	margin-bottom: 10px;
+}
+
+.article_levo {
+	float: left;
+	width: 450px;
+}
+
+.article .file.block, .article .link.block {
+	margin: 0;
+	padding: 0;
+}
+
+#imagesPlayer, #previewWrapper, #previewInnerWrapper {
+	width: 270px !important;
+}
+
+#thumbsWrapper #thumbs {
+	width: 180px !important;
+}
+
+#imagesPlayer {
+	margin: 0 !important;
+	padding: 0 !important;
+	
+	margin-bottom: 20px !important;
+	background: none !important;
+}
+
+#thumbLegend {
+	color: black !important;
+}
+
+#imagesPlayer #previewInnerWrapper img {
+	width: 240px !important;
+}
+
+.photosContainer.rightBlock {
+	background: none !important;
+	border: 1px solid #eee !important;
+}
+
+
+
+
+p.prvastrankrepko {
+/*	font-family: 'AauxNextBold', Arial, Helvetica, sans-serif !important; */
+	font-family: Lucida Grande, sans-serif;	
+	font-size: 20px !important;
+	color: #5FB11E !important;
+	float: left;
+	clear: left;	
+	width: 43px;
+	margin: 0;
+	line-height: 25px;
+}
+
+p.prvastrannekrepko {
+	font-size: 16px !important;
+	float: left;	
+	margin: 0;
+	line-height: 25px;
+}
+
+.prvastrankrepko2 {
+/*	font-family: 'AauxNextBold', Arial, Helvetica, sans-serif !important; */
+	font-family: Lucida Grande, sans-serif;	
+	font-size: 20px !important;
+	color: #5FB11E !important;
+	float: left;
+	clear: none;	
+	width: 50px;
+	line-height: 25px;
+}
+
+.leto {
+	font-size: 16px;
+	float: left;
+	clear: left;
+	line-height: 25px;	
+}
+
+.state-published {
+	color: #5FB11E !important;
+}
+
+dt img {
+	display: none;
+}
+
+dd {
+	margin-left: 5px;
+}
+
+
+
+
+
+/* TABELE */
+
+table, table tr, table td, table th {
+	border: none !important;
+	margin: 0 !important;
+	background: #efefef !important;
+	padding: 0 !important;
+}
+
+table td {
+	border: 1px solid #ccc !important;
+	border-collapse: collapse !important;
+	padding: 8px !important;
+}
+
+table {
+	border: 1px solid #ccc !important;
+}
+
+
+
+.contact-info #vsebina fieldset, .sendto_form #vsebina fieldset {
+	border: none !important;
+	padding-left: 0;
+}
+
+.contact-info #vsebina legend, .sendto_form #vsebina legend {
+	display: none !important;
+}
+
+.sitemap #vsebina .navTreeItem div a {
+	color: black !important;
+}
+
+.sitemap #vsebina .navTreeLevel2 div a {
+	color: #5FB11E !important;
+}
+
+.sitemap #vsebina .navTreeLevel3 div a {
+	color: black !important;
+}
+
+.sitemap #vsebina .navTreeLevel2  {
+	border: none !important;
+}
+
+.link-feed {
+	display: none !important;
+}
+
+.searchResults a {
+	color: #5FB11E !important;
+}
+
+.formControls .context {
+	border: 1px solid #666 !important;
+	padding: 5px !important;
+	background: none !important;
+}
+
+.searchPage .searchButton {
+	border: 1px solid #666 !important;
+	padding: 1px 10px 0px 10px !important;
+	background: none !important;
+}
+
+#searchform {
+	margin-top: 20px;
+	margin-bottom: 30px;
+}
+
+
+.fak_okvir {
+	float: left;
+	width: 650px; /* changed from 350px, from 2 col to 1 col displaly of items */
+	padding: 15px;
+}
+.fak_okvir h3 {
+	margin-top: 8px;
+}
+
+.fajli_datum {
+	font-size: 12px;
+	color: #333;
+	font-weight: normal;
+}
+
+/* PRVA STRAN */
+
+#prva_levo_zgor_zgori input {
+	display: none;
+}
+
+#carousel .carousel {
+	position: relative;
+	width: 668px;
+	height: 290px;
+	float: left;
+}
+
+#prva_levo_zgor_zgori:focus {
+	outline: none;
+}
+
+/* SHOWOFF */
+
+.jshowoff-slidelinks {
+	position: absolute;
+	top: 280px;
+	left: 350px;
+	display: block !important;
+	z-index: 150;
+}
+
+.jshowoff-slidelinks a {
+	padding: 3px 3px;
+	border: 1px solid #666;
+	background: white;
+	margin-right: 4px;
+	color: transparent;
+	line-height:1px;
+	font-size: 1px;
+}
+
+.jshowoff-slidelinks a.jshowoff-active {
+	background: #666;	
+}
+
+/* All your css hacks are belong to us... important! */
+
+ /* description goes up */
+#vsebina_podstran h1.documentFirstHeading {
+	margin-bottom: 7px;
+}
+
+/* everything moves down a bit */
+#vsebina_podstran p.documentDescription  {
+	margin-bottom: 25px; 
+}
+
+#vsebina_podstran p.documentDescription,
+#vsebina_podstran p.documentDescription span,
+#vsebina_podstran .article_levo p.documentDescription {
+	font-weight: normal;
+	font-style: italic;
+	color: #624C9C; !important;
+}
+
+/* we're all going down.. */
+#vsebina_podstran .article_levo,
+#vsebina_podstran .article_desno {
+	margin-top:7px !important;
+}
+
+#vsebina_podstran .photosContainer {
+	margin: 25px;
+}
+/* visually align us, please */
+#vsebina_podstran .description-less {
+	margin-top: 25px;
+}
+#vsebina_podstran .predmeti {
+	margin-top: 25px;
+}
+#vsebina_podstran .sirsa {
+	margin-top: 25px;
+}
+#vsebina_podstran #podstran_desno {
+	margin-top: 25px;
+}
+#vsebina_podstran #podstran_desno.preiskava {
+	margin-top: 13px;
+}
+
+/* novice */
+#vsebina_podstran dl {
+	margin: 27px 0 0 0 !important;	
+/*	background-color: #FEF7E8;	*/
+}
+
+/* format us please... */
+
+#vsebina_podstran #parent-fieldname-text {
+/*	background-color: #FEF7E8; */
+}
+
+#vsebina_podstran #parent-fieldname-text h2 {
+/*	font-weight: bold; */
+	font-size: 1.5em;
+	line-height: 1.4em;
+	margin: 1.5em 0 0.5em 0;
+	color: #000 !important;	
+}
+#vsebina_podstran #parent-fieldname-text h3 {
+/*	font-weight: bold; */
+	font-size: 1.35em;
+	line-height: 1.4em;
+	margin: 1.5em 0 0.5em 0;
+	color: #333 !important;
+}
+#vsebina_podstran #parent-fieldname-text h4 {
+/*	font-weight: bold; */
+	font-size: 1.2em;
+	line-height: 1.4em;
+	margin: 1.5em 0 0.5em 0;
+	color: #333 !important;
+}
+#vsebina_podstran blockquote.pullquote {
+	font-size: 1.2em;
+	font-weight: normal;
+	line-height: 1.4em;
+	margin: 1em;
+	color: #666 !important;
+	border-left: 1px #624C9C solid;
+}
+#vsebina_podstran blockquote.pullquote span.pullquote-cite {
+	display: block;
+	margin: 1em 0 0 0;
+	font-weight: normal;
+	font-style: italic;
+	line-height: 1.4em;
+	color: #666 !important;
+}
+#vsebina_podstran #parent-fieldname-text .visualHighlight {
+	background-color: #FFC !important; /* rgba(95, 177, 30, 0.15)  */
+}
+
+#vsebina_podstran #parent-fieldname-text p {
+	margin-top: 25px;
+}
+
+#vsebina_podstran #parent-fieldname-text p.callout {
+	color: #5FB11E !important; /* rgba(95, 177, 30, 1) */
+}
+
+/* taming lists */
+#vsebina_podstran ol  {
+	padding-left: 1.5em;
+	list-style-type: decimal;
+}
+#vsebina_podstran ul {
+	padding-left: 1.5em;
+	list-style-type: none;
+}
+
+/* making exceptions, for lists */
+#vsebina_podstran #listing_preiska ol,
+#vsebina_podstran #listing_preiskav ul {
+	padding-left: 10px;
+	list-style-type: none;
+}
+
+/* fun with diagnosticna dejavnost */
+#vsebina_podstran .field {
+	margin-top: 25px; 
+}
+
+
+#vsebina_podstran .internal-link,
+#vsebina_podstran a,
+#prva_desno_zgor_zgori a,
+#prva_desno_zgor_zgori a span {
+	color: #5FB11E;
+/*	background-color: rgba(204, 204, 204, 0.25) !important; */ /* #436976 */
+/*	text-decoration: underline; */
+}
+
+.float-right {
+	float: right;
+	margin: 1em 0 1em 1em;
+}
+.float-left {
+	float: left;
+	margin: 1em 1em 1em 0;
+}
+.img-description {
+	font-style: italic;
+	display: block;
+	padding: 0.7em 0 0 0;
+	color: #666;
+	font-size: 90%;
+}
+
+/* HITRO ISKANJE */
+#searchform .discreet {
+  display: none;
+}
+
+#okolo {
+  clear: both;
+  margin: 0 0 90px 0;
+}
+
+#okol {
+  /*width: 1000px;
+  margin: 30px auto 30px auto; 
+  padding-bottom: 30px; */
+  position: relative; 
+  text-align: center;
+}
+
+#okol .LSBox {
+  text-align: left;
+ padding: 30px 0 0px 180px;
+  position: relative;
+}
+
+#okol .LSBox span {
+ color: #FFF;
+ font-size: 12px;
+ padding: 7px 0;
+}
+
+#okol .LSBox .searchButton {
+ padding: 0px;
+margin: -8px 0 0 5px;
+height: 40px;
+}
+
+
+#okolo #searchGadget,
+input.iskalnik {
+  color: #414152;
+  padding: 5px;
+  margin: 0 0 7px 0px;
+  border: 1px inset;
+  width: 310px;
+}
+
+#okolo #searchGadget:focus {
+  color: #414152;
+  outline-offset: 2px;
+  outline: 2px solid #5FB11E;
+}
+
+#okolo #searchGadget:focus input {
+  color: #414152;
+  border: 1px solid #5FB11E;
+}
+
+#okolo .rezultati {
+  padding-top: 30px;
+  color: #414152;
+  clear: both;
+  position: absolute;
+  z-index: 20;
+  width: 1000px;
+  left: 0px;
+}
+
+#okolo .rezultati .LSShadow {
+ left: 0px;
+}
+
+#okolo fieldset {
+  border: 2px solid #E7E7E9;
+  background: white;
+  padding: 20px 5px;
+  left: 0px;
+  width: 760px
+}
+
+#okolo #livesearchLegend {
+  background-color: #aaa;
+  
+  color: white;
+   border: 1px solid #E7E7E9;
+padding: 5px 7px 5px 7px;
+margin: 0px 0 0 280px;
+
+}
+
+
+table.tabela {
+  border: 0;
+  margin: 30px 0;
+  padding: 0;
+  width: 100%;
+}
+
+table.tabela tr {
+  width: 100%;
+  cursor: pointer;
+}
+
+table.tabela tr:hover td {
+  color: #5FB11E;
+}
+
+table.tabela td {
+  padding: 5px;
+  text-align: left;
+  font-size: 14px;
+}
+
+table.tabela th {
+  padding: 5px;
+  text-align: left;
+}
+
+.hide {
+  display: none;
+  
+}
+
+
+table.tabela td.enota {
+ font-size: 11px;
+ line-height: 14px;
+} 
+
+
+
+#okolo #listing {
+ width: 1000px;
+  position: absolute;
+ height: auto;
+ z-index: 10;
+ padding-top: 30px;
+}
+
+#okolo #listing div.razvrsti {
+ padding: 0 15px;
+ margin-bottom: 10px;
+ text-align: left;
+}
+
+#okolo #listing div.levo {
+ width: 330px;
+ float: left;
+}
+
+.ekstra.ul {
+margin: 0 0 50px 0;
+padding: 0px !important;
+list-style-type: none !important;
+}
+
+.podrocje_select {
+  
+
+background: none;
+border: 1px solid #666;
+color: #624C9C;
+    font-size: 15px;
+    height: 26px;
+    padding: 2px 0 0;
+    width: 300px;
+}
+
+.podrocje_select:focus {
+  
+}
+
+.vijolcno {
+  color: #624C9C;
+  font-size: 14px;
+  margin-left: 20px;
+  line-height: 30px;
+}
+
+.vijolcno.vzorci {
+  padding: 30px 0 0 0;
+  margin: 0px 0 0 15px;
+  clear: both;
+}
+
+.trenutno {
+  color: #666;
+font-size: 10px;
+line-height: 18px;
+}
+
+#listing_preiskav.vzorci span a {
+  color: #666 !important;
+}
+
+#listing_preiskav.vzorci div.levo {
+  float: left;
+  width: 230px;
+  margin-left: 15px;
+  color: #624C9C;
+
+}
+
+#listing_preiskav.vzorci div.levo .razvrsti {
+  margin-bottom: 12px;
+}
+
+#listing_preiskav.vzorci div.levo a {
+ font-size: 17px;
+  color: #624C9C;
+  line-height: 19px;
+  
+}
+
+.vzorci_drobtine {
+  margin: 30px 0 20px 15px;
+  clear: both;
+}
+
+.slikce_filtrov {
+  padding: 50px;
+} 
+
+.slikca_filtra {
+  float: left;
+  padding: 40px;
+  text-align: center;
+} 
+
+.slikca_filtra h1 {
+  border: none;
+  margin: 0;
+  padding: 10px;
+  text-align: center;
+  font-size: 20px;
+} 
+
+#listing_preiskav {
+  padding-top: 30px;
+  clear: both;
+}
+
+
+#searchform {
+  margin: 0px;
+}
+
+form.searchPage {
+  text-align: left;
+}
+
+#podstran_preiskava_print {
+  margin: -13px 0;
+}
+
+
+/*od tukaj navzdol dodajal Ziga*/
+#gumb_pokazi_vec{
+	background-color: #8DC85A;
+	color: white!important;
+	padding: 5px 15px 5px 15px;
+	font-weight: bold;
+}
+
+#opis_preiskave{
+	width:500px;
+
+}
+
+.hideContent {
+    overflow: hidden;
+    height: 55px;
+}
+
+.embalaza_slika + .embalaza_slika {
+	padding-top: 10px;
+}
+
+.showContent {
+    height: auto;
+}
+
+.show-more {
+    /*padding: 10px 0;
+    text-align: center;*/
+}
+
+/*konec dodajanja - Ziga*/
+
+
+
+
+
+
+
+
+
+body {
+  background-color: rgb(255, 255, 255);
+  font: 300 1em/1.38 'Open Sans';
+  color: rgb(255, 255, 255)!important; /*dodal Ziga, ker je foundation prepisal tole*/
+}
+
+.copyright {
+  font-size: 70%;
+}
+
+/* Grow */
+.hvr-grow {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+}
+.hvr-grow:hover, .hvr-grow:focus, .hvr-grow:active {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+.footer {
+  float: left;
+  clear: both;
+  width: 100%;
+  padding-top: 92px;
+  padding-bottom: 92px;
+  background-color: rgb(165, 69, 191);
+}
+
+.footer-links {
+  float: left;
+  width: 79.9830729166%;
+  margin-left: 10%;
+}
+
+.footer-links .container {
+  width: 23.5466488677%;
+  border-radius: 3px;
+}
+
+.footer-links .text {
+  float: left;
+}
+
+.followers,
+.founds,
+.likes,
+.subscribers {
+  float: left;
+  width: 15%;
+  margin-left: 2.00033%;
+}
+
+.followers .text,
+.founds .text,
+.likes .text,
+.subscribers .text,
+.tweets .text,
+.users .text {
+  float: left;
+  width: 100%;
+  min-height: 25px;
+  text-align: center;
+}
+
+.image {
+  display: block;
+  float: left;
+  height: auto;
+  overflow: hidden;
+}
+
+.integration {
+  float: left;
+  clear: both;
+  width: 100%;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  background-color: rgb(59, 47, 91);
+}
+
+.integration .image {
+  width: 375px;
+  margin-left: 34.375%;
+}
+
+.links {
+  position: relative;
+  float: left;
+  clear: both;
+  z-index: 44;
+  width: 100%;
+  padding-top: 92px;
+  padding-bottom: 92px;
+  background-image: -webkit-linear-gradient(90deg, rgb(255, 255, 255) 0%, rgb(221, 221, 221) 100%);
+  background-image:    -moz-linear-gradient(90deg, rgb(255, 255, 255) 0%, rgb(221, 221, 221) 100%);
+  background-image:      -o-linear-gradient(90deg, rgb(255, 255, 255) 0%, rgb(221, 221, 221) 100%);
+  background-image:     -ms-linear-gradient(90deg, rgb(255, 255, 255) 0%, rgb(221, 221, 221) 100%);
+  background-image:         linear-gradient(360deg, rgb(255, 255, 255) 0%, rgb(221, 221, 221) 100%);
+}
+
+.links .text {
+  float: left;
+}
+
+.logo {
+  float: left;
+  height: 92px;
+}
+
+.logo .image {
+  /*width: 317px; spremenil Ziga*/
+  width: 372px;
+  margin-top: 14px;
+}
+
+.logo .text {
+  float: left;
+  width: 100%;
+  margin-top: 31px;
+  padding: 8px;
+  font-size: 0.875em;
+  font-weight: 400;
+  text-align: right;
+  color: rgb(0, 0, 0);
+}
+
+.metrics {
+  position: relative;
+  float: left;
+  clear: both;
+  z-index: 91;
+  width: 100%;
+  padding-top: 92px;
+  padding-bottom: 92px;
+  background-color: rgb(165, 69, 191);
+}
+
+.numbers {
+  float: left;
+  width: 80%;
+  margin-left: 10%;
+}
+
+.pair {
+  float: left;
+  width: 100%;
+}
+
+.pair .text {
+  float: left;
+  width: 100%;
+  text-align: center;
+  color: rgb(255, 255, 255);
+}
+
+.single {
+  position: relative;
+  float: left;
+  z-index: 12;
+  width: 100%;
+  padding-bottom: 200px;
+  background-image: url('../images/IMI%20detajli%2098.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+.single .container {
+  clear: both;
+  text-align: center;
+}
+
+.social {
+  position: relative;
+  float: left;
+  z-index: 71;
+  width: 100%;
+  padding-top: 92px;
+  padding-bottom: 92px;
+  background-image: -webkit-linear-gradient(90deg, rgb(255, 255, 255) 0%, rgb(221, 221, 221) 100%);
+  background-image:    -moz-linear-gradient(90deg, rgb(255, 255, 255) 0%, rgb(221, 221, 221) 100%);
+  background-image:      -o-linear-gradient(90deg, rgb(255, 255, 255) 0%, rgb(221, 221, 221) 100%);
+  background-image:     -ms-linear-gradient(90deg, rgb(255, 255, 255) 0%, rgb(221, 221, 221) 100%);
+  background-image:         linear-gradient(360deg, rgb(255, 255, 255) 0%, rgb(221, 221, 221) 100%);
+}
+
+.social .text {
+  text-align: center;
+}
+
+.text-47 p {
+  margin-bottom: 1em;
+}
+
+.tweets {
+  float: left;
+  width: 15%;
+  margin-left: 1.9987%;
+}
+
+.users {
+  float: left;
+  width: 15%;
+}
+
+._button {
+  /*display: block;*/
+  margin: 0 auto;
+  padding: 8px 16px;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 3px;
+  font-size: 1.125em;
+  font-weight: 400;
+  text-align: center;
+}
+
+._container {
+  float: left;
+}
+
+._element {
+  background-size: cover;
+}
+
+.links ._button {
+  border-color: rgb(165, 69, 191);
+  color: rgb(165, 69, 191);
+}
+
+.links ._element {
+  float: left;
+  width: 100.0254543603%;
+  height: 215px;
+  margin-left: -0.02545%;
+  background-position: left top;
+}
+
+.pair ._button,
+.single ._button {
+  border-color: rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
+}
+
+.social ._button {
+  border-color: rgb(98, 78, 154);
+  color: rgb(98, 78, 154);
+}
+
+.social ._element {
+  width: 144px;
+  height: 144px;
+  margin: 0 auto;
+  border-radius: 72px;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.container-1 {
+  width: 39.1666666666%;
+  margin: 120px 0 0 30.4%;
+  padding: 32px;
+  border-radius: 3px;
+  background-color: rgba(11, 11, 11, 0.5);
+}
+
+.container-10 {
+  background-image: url('../images/IMI%20detajli%20151.jpg');
+}
+
+.container-12 {
+  background-image: url('../images/IMI%20detajli.jpg');
+	width: 100%;
+}
+
+.container-11,
+.container-13 {
+  width: 31.9777947807%;
+  margin-left: 2.0268%;
+  border-radius: 3px;
+  margin-bottom:32px;
+}
+
+.container-14 {
+  background-image: url('../images/IMI%20detajli%20103.jpg');
+}
+
+.container-16,
+.container-7 {
+  width: 80%;
+  margin-left: 10%;
+  padding-right: 32px;
+  padding-bottom: 92px;
+  padding-left: 32px;
+  border-radius: 3px;
+}
+
+.container-17,
+.container-8 {
+  clear: both;
+  width: 79.9830729166%;
+  margin-left: 10%;
+}
+
+.container-18 {
+  position: relative;
+  z-index: 54;
+  width: 48.9833460855%;
+  text-align: center; /*dodal ziga - tist hover efekt je childa od tega vrgu na levo*/
+}
+
+.container-19 {
+  background-image: url('../images/slika.jpeg');
+}
+
+.container-2 {
+  width: 115.763546798%;
+  height: 42px;
+  margin: 32px 0 0 -7.87408%;
+  text-align: center;
+}
+
+.container-21 {
+  position: relative;
+  z-index: 59;
+  width: 48.8628778875%;
+  margin-left: 2.06587%;
+  text-align: center; /*dodal ziga - tist hover efekt je childa od tega vrgu na levo*/
+}
+
+.container-22 {
+  background-image: url('../images/slika-2.jpeg');
+}
+
+.container-23 {
+  clear: both;
+  width: 100.0033316674%;
+  margin-left: -0.00333%;
+  padding-top: 32px;
+}
+
+.container-24 {
+  position: relative;
+  clear: both;
+  z-index: 64;
+  width: 48.9833460855%;
+  margin-top: 60px;
+  text-align: center; /*dodal ziga - tist hover efekt je childa od tega vrgu na levo*/
+}
+
+.container-25 {
+  background-image: url('../images/slika-3.jpeg');
+}
+
+.container-20,
+.container-26 {
+  clear: both;
+  width: 99.9700887367%;
+  padding-top: 32px;
+}
+
+.container-27 {
+  position: relative;
+  z-index: 69;
+  width: 48.8645058361%;
+  margin: 60px 0 0 2.06587%;
+  text-align: center; /*dodal ziga - tist hover efekt je childa od tega vrgu na levo*/
+}
+
+.container-28 {
+  background-image: url('../images/slika-4.jpeg');
+}
+
+.container-29 {
+  clear: both;
+  width: 100%;
+  padding-top: 32px;
+}
+
+.container-15,
+.container-30 {
+  clear: both;
+  width: 80%;
+  height: 42px;
+  margin: 92px 0 0 10%;
+  text-align: center;
+}
+
+.container-32,
+.container-33 {
+  margin-left: 1.95517%;
+}
+
+.container-34 {
+  margin-left: 1.89819%;
+}
+
+.container-3,
+.container-5 {
+  width: 64.6666666666%;
+  margin-left: 20.16667%;
+  padding: 32px;
+  border-radius: 3px;
+  background-color: rgba(11, 11, 11, 0.5); /*spremenil alpha iz 0.5 na 0.7*/
+  text-align: center;
+}
+
+.container-4,
+.container-6 {
+  clear: both;
+  width: 119.7530864197%;
+  height: 42px;
+  margin: 32px 0 0 -9.87172%;
+}
+
+.container-9 {
+  width: 31.9791666666%;
+  border-radius: 3px;
+  margin-bottom:32px;
+}
+
+.logo-1 {
+  width: 32.4166666666%;
+  margin-left: 10%;
+}
+
+.logo-2 {
+  width: 46%;
+  margin-left: 1.58073%;
+}
+
+.text-10 {
+  width: 107.1428571428%;
+  margin-left: -3.57143%;
+  font-family: 'Droid Serif';
+  font-size: 2.25em;
+  font-weight: 400;
+  text-align: center;
+  color: rgb(165, 69, 191);
+}
+
+.text-11 {
+  clear: both;
+  width: 107.1428571428%;
+  margin-left: -3.57143%;
+  font-style: italic;
+  font-size: 1em;
+  text-align: center;
+  color: rgb(67, 67, 67);
+}
+
+.text-12,
+.text-14,
+.text-16 {
+  clear: both;
+  width: 100%;
+  margin-top: 32px;
+  font-family: 'Droid Serif';
+  font-size: 1.5em;
+  font-weight: 400;
+  color: rgb(67, 67, 67);
+}
+
+.text-13,
+.text-15,
+.text-17 {
+  clear: both;
+  width: 100%;
+  margin: 8px 0 0 -0.01018%;
+  font-size: 0.875em;
+  color: rgb(67, 67, 67);
+}
+
+.text-2 {
+  float: left;
+  width: 100%;
+  font-family: 'Droid Serif';
+  font-size: 1.5em;
+  font-weight: 400;
+  text-align: center;
+  color: rgb(255, 255, 255);
+}
+
+.text-18,
+.text-20,
+.text-22,
+.text-24,
+.text-26,
+.text-28 {
+  font-family: 'Droid Serif';
+  font-size: 2.375em;
+  font-weight: 400;
+  color: rgb(255, 255, 255);
+}
+
+.text-19,
+.text-21,
+.text-23,
+.text-25,
+.text-27,
+.text-29 {
+  clear: both;
+  font-size: 1em;
+  color: rgb(221, 221, 221);
+}
+
+.text-3 {
+  float: left;
+  clear: both;
+  width: 100%;
+  margin-top: 16px;
+  font-size: 1em;
+  text-align: center;
+  color: rgb(255, 255, 255);
+}
+
+.text-30 {
+  float: left;
+  width: 107.1428571428%;
+  margin-left: -3.57143%;
+  font-family: 'Droid Serif';
+  font-size: 2.25em;
+  font-weight: 400;
+  color: rgb(165, 69, 191);
+}
+
+.text-31 {
+  float: left;
+  clear: both;
+  width: 107.1428571428%;
+  margin-left: -3.57143%;
+  font-style: italic;
+  font-size: 1em;
+  color: rgb(67, 67, 67);
+}
+
+.text-34 {
+  float: left;
+  width: 99.6702516233%;
+  font-family: 'Droid Serif';
+  font-size: 1.125em;
+  font-weight: 400;
+  color: rgb(165, 69, 191);
+}
+
+.text-35 {
+  float: left;
+  clear: both;
+  width: 99.6702516233%;
+  font-size: 0.875em;
+  color: rgb(67, 67, 67);
+}
+
+.text-32,
+.text-36 {
+  float: left;
+  width: 100%;
+  font-family: 'Droid Serif';
+  font-size: 1.125em;
+  font-weight: 400;
+  color: rgb(165, 69, 191);
+}
+
+.text-33,
+.text-37 {
+  float: left;
+  clear: both;
+  width: 100%;
+  font-size: 0.875em;
+  color: rgb(67, 67, 67);
+}
+
+.text-38 {
+  float: right;
+  width: 100%;
+  font-family: 'Droid Serif';
+  font-size: 1.125em;
+  font-weight: 400;
+  color: rgb(165, 69, 191);
+}
+
+.text-39 {
+  float: right;
+  clear: both;
+  width: 100%;
+  font-size: 0.875em;
+  color: rgb(67, 67, 67);
+}
+
+.text-4 {
+  position: relative;
+  float: left;
+  clear: both;
+  z-index: 0;
+  width: 12%;
+  min-height: 51px;
+  margin: -707px 0 0 11.59896%;
+  font-family: 'Droid Serif';
+  font-size: 2em;
+  font-weight: 400;
+  text-align: center;
+  color: rgb(255, 255, 255);
+}
+
+.text-40,
+.text-42,
+.text-44,
+.text-46 {
+  width: 65.3191489361%;
+  font-family: 'Droid Serif';
+  /*font-size: 1.125em; povecal za 0,05em, ker sem tudi text v footerju povecal za 0,05em*/
+  font-size: 1.175em;
+  font-weight: 400;
+  color: rgb(255, 255, 255);
+}
+
+.text-41,
+.text-43,
+.text-45,
+.text-47 {
+  clear: both;
+  width: 100%;
+  margin-top: 16px;
+  /*font-size: 0.75em; to je velikost teksta v footerju*/
+  font-size: 0.80em; 
+  line-height: 1.5;
+  color: rgb(204, 204, 204);
+}
+
+.text-5 {
+  position: relative;
+  float: left;
+  z-index: 1;
+  width: 12%;
+  min-height: 51px;
+  margin: -663px 0 0 11.59896%;
+  font-family: 'Droid Serif';
+  font-size: 2em;
+  font-weight: 400;
+  text-align: center;
+  color: rgb(255, 255, 255);
+}
+
+.text-6,
+.text-8 {
+  font-family: 'Droid Serif';
+  font-size: 1.5em;
+  font-weight: 400;
+}
+
+.text-7,
+.text-9 {
+  clear: both;
+  margin-top: 16px;
+  font-size: 1em;
+}
+
+.pair ._container-3 { /*Healthcare diagnostics*/
+  width: 50%;
+  padding-top: 92px;
+  padding-bottom: 92px;
+  background-image: url('../images/IMI%20detajli%20151.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: left top;
+}
+
+.pair ._container-5 { /*A group of Slovenian researchers first to show evidence that fetal brain damages are caused by Zika Virus*/
+  width: 50%;
+  padding-top: 92px;
+  padding-bottom: 92px;
+  /*background-image: url('../images/IMI%20zunanjost%2026.jpg');*/
+  background-image: url('../images/detajli-153.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: left top;
+}
+
+.pair ._container-4 { /*education*/
+  width: 50%;
+  padding-top: 92px;
+  padding-bottom: 92px;
+  background-image: url('../images/IMI%20zunanjost%2026.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: left top;
+}
+
+.pair ._container-7 { /*projects*/
+  width: 50%;
+  padding-top: 92px;
+  padding-bottom: 92px;
+  background-image: url('../images/IMI%20detajli%20154.jpg');
+  background-size: cover;
+  background-position: left top;
+}
+
+.single ._container-1 {
+  width: 100%;
+  /*height: 92px; spremenil ziga - ker je zdej malo vecji logo, in da je equal odmik zgori in spodi - 14+72+14*/
+  height: 100px; 
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.text a {
+  border-top-width: 0;
+  border-right-width: 0;
+  border-bottom-width: 0;
+  border-left-width: 0;
+  border-color: transparent;
+  border-style: none;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  background-color: transparent;
+  font-family: inherit;
+  font-style: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  text-transform: inherit;
+  text-decoration: inherit;
+  letter-spacing: inherit;
+  word-spacing: inherit;
+  color: inherit;
+  opacity: 1;
+  word-break: normal;
+  word-wrap: normal;
+  white-space: normal;
+}
+
+@media(max-width: 768px) {
+
+  .footer {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  .footer .footer-links {
+    width: 95.8333333333%;
+    margin-left: 1.94906%;
+  }
+
+  .integration .image {
+    float: none;
+    height: auto;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .links {
+    position: relative;
+    z-index: 44;
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  .logo .image {
+    height: auto;
+  }
+
+  .metrics {
+    position: relative;
+    z-index: 91;
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  .metrics .numbers {
+    width: 96.09375%;
+    margin-left: 1.94906%;
+  }
+
+  .numbers .followers {
+    clear: both;
+    width: 31.8428184281%;
+    margin-top: 32px;
+    margin-left: 0.00212%;
+  }
+
+  .numbers .founds {
+    width: 31.0298102981%;
+    margin-top: 32px;
+    margin-left: 2.17014%;
+  }
+
+  .numbers .likes {
+    width: 31.8428184281%;
+    margin-top: 32px;
+    margin-left: 2.16379%;
+  }
+
+  .numbers .subscribers {
+    width: 31.8428184281%;
+    margin-left: 2.11933%;
+  }
+
+  .numbers .tweets {
+    width: 31.8428184281%;
+    margin-left: 2.16379%;
+  }
+
+  .numbers .users {
+    width: 31.8428184281%;
+    margin-left: 0.00212%;
+  }
+
+  .single {
+    position: relative;
+    z-index: 12;
+    padding-bottom: 0;
+    background-color: rgba(0, 0, 0, 0);
+  }
+
+  .social {
+    position: relative;
+    clear: both;
+    z-index: 71;
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  .container .text-13,
+  .container .text-15,
+  .container .text-17,
+  .links ._element {
+    margin-left: -0.01989%;
+  }
+
+  .social ._element {
+    width: 108px;
+    height: 108px;
+  }
+
+  .container .container-11 {
+    margin-left: 2.02468%;
+  }
+
+  .container .container-13 {
+    margin-left: 2.02892%;
+  }
+
+  .container .container-18 {
+    position: relative;
+    z-index: 54;
+    width: 62.4194369063%;
+    margin-left: 16.95429%;
+  }
+
+  .container .container-2 {
+    width: 109.0909090909%;
+    margin-left: -4.54324%;
+  }
+
+  .container .container-20 {
+    width: 100%;
+    padding-top: 16px;
+  }
+
+  .container .container-21 {
+    position: relative;
+    clear: both;
+    z-index: 59;
+    width: 65.9112109905%;
+    margin-top: 32px;
+    margin-left: 16.95429%;
+  }
+
+  .container .container-23 {
+    width: 100%;
+    margin-left: 0;
+    padding-top: 16px;
+  }
+
+  .container .container-24 {
+    position: relative;
+    z-index: 64;
+    width: 65.7988466757%;
+    margin-top: 32px;
+    margin-left: 17.05818%;
+  }
+
+  .container .container-26 {
+    width: 100.0161108425%;
+    margin-top: 3px;
+    margin-left: -0.01611%;
+    padding-top: 16px;
+  }
+
+  .container .container-27 {
+    position: relative;
+    clear: both;
+    z-index: 69;
+    width: 65.9069708276%;
+    margin-top: 32px;
+    margin-left: 16.9203699999%;
+  }
+
+  .container .container-29 {
+    width: 99.8520234189%;
+    padding-top: 16px;
+  }
+
+  .container .container-4,
+  .container .container-6 {
+    width: 120%;
+    margin-top: 55px;
+    margin-left: -10%;
+  }
+
+  .container .text-10,
+  .container .text-11,
+  .container .text-30,
+  .container .text-31 {
+    margin-left: -3.57133%;
+  }
+
+  .container .text-34 {
+    width: 99.723756906%;
+    margin-left: -0.0579%;
+  }
+
+  .container .text-35 {
+    width: 99.723756906%;
+  }
+
+  .container .text-36,
+  .container .text-37 {
+    margin-left: -0.2706200001%;
+  }
+
+  .container .text-38 {
+    margin-right: 0.27062%;
+  }
+
+  .container .text-39 {
+    width: 99.7222222222%;
+    margin-right: 0.54446%;
+  }
+
+  .footer-links .container-31 {
+    width: 49.3206521739%;
+  }
+
+  .footer-links .container-32 {
+    width: 48.777173913%;
+    margin-left: 1.76206%;
+  }
+
+  .footer-links .container-33 {
+    clear: both;
+    margin-top: 23px;
+    margin-left: 0.04883%;
+    /* width: 48.777173913%; dodal Ziga*/
+  }
+
+  .footer-links .container-34 {
+    margin-top: 29px;
+    margin-left: 27.44353%;
+    width: 48.777173913%; /*dodal Ziga*/
+  }
+
+  .links .container-15 {
+    width: 100%;
+    margin-top: 51px;
+    margin-left: 0;
+  }
+
+  .links .container-7 {
+    margin-left: 9.99756%;
+    padding-bottom: 48px;
+  }
+
+  .pair .container-3,
+  .pair .container-5 {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .single .container-1 {
+    clear: none;
+    width: 100%;
+    margin-top: 0;
+    margin-left: 0;
+  }
+    .single_lower .container-1 {
+    clear: none;
+    width: 100%;
+    margin-top: 0;
+    margin-left: 0;
+  }
+  .single_lower{
+
+    padding-bottom: 0!important;
+    background-color: rgba(0, 0, 0, 0);
+  }
+
+  .single .logo-1 {
+    margin-left: 1.99992%;
+  }
+
+  .single .logo-2 {
+    width: 54.0364583333%;
+    margin-left: 9.59473%;
+  }
+
+  .social .container-16 {
+    margin-left: 9.99756%;
+  }
+
+  .links .container-8,
+  .social .container-17 {
+    width: 95.9635416666%;
+    margin-left: 2.0813%;
+  }
+
+  .social .container-30 {
+    width: 100%;
+    margin-top: 48px;
+    margin-left: 0;
+  }
+
+  .text-4 {
+    position: relative;
+    z-index: 0;
+    margin-top: -997px;
+    margin-left: 11.5966799999%;
+  }
+
+  .text-5 {
+    position: relative;
+    z-index: 1;
+    margin-top: -953px;
+    margin-left: 11.5966799999%;
+  }
+
+  .pair ._container-4,
+  .pair ._container-7,
+  .pair ._container-3,
+  .pair ._container-5 {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+
+@media(max-width: 480px) {
+  body {
+    font-size: 1em;
+  }
+
+  .footer .footer-links,
+  .metrics .numbers {
+    margin-left: 1.94987%;
+  }
+
+  .integration .image,
+  .logo .image {
+    width: 280px;
+    height: auto;
+  }
+
+  .links {
+    position: relative;
+    z-index: 44;
+  }
+
+  .logo .text {
+    margin-top: 0;
+    padding-top: 0;
+    text-align: center;
+  }
+
+  .metrics {
+    position: relative;
+    z-index: 91;
+  }
+
+  .numbers .followers {
+    clear: none;
+    width: 45.8536585365%;
+    margin-left: 1.95122%;
+  }
+
+  .numbers .founds {
+    width: 46.1788617886%;
+    margin-left: 1.94106%;
+  }
+
+  .numbers .likes {
+    clear: both;
+    width: 45.8536585365%;
+    margin-left: 3.17412%;
+  }
+
+  .numbers .subscribers {
+    clear: both;
+    width: 45.8536585365%;
+    margin-top: 32px;
+    margin-left: 3.16057%;
+  }
+
+  .numbers .tweets {
+    width: 45.8536585365%;
+    margin-left: 1.95122%;
+  }
+
+  .numbers .users {
+    width: 49.1056910569%;
+    margin-left: -0.07453%;
+  }
+
+  .single {
+    position: relative;
+    z-index: 12;
+  }
+
+  .single .logo {
+    width: 90%;
+    margin-left: 5%;
+  }
+
+  .social {
+    position: relative;
+    z-index: 71;
+  }
+
+  .container .text-13,
+  .container .text-15,
+  .container .text-17,
+  .links ._element {
+    margin-left: -0.02532%;
+  }
+
+  .container .container-11 {
+    clear: both;
+    width: 90%;
+    margin-top: 49px;
+    margin-left: 5%;
+  }
+
+  .container .container-13 {
+    clear: both;
+    width: 90%;
+    margin-top: 47px;
+    margin-left: 5%;
+  }
+
+  .container .container-18 {
+    position: relative;
+    z-index: 54;
+    margin-left: 16.9538699999%;
+  }
+
+  .container .container-2 {
+    width: 115.3846153846%;
+    margin-left: -7.69043%;
+  }
+
+  .container .container-21 {
+    position: relative;
+    z-index: 59;
+    margin-left: 16.9538699999%;
+  }
+
+  .container .container-24 {
+    position: relative;
+    z-index: 64;
+    margin-left: 17.05224%;
+  }
+
+  .container .container-26 {
+    margin-left: -0.01547%;
+  }
+
+  .container .container-27 {
+    position: relative;
+    z-index: 69;
+    margin-left: 16.91995%;
+  }
+
+  .container .container-4 {
+    width: 87.2596153846%;
+    margin-top: 32px;
+    margin-left: 5.76521%;
+  }
+
+  .container .container-6 {
+    width: 96.4285714285%;
+    margin-top: 32px;
+    margin-left: 1.78223%;
+  }
+
+  .container .container-9 {
+    width: 90%;
+    margin-left: 5%;
+  }
+
+  .container .text-10,
+  .container .text-11,
+  .container .text-30,
+  .container .text-31 {
+    margin-left: -3.56934%;
+  }
+
+  .container .text-34 {
+    margin-left: -0.05147%;
+  }
+
+  .container .text-36,
+  .container .text-37 {
+    margin-left: -0.26289%;
+  }
+
+  .container .text-38 {
+    margin-right: 0.2732%;
+  }
+
+  .container .text-39 {
+    margin-right: 0.54124%;
+  }
+
+  .footer-links .container-31 {
+    margin-left: 1.76291%;
+    width: 48.23%;
+  }
+
+  .footer-links .container-32 {
+    margin-left: 1.76291%;
+    width: 48.23%;
+  }
+
+  .footer-links .container-33 {
+    margin-left: 0.04416%;
+    /* margin-left: 1.76291%; */
+    width: 48.23%; /*dodal Ziga*/
+  }
+
+  .footer-links .container-34 {
+    /*margin-left: 27.44226%; spremenil ziga*/
+    margin-left: 1.76291%;
+    width: 48.23%; /*dodal Ziga*/
+  }
+
+  .links .container-15 {
+    margin-top: 48px;
+  }
+
+  .links .container-8 {
+    width: 100%;
+    margin-left: 2.08008%;
+  }
+
+  .pair .container-3,
+  .pair .container-5 {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .single .container-1 {
+    padding-right: 16px;
+    padding-left: 16px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .single .logo-1 {
+    height: 75px;
+  }
+
+  .single .logo-2 {
+    clear: both;
+    height: auto;
+    margin-top: 17px;
+  }
+
+  .links .container-7,
+  .social .container-16 {
+    margin-left: 9.99349%;
+  }
+
+  .social .container-17 {
+    margin-left: 2.08008%;
+  }
+
+  .text-4 {
+    position: relative;
+    z-index: 0;
+    margin-top: -1074px;
+    margin-left: 11.5917999999%;
+  }
+
+  .text-5 {
+    position: relative;
+    z-index: 1;
+    margin-top: -1030px;
+    margin-left: 11.5917999999%;
+  }
+
+
+
+  .pair ._container-4, .pair ._container-3 {
+    width: 100%;
+  }
+
+  .pair ._container-7, .pair ._container-5 {
+    clear: both;
+    width: 100%;
+  }
+
+  .single ._container-1 {
+    height: auto;
+  }
+}
+
+
+.single_lower {
+  position: relative;
+  float: left;
+  z-index: 12;
+  width: 100%;
+  padding-bottom: 100px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  background-image: url('../images/detajli-66.jpg');
+}
+
+
+
+
+
+
+
+
+
+/*OVERRIDES ZA NOVO STRAN*/
+
+.first_page_searchbox {
+  /*float: none;
+  width: 100%;*/
+  float: none!important;
+  width: 50%!important;
+  margin: auto!important;
+  margin-bottom: 16px!important;
+}
+
+
+.first_page_searchbox input {
+  color: rgb(255, 255, 255)!important;
+  background-color:transparent!important;
+  border-color: rgb(255, 255, 255)!important;
+  padding: 8px 16px!important;
+  border-width: 1px!important;
+  border-style: solid!important;
+  border-radius: 3px!important;
+  font-size: 1.125em!important;
+  font-weight: 400!important;
+  text-align: center!important;
+  width: 100%!important;
+  margin:0!important;
+  margin-top: 32px!important;
+  margin-bottom: 16px!important;
+}
+
+#okol .LSBox {
+  padding: 0;
+}
+
+.text-47 p {
+  color: rgb(204, 204, 204);
+}
+._button {
+  color: rgb(250, 250, 250);
+}
+
+#LSResult {
+  margin:0!important;  
+  margin-top: 87px!important;
+}
+
+
+#vsebina_podstran .internal-link, #vsebina_podstran a, #prva_desno_zgor_zgori a, #prva_desno_zgor_zgori a span {
+  color: rgb(165, 69, 191); /*svetlo vijolcna*/
+  /*color: rgb(59, 47, 91);   temno viljolcna*/
+}
+
+a.menu-link:hover{
+  color: rgb(165, 69, 191);
+}
+
+#divi_preiskav a {
+  color: rgb(59, 47, 91);
+}
+
+
+/*diagnostična dejavnost in podmeni*/
+.velika_crka {
+  color: rgb(165, 69, 191);
+}
+
+h1 {
+  color: rgb(165, 69, 191)!important;
+  border:none;
+  font-family: 'Droid Serif';
+  font-size: 2.25em;
+  text-align: center;
+
+}
+#vsebina_podstran h1.documentFirstHeading {
+  margin-bottom: 1rem;
+}
+
+#vsebina_podstran #parent-fieldname-text {
+  /*text-align: center;*/
+}
+
+#vsebina_podstran #parent-fieldname-text p {
+  margin-top: 92px;
+}
+
+#vsebina_podstran #parent-fieldname-text p img {
+    display: block;
+    margin: 0 auto;
+}
+
+
+ul.izbirnik_crk li.odprt, ul.izbirnik_crk li:hover {
+  color: rgb(165, 69, 191)!important;
+}
+
+.naslov_vzorca {
+  color: rgb(165, 69, 191)!important;
+  background: url(fajli_dol_new.png) no-repeat;
+  background-position: right;
+  padding-right: 0;
+  border:none;
+  font-size: 1em;
+}
+
+.naslov_vzorca.odprt {
+  background: url(fajli_gor_new.png) no-repeat;
+  background-position: right;
+    padding-right: 0;
+  border:none;
+}
+
+.vzorec_desno.lab .tel {
+  color: rgb(165, 69, 191)!important;
+}
+
+#listing_preiskav.vzorci div.levo a {
+  color: rgb(165, 69, 191);
+}
+
+.podrocje_select {
+  color: rgb(59, 47, 91);
+}
+
+.vijolcno {
+  color: rgb(59, 47, 91);
+}
+
+#gumb_pokazi_vec {
+  margin: 0 auto;
+  padding: 8px 16px;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 3px;
+  font-size: 1.125em;
+  font-weight: 400;
+  text-align: center;
+  text-decoration:none;
+  background-color: transparent!important;
+  color: rgb(59, 47, 91)!important;
+}
+
+#zunanji_okvir {
+  background: linear-gradient(360deg, rgb(255, 255, 255) 0%, rgb(221, 221, 221) 100%);
+  margin-top: 100px;
+  min-height: 0;
+}
+
+.glava-ozadje-slika {
+  background-image: url(images/IMI%20detajli%2098.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+.container-top {
+  width: 100%;
+  height: 100px;
+  margin-top: -100px;
+  background-color: rgba(255, 255, 255, 0.9);
+
+}
+
+.logo .text {
+  font-size: 14px;
+  font-weight: normal;
+}
+
+
+.text-12 {
+  color: rgb(165, 69, 191);
+}
+
+.div_vzorci {
+  margin: 0;
+}
+
+.ostali_fajli{
+  display: none;
+}
+
+.pad {
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+#okvir {
+  width: 100%;
+}
+
+#vsebina_podstran {
+  width: 100%;
+  /*text-align: center;*/
+  clear: both;
+  width: 90%;
+  margin-left: 5%;
+}
+
+
+.container-16, .container-7 {
+  padding-right: 0;
+}
+
+.template-preiskava_view_new p.text, 
+.template-preiskava_view_new .ostali_fajli div, 
+.template-preiskava_view_new p.text span{
+  /*font-size: 14px!important; */
+}
+
+.template-preiskava_view_new p.text-12, 
+.template-preiskava_view_new p.text-14, 
+.template-preiskava_view_new p.text-16{
+  font-size: 18px!important;
+}
+
+.template-preiskava_view_new p.text-10 {
+  font-size: 30px!important;
+}
+#drobtine {
+  padding: 1em;
+  background-color: rgb(165, 69, 191);
+  padding-left: 10%;
+  font-size:0.8em;
+}
+
+#drobtine span, #drobtine a {
+    color:white;
+}
+
+.vsebina {
+  position: relative;
+  float: left;
+  clear: both;
+  z-index: 44;
+  width: 100%;
+  padding-top: 23px;
+  background-image: -webkit-linear-gradient(90deg, rgb(255, 255, 255) 0%, rgb(221, 221, 221) 100%);
+  background-image:    -moz-linear-gradient(90deg, rgb(255, 255, 255) 0%, rgb(221, 221, 221) 100%);
+  background-image:      -o-linear-gradient(90deg, rgb(255, 255, 255) 0%, rgb(221, 221, 221) 100%);
+  background-image:     -ms-linear-gradient(90deg, rgb(255, 255, 255) 0%, rgb(221, 221, 221) 100%);
+  background-image:         linear-gradient(360deg, rgb(255, 255, 255) 0%, rgb(221, 221, 221) 100%);
+}
+
+#podmeni {
+  clear: both;
+  width: 79.9830729166%;
+  margin-left: 10%;
+  text-align: center;
+}
+
+#podmeni ul li {
+  display: inline;
+  padding: 6.5px;
+  border-radius: 3px;
+}
+#podmeni ul li.oznacen {
+  background: rgb(165, 69, 191);
+  color: white;
+}
+#podmeni ul li.oznacen:hover {
+  background: rgb(165, 69, 191);
+  color: white;
+}
+#podmeni ul li.oznacen:hover a {
+  color: white;
+}
+
+#podmeni ul li:hover {
+  background:none;
+  color: rgb(165, 69, 191);
+}
+#podmeni ul li a {
+  line-height: 52px;
+  font-size: 0.875em;
+}
+#podmeni ul li:hover a {
+
+  color: rgb(165, 69, 191);
+}
+
+.nav_subitems {
+  border-bottom: 1px solid white;
+}
+
+.podnaslov {
+  width: 100%;
+  /*text-align: center;*/
+}
+
+#prva_desno_zgor_spodi #podlaga #not1 {
+  text-align: left;
+}
+
+.image-inline {
+  float: none!important;
+}
+
+
+#divi_preiskav {
+  text-align: left;
+}
+
+#divi_preiskav li {
+  background: url(puscica_velika.png) 0px 5px no-repeat;
+}
+
+#livesearch0 {
+  white-space: normal!important;
+}
+#okol {
+  width: 100%;
+}
+
+#okolo {
+  margin:0;
+}
+
+#okolo .rezultati {
+  width: 100%;
+}
+
+
+#listing_preiskav.vzorci div.levo.container-9 {
+  width: 31.9791666666%;
+  margin-left: 0;
+}
+#listing_preiskav.vzorci div.levo {
+  text-align: left;
+}
+
+.slikce_filtrov {
+  padding: 92px 0 0 0;
+  text-align: center;
+}
+
+#okol .LSBox {
+  text-align: center;
+}
+
+.zelena {
+  color: rgb(165, 69, 191)!important;
+}
+
+.container-12 {
+  /*padding-top: 92px;*/
+}
+
+a h1 { /*to je tam, pri Katalog preiskav, ko so une 3 slikce:; Hitro iskanje, Po področjih, Po vzorcih */
+  margin-top: 20px;
+}
+
+.vzorec_desno {
+  font-size: 0.875em;
+}
+
+.vzorec_levo {
+  font-size: 0.875em;
+}
+
+.text.text-41 p {
+  color: rgb(204, 204, 204);
+}
+
+#not4 {
+  margin-top: 32px;
+}
+.documentActions {
+  display: none;
+}
+/* //diagnostična dejavnost in podmeni //*/
+
+
+
+/*Pedagoška dejavnost */
+.podstran_meni p {
+  background: url(puscica_velika.png) 0px 5px no-repeat;
+}
+
+#listing_preiskav.predmeti ul li {
+  background: url(puscica_velika.png) 0px 5px no-repeat;
+}
+
+#listing_preiskav.predmeti ul li a {
+  color: rgb(165, 69, 191);
+}
+
+.state-published {
+  color: rgb(165, 69, 191)!important;
+}
+
+.fak_okvir {
+  width: auto;
+}
+
+.podrocje_fajli a {
+  color: rgb(165, 69, 191)!important;
+}
+
+.predmet.podrocje_fajli h4 {
+  /*background: url(fajli_dol_new.png) no-repeat 433px 0px;*/
+  background: none;
+  background-size: contain;
+}
+
+#podstran_levo {
+  width: auto;
+}
+
+#vsebina_podstran p.documentDescription, #vsebina_podstran p.documentDescription span, #vsebina_podstran .article_levo p.documentDescription {
+  font-size: 1em;
+  color: rgb(67, 67, 67);
+  text-align: center;
+}
+
+#prva_spodi_desno img { /*certifikati kakovosti v main template*/
+  background:rgb(204, 204, 204);
+}
+
+.centriraj {
+  text-align: center;
+}
+
+
+
+
+
+
+
+/*od Gregorja koda za lepše prikazovanje rezultatov iskanja preiskav*/
+  #okol .LSBox {
+      float: none
+  }
+  #okol #searchGadget {
+    background: white none repeat scroll 0 0;
+    text-align: left !important;    
+  }
+  #okol #searchGadget:focus {
+    outline: none;
+  }
+
+  #searchGadget::-webkit-input-placeholder {
+    color: white !important;
+  }
+  #searchGadget::-moz-placeholder {
+    color: white !important;
+  }
+  #searchGadget:-ms-input-placeholder {
+    color: white !important;
+  }
+  #searchGadget:-moz-placeholder {
+    color: white !important;
+  }
+
+  @media(max-width: 480px) {
+    #okolo .rezultati {
+      width: 120%;
+      margin-left: 0;
+      left:-10%;
+      top: 150px;
+    }
+    
+  }
+  #LSShadow {
+    width: 100%
+  }
+  #okolo fieldset {
+    background: #624C9C;
+      left: 0;
+      padding: 0;
+      width: 100%;
+  }
+  #okolo #livesearchLegend {
+    background: rgba(0,0,0,0.7);
+      width: 50%;
+      margin: 0 0 0 25%;
+      padding: 10px 10px;
+    text-align: center;
+  }
+  .LSIEFix {
+    padding: 5% !important;
+    background: transparent;
+  }
+  .LSRow {
+    border: none;
+    border-bottom: 1px solid rgba(255,255,255, 0.5);
+    padding: 5px 0;
+    overflow: hidden;
+    width: 100%;
+  }
+  .LSRow a, .LSRow .discreet {
+    color: white !important;
+  } 
+  .LSRow a {
+    display: block;
+    /*width: 90%;*/
+    width: 100%;
+    margin-top: 5px;
+    float: left;
+    white-space: inherit;
+  }
+  .LSRow .discreet {
+    float: right;
+    clear: right; 
+  } 
+  .single.nad {
+    z-index: 20000
+  }
+  #LSNothingFound {
+    color: white;
+  }
+  #close_search {
+    position: absolute;
+    right: 15px;
+    top: 45px;
+    color: white;
+    z-index: 1000000;
+    font-family: Verdana;
+    font-size: 130%;
+    cursor: pointer;
+  }
+/*od Gregorja koda za lepše prikazovanje rezultatov iskanja preiskav*/
+
+
+/* //STVARI ZA NOVO STRAN*/
+
+
+
+
+
+
+
+
+#logo {
+  margin: 20px 0 10px 0;
+}
+
+h1 {
+  margin: 50px;
+  text-align: center;
+  color: #624C9C;
+}
+
+h1 a {
+  color: #624C9C;
+  text-decoration: none;
+}
+
+h1 span {
+  color: rgb(165, 69, 191)!important;
+}
+
+.searchResults a {
+  color: rgb(59, 47, 91)!important;
+}
+
+.search-opcija a img {
+  height:60px;
+}
+
+
+.preiskava_opis_container {
+	width: 20%;
+}
+
+
+.preiskava_vzorci_container {
+	width: 55%;
+}
+
+.preiskava_tech_data {
+	width: 20%;
+}
+
+body {
+margin: 0 /*wtf zakaj je mel body po defaultu 8px margina? :D*/}
+
+.search-opcija {
+ /*neki padding problemi...metalo v drugo vrsto*/
+ padding: 0;
+}
+
+.slika_popup {
+  padding-bottom: 10px;
+}
+
+
+.slika_popup {
+    padding-right: 10px; 
+    width: 45%; 
+    float: left;
+}
+
+@media only screen and (max-width: 768px) {
+    .slika_popup {
+	width:100%;
+	padding-right: 0;
+    }
+}
+
+.siv-tekst {
+  color: rgb(67, 67, 67);
+}

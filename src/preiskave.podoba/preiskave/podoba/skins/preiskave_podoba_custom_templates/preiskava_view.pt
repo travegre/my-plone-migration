@@ -1,0 +1,207 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+
+<body>
+  <div metal:fill-slot="main">
+    <metal:main-macro define-macro="main"
+                    tal:define="kssClassesView context/@@kss_field_decorator_view;
+                                getKssClasses nocall:kssClassesView/getKssClassesInlineEditable;
+                                templateId template/getId">
+
+        
+<!--
+        <span class="podstran_preiskava">
+        <div tal:replace="structure provider:plone.belowcontentbody" />
+        </span>
+-->
+
+<!-- PODATKI ZA PREISKAVO -->
+    
+      <p class="text text-10" tal:content="python:here.title">
+            Title or id
+      </p>
+
+      <div class="container _container container-12 clearfix">
+        <div class="container _container container-9 preiskava_opis_container clearfix">
+          <!--
+          <div class="container _element container-10"></div>
+          -->
+          <p class="text text-12 siv-tekst">Področje preiskave</p>
+          <tal:podrocje tal:define="podrocja python: ','.join(here.podrocje)">
+            <p class="text text-13" 
+                tal:define="seznam_podrocij python: podrocja.split(',');
+                        brez_duplikatov python: [];
+                        dummy python: [brez_duplikatov.append(x) for x in seznam_podrocij if x not in brez_duplikatov]" tal:content="python: ','.join(brez_duplikatov)">
+            </p>
+          </tal:podrocje>
+
+          <p class="text text-12 siv-tekst" tal:condition="python: here.opis != ''">Opis preiskave</p>
+          <p class="text text-13" tal:content="structure python: here.opis" tal:condition="python: here.opis != ''">
+          </p>
+
+          <div class="show-more" style="display:none">
+              <a href="#" id="gumb_pokazi_vec">Prikaži več</a>
+          </div>
+
+          <p class="text text-12 siv-tekst" tal:condition="python: here.datoteka.getFilename('datoteka')">Dodatna dokumentacija:</p>
+          <p class="text text-13">
+              <a tal:attributes="href python: here.datoteka.absolute_url()" tal:define="ime python: here.datoteka; ime python: ime.getFilename('datoteka')" tal:content="ime" />
+          </p>
+
+
+          <p class="text text-12 siv-tekst" tal:condition="python: here.opombe != ''">Opombe</p>
+          <p class="text text-13" tal:content="structure python: here.opombe" tal:condition="python: here.opombe != ''"></p>
+        </div>
+  <!-- //PODATKI ZA PREISKAVO -->
+
+
+  <!-- PODATKI O VZORCIH -->
+      <div class="container _container container-11 preiskava_vzorci_container clearfix">
+        <div tal:define="vzorci python: here.vzorci; 
+                        vzorci_lab python: here.vzorci_lab; 
+                        vzorci_lab_tel python: here.vzorci_lab_tel; 
+                        vzorci_lab_kratica python: here.vzorci_lab_kratica;
+                        vzorci_odvzem python: here.vzorci_odvzem; 
+                        vzorci_kolicina python: here.vzorci_kolicina; 
+                        vzorci_transport python: here.vzorci_transport; 
+                        vzorci_opomba python: list(here.vzorci_opomba); 
+                        embalaza_slika_sifra python: here.embalaza_slika_sifra; 
+                        vzorci_odvzem_video_sifra python: here.vzorci_odvzem_video_sifra;
+            " tal:condition="python: len(vzorci) > 0"
+            class="pad">
+          <p class="text text-14">Vzorci in navodila</p>
+
+          <div class="div_vzorci">
+            <tal:k repeat="vzorec vzorci">
+              <tal:kaj condition="python: vzorec != ''" 
+                    define="ste repeat/vzorec/index; 
+                    labi python: vzorci_lab[ste].split('###');
+                    teli python: vzorci_lab_tel[ste].split('###');
+                    lab_krat python: vzorci_lab_kratica[ste].split('###');
+                    vzorec python: vzorec.split('###')[0];
+                    sifra_slike python: embalaza_slika_sifra[ste].split('#');
+                    ">
+                    
+                <div class="neki">
+                  <p class="naslov_vzorca text text-14" tal:condition="python: vzorec != ''" tal:content="structure python: vzorec"></p>
+                  
+                  <div class="ostali_fajli">
+                    <div tal:on-error="python: vzorci_odvzem.insert(ste,'')" tal:condition="python: vzorci_odvzem[ste] != ''" class="vzorec_levo">Navodila za odvzem:</div>
+                    <div tal:condition="python: vzorci_odvzem[ste] != ''" class="vzorec_desno" tal:content="structure python: vzorci_odvzem[ste]"></div>
+                                                                                                                          
+                    <div tal:on-error="python: vzorci_transport.insert(ste,'')" tal:condition="python: vzorci_transport[ste] != ''" class="vzorec_levo">Navodila za transport: </div>
+                    <div tal:condition="python: vzorci_transport[ste] != ''" class="vzorec_desno" tal:content="structure python: vzorci_transport[ste]"></div>
+                      
+                    <div tal:on-error="python: vzorci_kolicina.insert(ste,'')" tal:condition="python: vzorci_kolicina[ste] != ''" class="vzorec_levo">Količina in embalaža: </div>
+                    <div tal:condition="python: vzorci_kolicina[ste] != ''" class="vzorec_desno" tal:content="structure python: vzorci_kolicina[ste]"></div>
+
+                    
+                    <div tal:on-error="python: vzorci_opomba.insert(ste,'')" tal:condition="python: vzorci_opomba[ste] != ''" class="vzorec_levo">Opomba za klinika: </div>
+                    <div tal:condition="python: vzorci_opomba[ste] != ''" class="vzorec_desno" tal:content="structure python: vzorci_opomba[ste]"></div>
+                    
+                    <div tal:condition="python: embalaza_slika_sifra[ste] != ''" class="vzorec_levo">Priporočena embalaža: </div>
+                    <div style="clear:both;"></div>
+                    <div tal:condition="python: embalaza_slika_sifra[ste] != ''" class="row">
+                        <tal:te tal:repeat="slika sifra_slike" >
+                        <!--ta div ima href atribut zato, ker drgac popup ne dela-->
+                        
+                        <div class="slika_popup" tal:attributes="href python: 'embalazaSlike/' + slika">
+                            <img class="embalaza_slika" tal:attributes="src python: 'embalazaSlike/' + slika" style="width:100%;" />
+                        </div>
+                        </tal:te>
+                    </div>
+                      
+                    <div tal:on-error="python: vzorci_odvzem_video_sifra.insert(ste,'')" tal:condition="python: vzorci_odvzem_video_sifra[ste] != ''" class="vzorec_levo">Video: </div>
+                    <div tal:condition="python: vzorci_odvzem_video_sifra[ste] != ''">
+                      <input type="hidden" class="replace_url" name="replace_url" tal:attributes="value python: vzorci_odvzem_video_sifra[ste]">
+
+                      <iframe class="yt_video" style="width:100%" frameborder="0" allowfullscreen>
+                      </iframe>
+                          <script type="text/javascript">
+                          var url = $(".replace_url").val();
+                          var url = url.replace("watch?v=", "v/");
+                          $(".yt_video").each(function(){
+                              $(this).attr("src", url);
+                          });
+                      </script>
+                    </div>
+                      
+                    <div tal:condition="python: labi[0] != ''" tal:content="structure python: labi[0]" class="vzorec_levo lab"></div>
+                    <div tal:condition="python: teli[0] != ''" class="vzorec_desno lab">Telefon: <span class="tel" tal:content="structure python: teli[0]" /></div>
+                    <div tal:condition="python: labi[1] != ''" tal:content="structure python: labi[1]" class="vzorec_levo lab"></div>
+                    <div tal:condition="python: teli[1] != ''" class="vzorec_desno lab">Telefon: <span class="tel" tal:content="structure python: teli[1]" /></div>
+                    <div tal:condition="python: labi[2] != ''" tal:content="structure python: labi[2]" class="vzorec_levo lab"></div>
+                    <div tal:condition="python: teli[2] != ''" class="vzorec_desno lab">Telefon: <span class="tel" tal:content="structure python: teli[2]" /></div>  
+
+                    <div style="clear:both"></div>
+
+                    <div tal:condition="python: lab_krat[0] != ''" class="vzorec_levo">Lab kratica 1: </div>
+                    <div tal:condition="python: lab_krat[0] != ''" class="vzorec_desno" tal:content="structure python: lab_krat[0]"></div>
+
+                    <div tal:condition="python: lab_krat[1] != ''" class="vzorec_levo">Lab kratica 2: </div>
+                    <div tal:condition="python: lab_krat[1] != ''" class="vzorec_desno" tal:content="structure python: lab_krat[1]"></div>
+
+                    <div tal:condition="python: lab_krat[2] != ''" class="vzorec_levo">Lab kratica 3: </div>
+                    <div tal:condition="python: lab_krat[2] != ''" class="vzorec_desno" tal:content="structure python: lab_krat[2]"></div>
+
+                   
+                    <div style="clear:both"></div>
+                  </div>
+                </div>
+              </tal:kaj>  
+            </tal:k>
+          </div>          
+        </div>
+      </div>
+
+
+  <!-- //PODATKI O VZORCIH -->
+
+  <!-- DODATNO O PREISKAVAH -->
+      <div class="container _container container-13 preiskava_tech_data clearfix">
+        <div tal:condition="python: here.id != ''">
+          <p class="text text-16">Šifra preiskave</p>
+          <p class="text text-17" tal:condition="python: here.id != ''"><span tal:content="structure python: here.id.split('_')[1]" /></p>
+        </div>
+        <!--
+        <div tal:condition="python: here.sklop != ''">
+          <p class="text text-16">Sklop preiskave</p>
+          <p class="text text-17" tal:condition="python: here.sklop != ''"><span tal:content="structure python: here.sklop" /></p>
+        </div>
+        
+        <div tal:condition="python: here.sinonim != ''">
+          <p class="text text-16">Sinonim preiskave</p>
+          <p class="text text-17" tal:condition="python: here.sinonim != ''"><span tal:content="structure python: here.sinonim" /></p>
+        </div>
+        -->
+        <div tal:condition="python: here.laboratoriji != ''">
+          <p class="text text-16">Laboratoriji</p>
+          <p class="text text-17" tal:condition="python: here.laboratoriji != ''"><span tal:content="structure python: here.laboratoriji" /></p>
+        </div>
+
+        <div tal:condition="python: here.urnik != ''">
+          <p class="text text-16">Urnik izvajanja</p>
+          <p class="text text-17" tal:condition="python: here.urnik != ''"><span tal:content="structure python: here.urnik" /></p>
+        </div>
+      
+        <div tal:condition="python: here.trajanje != ''">
+          <p class="text text-16">Trajanje preiskave</p>
+          <p class="text text-17" tal:content="structure python: here.trajanje" />
+        </div>
+      
+        <div tal:condition="python: here.metode != ''">
+          <p class="text text-16">Metode preiskave</p>
+          <p class="text text-17" tal:condition="python: here.metode != ''"><span tal:content="structure python: here.metode" /></p>
+        </div>
+      </div>
+<!-- //DODATNO O PREISKAVAH -->
+    </metal:main-macro>
+  </div>
+
+</body>
+</html>

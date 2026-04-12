@@ -1,0 +1,178 @@
+#okol {
+  width: 1000px;
+  margin: 30px auto 30px auto;
+  text-align: center;
+  padding-bottom: 30px;
+}
+
+#okolo {
+  min-height: 1500px;
+}
+
+#searchGadget {
+  color: #414152;
+  padding: 5px;
+  margin: 0 0 40px 0;
+}
+
+#logo {
+  margin: 20px 0 10px 0;
+}
+
+#searchGadget:focus {
+  color: #414152;
+}
+
+.rezultati {
+  padding-top: 0px;
+  color: #414152;
+  clear: both;
+  position: absolute;
+  z-index: 20;
+  width: 1000px;
+  
+}
+
+fieldset {
+  border: 2px solid #E7E7E9;
+  background: white;
+  padding: 20px 5px;
+}
+
+#livesearchLegend {
+  background-color: #E7E7E9;
+  padding: 0.1em 0.5em;
+  color: white;
+}
+
+body {
+  background: url(ozadje_body.png);
+}
+
+h1 {
+	margin: 50px;
+	text-align: center;
+	color: #624C9C;
+}
+
+h1 a {
+	
+	color: #624C9C !important;
+}
+
+
+
+table.tabela {
+  border: 0;
+  margin: 30px 0;
+  padding: 0;
+  width: 100%;
+}
+
+table.tabela tr {
+  width: 100%;
+  cursor: pointer;
+}
+
+table.tabela tr:hover td {
+  color: #5FB11E;
+}
+
+table.tabela td {
+  padding: 5px;
+  text-align: left;
+  font-size: 14px;
+}
+
+table.tabela th {
+  padding: 5px;
+  text-align: left;
+}
+
+.hide {
+  display: none;
+  
+}
+
+.pp_inline {
+  color: #414152 !important;
+  padding: 10px;
+  line-height: 26px;
+}
+
+.pp_inline a {
+  color: #5FB11E;
+}
+
+
+.pp_inline .ime {
+  color: #5FB11E;
+  font-size: 50px;
+  line-height: 70px;
+  text-align: center;
+}
+
+.pp_inline .stevilka {
+  color: #5FB11E;
+  font-size: 90px;
+  line-height: 220px;
+  text-align: center;
+}
+
+table.tabela td.enota {
+ font-size: 11px;
+ line-height: 14px;
+} 
+
+.kategorija {
+ cursor: pointer;
+ color: #624C9C;
+}
+
+
+.kategorija:hover {
+ 
+ color: #777;
+}
+
+#listing {
+ width: 1000px;
+  position: absolute;
+ height: auto;
+ z-index: 10;
+ padding-top: 30px;
+}
+
+#listing div.razvrsti {
+ padding: 0 15px;
+ margin-bottom: 10px;
+ text-align: left;
+}
+
+#listing div.levo {
+ width: 330px;
+ float: left;
+}
+
+.clear {
+  clear: both;
+  float: none !important;    
+} 
+
+.forma {
+  
+  clear: both;
+} 
+
+.LSBox {
+ position: relative; 
+}
+
+.opozorilo {
+	text-align: left;
+	margin: 0 0 3px 285px;
+	font-size: 12px;
+	color: #777;
+
+}
+

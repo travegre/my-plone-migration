@@ -1,0 +1,166 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+
+<body>
+
+    <div metal:fill-slot="main">
+    <metal:main-macro define-macro="main"
+                      tal:define="kssClassesView context/@@kss_field_decorator_view;
+                                  getKssClasses nocall:kssClassesView/getKssClassesInlineEditable;
+                                  templateId template/getId">
+
+       
+     
+      
+        <h1 metal:use-macro="here/kss_generic_macros/macros/generic_title_view">
+            Title or id
+        </h1>
+
+        
+
+        <p metal:use-macro="here/kss_generic_macros/macros/generic_description_view">
+            Description
+        </p>
+        
+        
+
+        <div metal:define-macro="text-field-view"
+             id="parent-fieldname-text" class="stx"
+             tal:define="kss_class python:getKssClasses('text',
+                         templateId=templateId, macro='text-field-view');
+                         has_text exists:context/aq_base/getText;
+                         text python:has_text and here.getText() or ''"
+             tal:condition="text"
+             tal:attributes="class python:test(here.Format() in ('text/structured',
+                                                   'text/x-rst', ), 'stx' + kss_class, 'plain' + kss_class)">
+            <div metal:define-slot="inside" tal:replace="structure text">The body</div>
+        </div>
+
+        <metal:listingmacro define-macro="listing">
+        	<tal:foldercontents define="contentFilter contentFilter|request/contentFilter|nothing;
+                            limit_display limit_display|request/limit_display|nothing;
+                            more_url more_url|request/more_url|string:folder_contents;
+                            is_a_topic python:here.portal_type=='Topic';
+                            folderContents folderContents|nothing; folderContents python:folderContents or is_a_topic and here.queryCatalog(contentFilter, batch=True) or here.getFolderContents(contentFilter, batch=True, b_size=limit_display or 100);
+                            use_view_action site_properties/typesUseViewActionInListings|python:();
+                            over_limit python: limit_display and len(folderContents) > limit_display;
+                            folderContents python: (over_limit and folderContents[:limit_display]) or folderContents;
+                            batch folderContents;
+                            
+                            folderContents python: context.portal_catalog(portal_type=['imipreiskava']);
+                            parametri python: context.REQUEST.form.keys();
+                            podrocje python: 'podrocje' in parametri and context.REQUEST.form['podrocje'] or '';
+                            
+                            ">
+        
+        	<tal:listing condition="folderContents" 
+        tal:define="vsa_p python: context.portal_catalog.uniqueValuesFor('podrocje'); 
+        vsa_p python: list(vsa_p);
+        
+        preiskave python: podrocje == '' and context.portal_catalog(portal_type='imipreiskava') or context.portal_catalog(portal_type='imipreiskava', moj=podrocje);
+        slo_crke python: ['A', 'B', 'C', 'Č', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'R', 'S', 'Š', 'T', 'U', 'V', 'Z', 'Ž', 'Q', 'X', 'Y', 'W'];
+        sumniki python: ['\xc4\x8c', '\xc4\x8d', '\xc5\xa0', '\xc5\xa1',  '\xc5\xbd', '\xc5\xbe'];
+        sumniki2 python: ['\xc4\x8c', '\xc4\x8c', '\xc5\xa0', '\xc5\xa0',  '\xc5\xbd', '\xc5\xbd'];">
+    
+    
+    
+    	<div id="vsebina_podstran">
+        	<div id="listing_preiskav">
+	            <span class="trenutno">Trenutno izbrano področje preiskav</span><br />
+	            <select class="podrocje_select" tal:define="novapot python: here.absolute_url()" tal:attributes="onchange python: 'location.href = \'' + novapot + '/?podrocje=\' + this.options[this.selectedIndex].value'">
+	                  <option tal:attributes="selected python: podrocje and '' or 'selected'" value="">VSA PODROČJA</option>                
+	                  <tal:entry tal:repeat="mapa python: vsa_p">
+	                    <option tal:attributes="selected python: mapa == podrocje and 'selected' or ''" tal:content="mapa"></option>
+	                  </tal:entry>             
+	            </select>
+
+	            <span class="vijolcno"><<< &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Skrčite število preiskav samo na eno izbrano področje</span>
+	            
+	                     
+	                
+	     
+	            <div id="divi_preiskav">
+	                 
+	                      <div tal:attributes="class python: ''.join(filter(lambda x: ord(x)<128, podrocje)).replace(' ', '_')" tal:define="
+	                      preiskave_podrocje python: preiskave;                     
+	                         
+	                      vse_c python: {};                   
+	                      "
+	                      >
+	                      
+	                      <h2 class="printskrit" tal:content="podrocje" />
+	                      
+	                      <tal:entry3 tal:repeat="pre preiskave_podrocje">
+	                       <tal:zo tal:define="moj python: pre.Title[:2]; crka python: (moj in sumniki) and sumniki2[sumniki.index(moj)] or pre.Title[0].upper(); 
+	                        
+	                        contents python: vse_c.update({crka:[]});
+	                        " />             
+	                      </tal:entry3>
+	                      
+	                       <tal:entry3 tal:repeat="pre preiskave_podrocje">
+	                       <tal:zo tal:define="moj python: pre.Title[:2]; crka python: (moj in sumniki) and sumniki2[sumniki.index(moj)] or pre.Title[0].upper();                         
+	                        contents python: vse_c.get(crka, []).append(pre);
+	                        " />
+	                      </tal:entry3>
+	                      
+	                      
+	                          <ul class="izbirnik_crk">
+	                  <tal:entry tal:repeat="crka python: vse_c.keys()">
+	                    <li class="preiskave_crke" tal:attributes="id crka" tal:content="crka" />                 
+	                  </tal:entry>
+	                </ul>
+
+	                          <div class="locnica_druga" style="clear:both"></div>
+	                          <tal:entry2 tal:repeat="crka python: vse_c.keys()">                         
+	                                
+	                                <div tal:attributes="class python: crka + ' crke_skrito preiskave odprto'" tal:define="preiskave_crke python: vse_c[crka];">
+	                                    
+	                                    <div class="velika_crka" tal:content="crka" />
+	                                    <ul>
+	                                              <tal:entry2 tal:repeat="item2 preiskave_crke" >
+	                                                  <li tal:attributes="title python: item2.Title">
+	                                                    <a tal:attributes="href python:item2.getURL() + '?podrocje=' + podrocje;" tal:content="python: item2.Title" />
+	                                                  </li>
+	                                              </tal:entry2> 
+	                                      </ul>
+	                                      
+	                                </div>
+	                           </tal:entry2>
+	                      </div>
+	                  
+	                  
+	                  
+	            </div>
+	         
+	                
+	         
+	         
+	        </div> 
+        </div>
+       
+        
+        
+             
+            
+        
+        <div tal:replace="structure provider:plone.belowcontentbody" />
+                        
+        </tal:listing>
+       
+        </tal:foldercontents>
+        </metal:listingmacro>
+
+
+
+    </metal:main-macro>
+    </div>
+    
+    
+
+</body>
+</html>

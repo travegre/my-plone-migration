@@ -1,0 +1,69 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+
+<body>
+
+    <div metal:fill-slot="main">
+    <metal:main-macro define-macro="main"
+                      tal:define="kssClassesView context/@@kss_field_decorator_view;
+                                  getKssClasses nocall:kssClassesView/getKssClassesInlineEditable;
+                                  templateId template/getId">
+
+        <h1 id="parent-fieldname-title" class="documentFirstHeading kssattr-atfieldname-title kssattr-templateId-kss_generic_macros kssattr-macro-title-field-view">
+            Hitro iskanje
+        </h1>
+        
+       
+        <form name="searchform" action="search" class="searchPage">
+            <div id="okolo">
+                <div id="okol" >              
+                    <div class="forma">
+                        <div class="LSBox">
+                            <input class="searchPage" id="searchGadget" name="moj" value="" />
+                            <input class="searchPage searchButton" type="submit" value="Išči">
+                            <br />
+                            <span>Vpišite iskani pojem, ime preiskave, vzorec, področje, sklop, laboratorij, ...</span>
+                            <div class="rezultati" style="display: block; ">
+                                <div class="LSShadow" id="LSShadow"></div>
+                            </div>
+                        </div>  
+                    </div>
+                </div>
+            </div>  
+
+
+            <br />
+
+
+        <!--
+            <div id="listing_preiskav">
+                <span class="trenutno">Trenutno izbrano področje preiskav</span><br />
+        
+                <select class="podrocje_select" name="podrocje2" tal:define="novapot python: here.absolute_url();vsa_p python: context.portal_catalog.uniqueValuesFor('podrocje'); 
+                vsa_p python: list(vsa_p);
+                parametri python: context.REQUEST.form.keys();
+                podrocje python: 'podrocje' in parametri and context.REQUEST.form['podrocje'] or '';">                
+                    <option tal:attributes="selected python: podrocje and '' or 'selected'" value="">VSA PODROČJA</option>
+                    <tal:entry tal:repeat="mapa python: vsa_p">
+                        <option tal:attributes="selected python: mapa == podrocje and 'selected' or ''; value mapa" tal:content="mapa"></option>
+                    </tal:entry>           
+                </select>
+                <span class="vijolcno"><<< &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Skrčite število preiskav samo na eno izbrano področje</span>
+            </div>
+            -->
+        </form>
+
+
+
+    </metal:main-macro>
+    </div>
+    
+    
+
+</body>
+</html>

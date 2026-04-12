@@ -1,0 +1,133 @@
+#okol {
+  width: 95%;
+  margin: 30px auto 30px auto;
+  text-align: center;
+  padding-bottom: 30px;
+}
+
+#okolo {
+  min-height: 1500px;
+}
+
+
+#logo {
+  margin: 0px 0 0px 0;
+}
+
+
+body {
+  background: url(ozadje_body.png);
+}
+
+h1, h2 {
+	margin: 20px 0 20px 0;
+	text-align: center;
+	color: #624C9C;
+  text-decoration: none;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+h2 {
+  margin: 0px 0;
+  font-size: 2em;
+}
+
+h1 a {
+	text-decoration: none;
+	color: #624C9C !important;
+  font-size: 32px;
+  margin: 0;
+}
+
+body {
+  color: #414152;
+  font-size: 16px;
+  text-decoration: none;
+  font-family: Tahoma, sans-serif;
+}
+
+a {
+  color: #5fb11e;
+  font-size: 16px;
+  text-decoration: none;
+
+}
+
+table {
+  border: 1px solid #624c9c;
+}
+
+table td {
+  padding: 12px;
+  border: 1px solid #624c9c;
+  border-collapse: collapse;
+  font-size: 1.5em;
+}
+
+table td {
+  text-align: left;
+}
+
+table td:nth-child(2) {
+  font-weight: bold;
+  font-family: Tahoma, sans-serif;
+  font-size: 2.05em;
+}
+
+.fieldErrorBox {
+  color: #5fb11e;
+}
+
+#pfg-fieldwrapper .field {
+  margin: 40px 0;
+  text-align: left;
+
+}
+
+#pfg-fieldwrapper .field input,
+#pfg-fieldwrapper .field select,
+#pfg-fieldwrapper .field textarea {
+  width: 100%;
+  padding: 6px;
+}
+
+#pfg-fieldwrapper {
+  margin: 20px auto;
+  text-align: left;
+  width: 40%;
+
+}
+
+span.required {
+  content: "*";
+  color: #5fb11e !important;
+}
+
+.template-fg_thankspage_view_p3 .documentDescription {
+display: none;
+}
+
+h2, table {
+display: inline-table;
+}
+
+#last-change {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+
+}
+
+/* IZVOZ */
+form#izvoz-1,
+form#izvoz-2 {
+  text-align: left;
+}
+
+form#izvoz-1 #oddo,
+form#izvoz-2 #oddo-2,
+form#izvoz-2 #obdobje,
+form#izvoz-1 .submit,
+form#izvoz-2 .submit {
+  display: none;
+}
