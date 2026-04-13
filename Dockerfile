@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y gcc build-essential libssl-dev libxml2-
 
 RUN useradd -m -s /bin/bash plone
 
-RUN pip install --no-cache-dir wheel setuptools==65.7.0 zc.buildout==2.13.9
+RUN pip install --no-cache-dir wheel setuptools==65.7.0 zc.buildout==3.1.1
 
 WORKDIR /plone/instance
 

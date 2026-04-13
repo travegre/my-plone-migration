@@ -10,17 +10,17 @@ services:
     networks:
       - plone
     healthcheck:
-      test: ["CMD-SHELL", "python -c \"import socket; s=socket.socket(); s.connect(('localhost', 8100)); s.close()\""]
-      interval: 5s
-      timeout: 5s
-      retries: 15
-      start_period: 15s
+      test: ["CMD-SHELL", "ss -tln | grep -q ':8100'"]
+      interval: 10s
+      timeout: 10s
+      retries: 20
+      start_period: 30s
 
   instance:
     build: .
     command: bin/instance console
     ports:
-      - "8080:8080"
+      - "8090:8080"
     volumes:
       - ./src:/plone/instance/src
     depends_on:
