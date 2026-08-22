@@ -17,7 +17,7 @@ services:
     command: bin/instance console
     user: root
     ports:
-      - "8080:8080"
+      - "8090:8090"
     volumes:
       - ./src:/plone/instance/src
     depends_on:

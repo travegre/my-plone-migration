@@ -19,5 +19,5 @@ USER plone
 WORKDIR /plone/instance
 RUN /usr/local/bin/buildout -c buildout.cfg
 
-EXPOSE 8080
+EXPOSE 8090
 CMD ["bin/instance", "console"]
