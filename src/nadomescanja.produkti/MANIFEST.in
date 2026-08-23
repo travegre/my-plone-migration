@@ -1,0 +1,2 @@
+recursive-include nadomescanja *
+global-exclude *pyc

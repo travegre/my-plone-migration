@@ -1,0 +1,15 @@
+form #archetypes-fieldname-description {
+  display: none
+}
+
+.section-seznam_zaposlenih form #archetypes-fieldname-description {
+  display: block
+}
+
+#ui-datepicker-div {
+  z-index: 100 !important;
+}
+
+#ui-datepicker-div .ui-state-default {
+  background:orange;
+}

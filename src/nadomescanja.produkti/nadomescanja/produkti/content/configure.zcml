@@ -1,0 +1,23 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    i18n_domain="nadomescanja.produkti">
+
+  <!-- configure your content components here -->
+  
+  <!-- -*- extra stuff goes here -*- -->
+  <class class=".dezurstvo.dezurstvo">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.Idezurstvo"
+        />
+  </class>
+
+  <class class=".laboratorij.laboratorij">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.Ilaboratorij"
+        />
+  </class>
+
+</configure>

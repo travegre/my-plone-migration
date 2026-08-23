@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<rolemap>
+  <permissions>
+    <!-- -*- extra stuff goes here -*- -->
+    <permission name="nadomescanja.produkti: Add dezurstvo" acquire="False">
+      <role name="Manager"/>
+      <role name="Site Administrator"/>
+      <role name="Contributor"/>
+      <role name="Owner"/>
+    </permission>
+    <permission name="nadomescanja.produkti: Add laboratorij" acquire="False">
+      <role name="Manager"/>
+      <role name="Site Administrator"/>
+      <role name="Contributor"/>
+      <role name="Owner"/>
+    </permission>
+  </permissions>
+</rolemap>

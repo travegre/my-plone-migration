@@ -1,0 +1,33 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      metal:use-macro="context/main_template/macros/master">
+<body>
+<metal:block metal:fill-slot="main">
+
+  <h1 class="documentFirstHeading" tal:content="context/Title" />
+
+  <p class="discreet" tal:condition="not: view/rows">Ni vnosov.</p>
+
+  <table class="listing nadomescanja-table" tal:condition="view/rows">
+    <thead>
+      <tr>
+        <th>Laboratorij</th>
+        <th>Okrajšava</th>
+        <th>Privzeti vodja</th>
+        <th>Nadomestni vodja</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr tal:repeat="row context/getNadomescanjaRows">
+          <td tal:content="python: row.get('laboratorij_naziv')      or u'\u2014'" />
+          <td tal:content="python: row.get('laboratorij_okrajsava')  or u'\u2014'" />
+          <td tal:content="python: row.get('privzeti_vodja_naziv')   or u'\u2014'" />
+          <td tal:content="python: row.get('nadomestni_vodja_naziv') or u'\u2014'" />
+      </tr>
+    </tbody>
+  </table>
+
+</metal:block>
+</body>
+</html>

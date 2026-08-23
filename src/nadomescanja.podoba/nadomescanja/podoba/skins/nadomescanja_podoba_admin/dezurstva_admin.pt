@@ -1,0 +1,80 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+
+  <head><title></title></head>
+
+  <metal:javascript_head fill-slot="javascript_head_slot">
+    <tal:block define="macro here/archetypes_custom_js/macros/javascript_head | nothing"
+               condition="macro">
+      <metal:block use-macro="macro" />
+    </tal:block>
+    <tal:comment replace="nothing">
+      Many of the following defines duplicated from the tal:defines in the
+      main slot. With base_edit, edit_macros could be reused as it was defined
+      for the entire document. base_view uses main_template and thus must
+      create additional defines for each slot it fills.
+    </tal:comment>
+    
+   
+  </metal:javascript_head>
+
+  
+
+  <body>
+    <metal:fill fill-slot="main">
+	<link rel="stylesheet" href="jquery-ui.min.css" type="text/css" media="screen, projection" />
+	<script type="text/javascript" src="jquery-1.5.1.min.js"></script>   
+	<script type="text/javascript" src="jquery-ui.min.js"></script> 
+  	
+	
+	<script>
+	  $(function() {
+	    $( ".datepicker" ).datepicker({
+	      dateFormat: "dd.mm.yy"
+	    });
+	  });
+	
+	function DoSubmit(){
+		var nov = document.poslji_datum.datum.value;	 
+		nov = nov.split('.')[2] + '-' + nov.split('.')[1] + '-' + nov.split('.')[0];
+		document.poslji_datum.datum.value = nov;
+	  	return true;
+	}
+
+	function DoSubmit2(){
+		var star = document.kopiraj_datum.star.value;
+		var nov = document.kopiraj_datum.nov.value;	 
+		star = star.split('.')[2] + '-' + star.split('.')[1] + '-' + star.split('.')[0];
+		nov = nov.split('.')[2] + '-' + nov.split('.')[1] + '-' + nov.split('.')[0];
+		document.kopiraj_datum.nov.value = nov;
+		document.kopiraj_datum.star.value = star;
+	  	return true;
+	}
+	</script>
+
+	<h2>Uredi nadomeščanja</h2>
+
+	<form action="/nadomescanja/izberi_dezurstvo" onsubmit="DoSubmit();" name="poslji_datum">
+	<p>Datum: <input name="datum" type="text" class="datepicker"></p>
+	<input type="submit" value="Uredi" style="cursor: pointer" />
+	</form>
+
+	<p>&nbsp;</p>
+
+	<h2>Kopiraj nadomeščanja</h2>
+	
+	<form action="/nadomescanja/kopiraj_dezurstvo" onsubmit="DoSubmit2();" name="kopiraj_datum">
+	<p>Obstoječi datum: <input name="star" type="text" class="datepicker"></p>
+	<p>Novi datum: <input name="nov" type="text" class="datepicker"></p>
+	<input type="submit" value="Kopiraj" style="cursor: pointer" />
+	</form>
+
+    </metal:fill>
+  </body>
+</html>

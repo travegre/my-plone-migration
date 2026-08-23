@@ -1,0 +1,22 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="nadomescanja.podoba">
+
+  <genericsetup:registerProfile
+      name="default"
+      title="nadomescanja_podoba"
+      directory="profiles/default"
+      description='Extension profile for the "nadomescanja_podoba" Plone theme.'
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+  <genericsetup:importStep
+      name="nadomescanja.podoba.various"
+      title="nadomescanja_podoba: miscellaneous import steps"
+      description="Various import steps that are not handled by GS import/export handlers."
+      handler="nadomescanja.podoba.setuphandlers.setupVarious">
+    <depends name="skins"/>
+  </genericsetup:importStep>
+
+</configure>

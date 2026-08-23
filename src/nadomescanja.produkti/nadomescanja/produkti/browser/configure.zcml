@@ -1,0 +1,30 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="nadomescanja.produkti">
+
+  <include package="plone.app.contentmenu" />
+
+  <!-- -*- extra stuff goes here -*- -->
+  <browser:resourceDirectory
+      name="nadomescanja.produkti"
+      directory="."
+      />
+
+  <browser:page
+      name="nadomescanja-data-json"
+      for="*"
+      class=".nadomescanja_data.NadomescanjaDataView"
+      permission="zope2.View"
+      />
+
+  <browser:page
+    name="nadomescanja_view"
+    for="nadomescanja.produkti.interfaces.Idezurstvo"
+    class=".nadomescanja_view.NadomescanjaView"
+    template="nadomescanja_view.pt"
+    permission="zope2.View"
+    />
+
+
+</configure>

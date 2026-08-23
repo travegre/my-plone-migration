@@ -1,0 +1,167 @@
+#okol {
+  width: 95%;
+  margin: 30px auto 30px auto;
+  text-align: center;
+  padding-bottom: 30px;
+}
+
+#okolo {
+  padding-bottom: 50px;
+}
+
+
+#logo {
+  margin: 0px 0 0px 0;
+}
+
+
+body {
+  background: url(ozadje_body.png);
+}
+
+h1, h2 {
+	margin: 20px 0 20px 0;
+	text-align: center;
+	color: #624C9C;
+  text-decoration: none;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+h2 {
+  margin: 0px 0;
+}
+
+h1 a {
+	text-decoration: none;
+	color: #624C9C !important;
+  font-size: 32px;
+  margin: 0;
+}
+
+body {
+  color: #414152;
+  font-size: 16px;
+  text-decoration: none;
+  font-family: Tahoma, sans-serif;
+}
+
+a {
+  color: #5fb11e;
+  font-size: 16px;
+  text-decoration: none;
+
+}
+
+table {
+  border: 1px solid #624c9c;
+	width: 100%;
+}
+
+table.dezurstva {
+  border-bottom: 1px solid #624c9c;
+}
+
+table td, table th {
+  padding: 12px 10px;
+  border: 1px solid #624c9c;
+  border-collapse: collapse;
+}
+
+table.dezurstva tr.head th {
+  font-weight: bold;
+  font-family: Tahoma, sans-serif;
+  font-size: 1.3em;
+  padding: 1.5em 0.5em;
+  border-bottom: 2px solid #624c9c;
+  color: #624c9c;
+}
+
+
+
+table.dezurstva td, table.dezurstva_opombe td {
+  text-align: left;
+  font-weight: bold;
+  border-top: none;
+  
+  /*font-size: 1.8em; odstranil Žiga*/
+  font-size: 2em; /*dodal Žiga*/
+  background: white;
+}
+
+table.dezurstva_opombe {
+border-bottom: 2px solid #624c9c;
+}
+
+table.dezurstva td span, table.dezurstva_opombe td span {
+  color: #5fb11e; 
+  font-weight: normal;
+  font-size: 0.9em;  
+}
+
+table.dezurstva td.grey {
+  color: #aaa;
+}
+
+table.glava,
+table.glava td {
+	border: none;
+	
+}
+
+.fieldErrorBox {
+  color: #5fb11e;
+}
+
+#pfg-fieldwrapper .field {
+  margin: 40px 0;
+  text-align: left;
+
+}
+
+#pfg-fieldwrapper .field input,
+#pfg-fieldwrapper .field select,
+#pfg-fieldwrapper .field textarea {
+  width: 100%;
+  padding: 6px;
+}
+
+#pfg-fieldwrapper {
+  margin: 20px auto;
+  text-align: left;
+  width: 40%;
+
+}
+
+span.required {
+  content: "*";
+  color: #5fb11e !important;
+}
+
+.template-fg_thankspage_view_p3 .documentDescription {
+display: none;
+}
+
+h2, table {
+display: inline-table;
+}
+
+#last-change {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+
+}
+
+/* IZVOZ */
+form#izvoz-1,
+form#izvoz-2 {
+  text-align: left;
+}
+
+form#izvoz-1 #oddo,
+form#izvoz-2 #oddo-2,
+form#izvoz-2 #obdobje,
+form#izvoz-1 .submit,
+form#izvoz-2 .submit {
+  display: none;
+}
