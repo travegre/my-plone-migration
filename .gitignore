@@ -1,0 +1,30 @@
+# Python bytecode
+*.pyc
+*.pyo
+__pycache__/
+
+# Buildout generated files and directories
+bin/
+parts/
+develop-eggs/
+.installed.cfg
+.mr.developer.cfg
+
+# Runtime data
+var/
+*.log
+
+# Bundled eggs committed inside src/ packages - should not be tracked
+src/*/*.egg
+src/*/*/*.egg
+
+# Editor/OS
+.DS_Store
+*.swp
+*.swo
+*.orig
+*.save
+*.bak
+
+# Docker
+.env

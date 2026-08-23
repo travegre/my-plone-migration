@@ -1,7 +1,7 @@
 FROM python:2.7-slim
 
 ENV PYTHONUNBUFFERED 1
-ENV PLONE_VERSION 5.2.14
+ENV PLONE_VERSION 4.3.20
 
 RUN apt-get update && apt-get install -y \
     gcc \
@@ -19,7 +19,11 @@ RUN apt-get update && apt-get install -y \
 
 RUN useradd -m -s /bin/bash plone
 
-RUN pip install --no-cache-dir zc.buildout==2.13.8 setuptools==44.1.1
+# setuptools 44.x and zc.buildout 2.13.x are the last versions
+# supporting Python 2.7 and Plone 4.3
+RUN pip install --no-cache-dir \
+    zc.buildout==2.13.8 \
+    setuptools==44.1.1
 
 WORKDIR /plone/instance
 
@@ -27,7 +31,7 @@ COPY --chown=plone:plone buildout-base.cfg /plone/instance/buildout-base.cfg
 COPY --chown=plone:plone buildout.cfg /plone/instance/buildout.cfg
 COPY --chown=plone:plone src/ /plone/instance/src/
 
-RUN mkdir -p var/filestorage var/blobstorage var/log var/.python-eggs && \
+RUN mkdir -p var/filestorage var/blobstorage var/log var/.python-eggs products && \
     chown -R plone:plone /plone/instance
 
 USER plone

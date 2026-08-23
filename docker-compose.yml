@@ -10,6 +10,3 @@ services:
       - ./var/filestorage:/plone/instance/var/filestorage
       - ./var/blobstorage:/plone/instance/var/blobstorage
       - ./src:/plone/instance/src
-
-networks:
-  plone:
