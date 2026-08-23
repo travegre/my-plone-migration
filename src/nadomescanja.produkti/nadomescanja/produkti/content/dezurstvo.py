@@ -33,7 +33,7 @@ from StringIO import StringIO
 import base64
 import cStringIO
 import xlrd
-import xlwt
+import openpyxl
 import sys
 import random
 import DateTime
@@ -125,7 +125,7 @@ class dezurstvo(folder.ATFolder):
             nadomescanja = set(nadomescanja_oseba)
 
         # create excel
-        workBookDocument = xlwt.Workbook()
+        workBookDocument = openpyxl.Workbook()
         docSheet1 = workBookDocument.add_sheet('izpis')
         
         od = first_day.Date()
