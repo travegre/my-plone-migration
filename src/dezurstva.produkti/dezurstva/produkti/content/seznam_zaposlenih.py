@@ -1,94 +1,36 @@
-"""Definition of the seznam_zaposlenih content type
+"""Definition of the seznam_zaposlenih content type (Dexterity)
 """
 
-from zope.interface import implements
-
-from Products.Archetypes import atapi
-from Products.ATContentTypes.content import folder
-from Products.ATContentTypes.content import schemata
-
-# -*- Message Factory Imported Here -*-
+from zope.interface import implementer
+from plone.dexterity.content import Container
+from AccessControl import ClassSecurityInfo
+from Products.CMFCore.permissions import ModifyPortalContent
 
 from dezurstva.produkti.interfaces import Iseznam_zaposlenih
-from dezurstva.produkti.config import PROJECTNAME
-
-from Products.CMFCore.exceptions import BadRequest
-from AccessControl import ClassSecurityInfo
-from Products.CMFCore.permissions import *
-
-from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 import os
 from zipfile import ZipFile
 import mimetypes
-from StringIO import StringIO
+from io import BytesIO
 from DateTime.DateTime import DateTime
 
-import base64
-import cStringIO
-import xlrd
-import os, re
-
+import openpyxl
+import re
 import csv
 import logging
 from Products.CMFPlone.utils import safe_unicode
 
 log = logging.getLogger("Plone")
 
-seznam_zaposlenihSchema = folder.ATFolderSchema.copy() + atapi.Schema((
 
-    # -*- Your Archetypes field definitions here ... -*-
-    atapi.FileField(
-        'datoteka1',
-        storage=atapi.AnnotationStorage(),
-        widget=atapi.FileWidget(
-            label=(u"Datoteka z zaposlenimi"),
-            description=(u""),
-        ),
-        validators=('isNonEmptyFile'),
-        
-    ),
-
-    atapi.FileField(
-        'datoteka2',
-        storage=atapi.AnnotationStorage(),
-        widget=atapi.FileWidget(
-            label=(u"Dodaj telefonske"),
-            description=(u""),
-        ),
-        validators=('isNonEmptyFile'),
-        
-    ),
-
-))
-
-# Set storage on fields copied from ATFolderSchema, making sure
-# they work well with the python bridge properties.
-
-seznam_zaposlenihSchema['title'].storage = atapi.AnnotationStorage()
-seznam_zaposlenihSchema['description'].storage = atapi.AnnotationStorage()
-
-schemata.finalizeATCTSchema(
-    seznam_zaposlenihSchema,
-    folderish=True,
-    moveDiscussion=False
-)
-
-
-class seznam_zaposlenih(folder.ATFolder):
-    """Description of the Example Type"""
-    implements(Iseznam_zaposlenih)
+@implementer(Iseznam_zaposlenih)
+class seznam_zaposlenih(Container):
+    """Dexterity-based seznam_zaposlenih content type."""
 
     meta_type = "seznam_zaposlenih"
-    schema = seznam_zaposlenihSchema
+    portal_type = "seznam_zaposlenih"
 
-    title = atapi.ATFieldProperty('title')
-    description = atapi.ATFieldProperty('description')
-
-    # -*- Your ATSchema to Python Property Bridges Here ... -*-
-
-    datoteka1 = atapi.ATFieldProperty('datoteka1')
-    datoteka2 = atapi.ATFieldProperty('datoteka2')
+    security = ClassSecurityInfo()
 
     security = ClassSecurityInfo()        
     
@@ -97,54 +39,54 @@ class seznam_zaposlenih(folder.ATFolder):
     def unpackArchive(self):
                 
         
-        field1 = self.getField('datoteka1')
-        filetype1 = field1.getContentType(self)
-        file1 = field1.getRaw(self)
+        field1_name = 'datoteka1'
+        
+        file1 = getattr(self, 'datoteka1', None)
 
-        field2 = self.getField('datoteka2')
-        filetype2 = field2.getContentType(self)
-        file2 = field2.getRaw(self)
+        field2_name = 'datoteka2'
+        
+        file2 = getattr(self, 'datoteka2', None)
 
         msg = self.plone_utils.addPortalMessage
         
         
-        if file1.data:       
+        if file1 and getattr(file1, 'data', None):       
             
 
             import datetime
             import re
-            filename1 = field1.getFilename(self)
+            filename1 = getattr(file1, 'filename', 'file1.xlsx')
             
             # get the full binary from file
             try:
-                chunk1 = file1.data
-                filedata1 = ''
+                chunk1 = file1.data if hasattr(file1, 'next') else None
+                filedata1 = b''
                 while chunk1 is not None:
-                    filedata1 += chunk1.data
-                    chunk1 = chunk1.next               
+                    filedata1 += chunk1.data if isinstance(chunk1.data, bytes) else chunk1.data.encode()
+                    chunk1 = chunk1.next
             except AttributeError:
-                filedata1 = file1.data
+                filedata1 = file1.data if isinstance(file1.data, bytes) else file1.data.encode()
 
-            wb = xlrd.open_workbook(file_contents = filedata1)
-            sh = wb.sheet_by_index(0)
+            wb = openpyxl.load_workbook(BytesIO(filedata1 if isinstance(filedata1, bytes) else filedata1.encode()))
+            sh = wb.active
 
                        
             
             
             
-            for i in range(sh.nrows):
-                row = sh.row_values(i)
+            for i in range(sh.max_row):
+                row = [sh.cell(row=i+1, column=j+1).value or "" for j in range(sh.max_column)]
                 
                 try: 
-                    sifra = row[0].decode("utf-8")
+                    sifra = row[0]
                 except:
                     sifra = ""
                 try: 
-                    delavec = row[1].encode("utf-8")
+                    delavec = row[1]
                 except:
                     delavec = ""
                 try: 
-                    kontakt = row[2].decode("utf-8")
+                    kontakt = row[2]
                 except:
                     kontakt = ""
                 
@@ -156,46 +98,46 @@ class seznam_zaposlenih(folder.ATFolder):
                                         description=kontakt                             
                                     )
                 
-        field1.set(self, 'DELETE_FILE')
+        setattr(self, 'datoteka1', None)
 
-        if file2.data: 
+        if file2 and getattr(file2, 'data', None): 
 
             import datetime
             import re
-            filename2 = field2.getFilename(self)
+            filename2 = getattr(file2, 'filename', 'file2.xlsx')
             
             # get the full binary from file
             try:
-                chunk2 = file2.data
-                filedata2 = ''
+                chunk2 = file2.data if hasattr(file2, 'next') else None
+                filedata2 = b''
                 while chunk2 is not None:
-                    filedata2 += chunk2.data
+                    filedata2 += chunk2.data if isinstance(chunk2.data, bytes) else chunk2.data.encode()
                     chunk2 = chunk2.next               
             except AttributeError:
-                filedata2 = file2.data
+                filedata2 = file2.data if isinstance(file2.data, bytes) else file2.data.encode()
 
-            wb = xlrd.open_workbook(file_contents = filedata2)
-            sh = wb.sheet_by_index(0)
+            wb = openpyxl.load_workbook(BytesIO(filedata2 if isinstance(filedata2, bytes) else filedata2.encode()))
+            sh = wb.active
             
 
             
-            for i in range(sh.nrows):
-                row = sh.row_values(i) 
+            for i in range(sh.max_row):
+                row = [sh.cell(row=i+1, column=j+1).value or "" for j in range(sh.max_column)] 
 
                 try: 
-                    sifra = row[0].decode("utf-8")
+                    sifra = row[0]
                 except:
                     sifra = ""
                 try: 
-                    delavec = row[1].encode("utf-8")
+                    delavec = row[1]
                 except:
                     delavec = ""
                 try: 
-                    kontakt = row[2].decode("utf-8")
+                    kontakt = row[2]
                 except:
                     kontakt = ""
                 try: 
-                    email = row[3].decode("utf-8")
+                    email = row[3]
                 except:
                     email = ""
 
@@ -204,11 +146,10 @@ class seznam_zaposlenih(folder.ATFolder):
                 if zadetek:
                     zadetek = zadetek[0].getObject()
                     if email == '': email = '-'
-                    zadetek.setDescription(kontakt + '|' + email)
-                    print zadetek.Description()
+                    zadetek.description = (kontakt + '|' + email)
+                    pass  # debug print removed
                 else:
                     if sifra != '':
-                        print sifra + ' ustvarjen'
                         if email == '': email = '-'
                         preiskava = self.invokeFactory(
                                                                         
@@ -220,7 +161,7 @@ class seznam_zaposlenih(folder.ATFolder):
                     
 
 
-        field2.set(self, 'DELETE_FILE')  
+        setattr(self, 'datoteka2', None)  
 
     security.declareProtected(ModifyPortalContent, 'at_post_create_script')
     def at_post_create_script(self):
@@ -230,4 +171,3 @@ class seznam_zaposlenih(folder.ATFolder):
     def at_post_edit_script(self):
         self.unpackArchive()
 
-atapi.registerType(seznam_zaposlenih, PROJECTNAME)

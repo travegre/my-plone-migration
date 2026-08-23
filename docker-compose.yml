@@ -4,7 +4,6 @@ services:
   instance:
     build: .
     command: bin/instance console
-    user: root
     ports:
       - "8090:8090"
     volumes:
