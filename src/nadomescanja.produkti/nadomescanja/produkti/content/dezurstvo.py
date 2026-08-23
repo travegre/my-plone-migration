@@ -32,7 +32,6 @@ import mimetypes
 from StringIO import StringIO
 import base64
 import cStringIO
-import xlrd
 import openpyxl
 import sys
 import random
