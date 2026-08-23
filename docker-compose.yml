@@ -1,17 +1,6 @@
 version: "3.8"
 
 services:
-  zeoserver:
-    build: .
-    command: bin/zeoserver fg
-    user: root
-    volumes:
-      - ./var/filestorage:/plone/instance/var/filestorage
-      - ./var/blobstorage:/plone/instance/var/blobstorage
-      - ./src:/plone/instance/src
-    networks:
-      - plone
-
   instance:
     build: .
     command: bin/instance console
@@ -19,11 +8,9 @@ services:
     ports:
       - "8090:8090"
     volumes:
+      - ./var/filestorage:/plone/instance/var/filestorage
+      - ./var/blobstorage:/plone/instance/var/blobstorage
       - ./src:/plone/instance/src
-    depends_on:
-      - zeoserver
-    networks:
-      - plone
 
 networks:
   plone:
