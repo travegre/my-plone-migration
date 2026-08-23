@@ -1,32 +1,24 @@
 <?xml version="1.0"?>
 <object name="produkti"
-   meta_type="Dexterity FTI"
+   meta_type="Factory-based Type Information with dynamic views"
    i18n:domain="imiimenik.produkti" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
   <property name="title" i18n:translate="">produkti</property>
-  <property name="description" i18n:translate="">Contact person entry</property>
-  <property name="icon_expr">string:${portal_url}/++resource++plone/document_icon.png</property>
-  <property name="factory">produkti</property>
-  <property name="add_view_expr">string:${folder_url}/@@add-dexterity-type/produkti</property>
-  <property name="link_target"></property>
-  <property name="immediate_view">view</property>
+  <property name="description"
+    i18n:translate="">Description of the Example Type</property>
+  <property name="content_meta_type">produkti</property>
+  <property name="content_icon">document_icon.gif</property>
+  <property name="product">imiimenik.produkti</property>
+  <property name="factory">addprodukti</property>
+  <property name="immediate_view">atct_edit</property>
   <property name="global_allow">True</property>
   <property name="filter_content_types">False</property>
-  <property name="allowed_content_types"/>
   <property name="allow_discussion">False</property>
-  <property name="default_view">view</property>
+  <property name="default_view">base_view</property>
   <property name="view_methods">
-    <element value="view" />
-  </property>
-  <property name="default_view_fallback">False</property>
-  <property name="add_permission">cmf.AddPortalContent</property>
-  <property name="klass">imiimenik.produkti.content.produkti.produkti</property>
-  <property name="schema"></property>
-  <property name="behaviors">
-    <element value="plone.dublincore"/>
-    <element value="plone.namefromtitle"/>
+    <element value="base_view" />
   </property>
   <alias from="(Default)" to="(dynamic view)" />
-  <alias from="edit" to="@@edit" />
+  <alias from="edit" to="atct_edit" />
   <alias from="sharing" to="@@sharing" />
   <alias from="view" to="(selected layout)" />
   <action title="View" action_id="view" category="object" condition_expr=""
@@ -34,7 +26,7 @@
     <permission value="View" />
   </action>
   <action title="Edit" action_id="edit" category="object" condition_expr=""
-    url_expr="string:${object_url}/@@edit" visible="True">
+    url_expr="string:${object_url}/edit" visible="True">
     <permission value="Modify portal content" />
   </action>
 </object>

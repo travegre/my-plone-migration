@@ -34,10 +34,10 @@
     </metal:baseslot>
 
     
-    <script type="text/javascript" src="/dezurstva/jquery-1.5.1.min.js"></script> 
-    <link rel="stylesheet" href="/dezurstva/dezurstva.css" type="text/css" />  
+    <script type="text/javascript" src="jquery-1.5.1.min.js"></script> 
+    <link rel="stylesheet" href="dezurstva.css" type="text/css" />  
 
-    <script type="text/javascript" src="/dezurstva/jquery.tinysort.js"></script>
+    <script type="text/javascript" src="jquery.tinysort.js"></script>
 
     <script>
 	$(document).ready(function() {

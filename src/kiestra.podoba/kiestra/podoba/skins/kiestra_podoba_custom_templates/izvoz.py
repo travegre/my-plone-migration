@@ -67,6 +67,6 @@ elif mode == 'oddo':
 
 
 test = context.portal_catalog(portal_type = "dezurstvo")[0].getObject()
-return test.excel_export(first_day, last_day, oseba)
+print test.excel_export(first_day, last_day, oseba)
 
 return printed

@@ -1,10 +1,10 @@
-Metadata-Version: 2.1
+Metadata-Version: 1.0
 Name: imiimenik.produkti
 Version: 1.0
 Summary: UNKNOWN
 Home-page: http://svn.plone.org/svn/collective/
-Author: 
-Author-email: 
+Author: UNKNOWN
+Author-email: UNKNOWN
 License: GPL
 Description: .. contents::
         
@@ -350,4 +350,3 @@ Platform: UNKNOWN
 Classifier: Framework :: Plone
 Classifier: Intended Audience :: Developers
 Classifier: License :: OSI Approved :: GNU General Public License (GPL)
-Provides-Extra: tests

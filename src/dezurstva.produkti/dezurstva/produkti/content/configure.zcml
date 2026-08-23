@@ -1,7 +1,22 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
     i18n_domain="dezurstva.produkti">
 
-  <!-- Dexterity content types are registered via the FTI in profiles/default/types/ -->
+  <!-- configure your content components here -->
+  
+  <!-- -*- extra stuff goes here -*- -->
+  <class class=".seznam_zaposlenih.seznam_zaposlenih">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.Iseznam_zaposlenih"
+        />
+  </class>
+  <class class=".dezurstvo.dezurstvo">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.Idezurstvo"
+        />
+  </class>
 
 </configure>
