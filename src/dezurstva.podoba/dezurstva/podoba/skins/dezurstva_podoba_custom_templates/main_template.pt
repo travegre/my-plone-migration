@@ -34,10 +34,10 @@
     </metal:baseslot>
 
     
-    <script type="text/javascript" src="jquery-1.5.1.min.js"></script> 
-    <link rel="stylesheet" href="dezurstva.css" type="text/css" />  
+    <script type="text/javascript"  tal:attributes="src string:${portal_url}/jquery-1.5.1.min.js"></script> 
+    <link rel="stylesheet" tal:attributes="href string:${portal_url}/dezurstva.css" type="text/css" />  
 
-    <script type="text/javascript" src="jquery.tinysort.js"></script>
+    <script type="text/javascript" tal:attributes="src string:${portal_url}/jquery.tinysort.js"></script>
 
     <script>
 	$(document).ready(function() {
@@ -389,8 +389,8 @@ KONEC ZAKOMENTIRANE SKRIPTE -->
 <p>&nbsp;</p>
 <hr />
 
-	<link rel="stylesheet" href="jquery-ui.min.css" type="text/css" media="screen, projection" />	  
-	<script type="text/javascript" src="jquery-ui.min.js"></script> 
+	<link rel="stylesheet" tal:attributes="href string:${portal_url}/jquery-ui.min.css" type="text/css" media="screen, projection" />	  
+	<script type="text/javascript" tal:attributes="src string:${portal_url}/jquery-ui.min.js"></script> 
   	
 	<script>
 

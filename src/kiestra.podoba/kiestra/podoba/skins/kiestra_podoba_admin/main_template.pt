@@ -61,6 +61,7 @@
     $(document).ready(function() {
         $('.field.ArchetypesInAndOutWidget table select option').tsort();
     });
+    </script>
 </head>
 
 <body tal:define="isRTL portal_state/is_rtl;

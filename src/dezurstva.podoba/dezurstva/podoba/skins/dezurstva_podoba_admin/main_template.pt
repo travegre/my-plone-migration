@@ -63,6 +63,7 @@
         $('.field.ArchetypesInAndOutWidget table select option').tsort();
         $('ul.navTree.navTreeLevel0>li').tsort('span');
     });
+    </script>
 </head>
 
 <body tal:define="isRTL portal_state/is_rtl;

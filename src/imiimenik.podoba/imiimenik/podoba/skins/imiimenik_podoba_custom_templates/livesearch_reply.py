@@ -87,7 +87,7 @@ searchterm_query = '?searchterm=%s'%url_quote_plus(q)
 
 REQUEST = context.REQUEST
 RESPONSE = REQUEST.RESPONSE
-RESPONSE.setHeader('Content-Type', 'text/xml;charset=%s' % site_encoding)
+RESPONSE.setHeader('Content-Type', 'text/html;charset=%s' % site_encoding)
 
 # replace named entities with their numbered counterparts, in the xml the named ones are not correct
 #   &darr;      --> &#8595;
@@ -256,11 +256,12 @@ else:
         #write('''</tr>''')
 
     write('''</table>''')
+
     write('''<script type="text/javascript">
     $("tr[rel^='prettyPhoto']").prettyPhoto({social_tools: false, default_width: 800});
     $('.tabela tr.tri').tsort({attr:'rel2'});
-    
     </script>''')
+
     write('''</div>''')
     write('''</fieldset>''')
 
