@@ -14,6 +14,14 @@ develop-eggs/
 var/
 *.log
 
+# Migration outputs are large/generated and must never be committed
+src/export/
+
+# Temporary migration/debug helpers
+src/check_easyform_import.py
+src/plone43_inventory_runtime_fix.py
+src/collective.easyform/
+
 # Bundled eggs committed inside src/ packages - should not be tracked
 src/*/*.egg
 src/*/*/*.egg
