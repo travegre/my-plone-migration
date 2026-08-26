@@ -35,17 +35,24 @@ RUN pip install --no-cache-dir \
 
 WORKDIR /plone/instance
 
-# Copy only buildout configuration and package metadata needed to resolve
-# dependencies before the expensive buildout layer.  Ordinary source/tool
-# edits are copied later and therefore do not invalidate dependency installs.
+# Dependency configuration gets its own cache boundary.
 COPY --chown=plone:plone buildout-base.cfg /plone/instance/buildout-base.cfg
 COPY --chown=plone:plone buildout.cfg /plone/instance/buildout.cfg
 
-# Develop eggs listed in buildout.cfg must exist when buildout runs.  Copy the
-# package trees here; docker-compose bind-mounts ./src at runtime, so future
-# script/source edits do not require an image rebuild at all.  This layer is
-# only invalidated when the dependency-bearing src tree itself changes.
-COPY --chown=plone:plone src/ /plone/instance/src/
+# Buildout needs the develop eggs to exist while it resolves/install packages,
+# but migration scripts and export payloads do not belong in this expensive
+# layer. Keep this explicit list in sync with [buildout] develop in buildout.cfg.
+COPY --chown=plone:plone src/imiimenik.podoba/ /plone/instance/src/imiimenik.podoba/
+COPY --chown=plone:plone src/imiimenik.produkti/ /plone/instance/src/imiimenik.produkti/
+COPY --chown=plone:plone src/dezurstva.podoba/ /plone/instance/src/dezurstva.podoba/
+COPY --chown=plone:plone src/dezurstva.produkti/ /plone/instance/src/dezurstva.produkti/
+COPY --chown=plone:plone src/kiestra.podoba/ /plone/instance/src/kiestra.podoba/
+COPY --chown=plone:plone src/kiestra.produkti/ /plone/instance/src/kiestra.produkti/
+COPY --chown=plone:plone src/preiskave.podoba/ /plone/instance/src/preiskave.podoba/
+COPY --chown=plone:plone src/preiskave.produkti/ /plone/instance/src/preiskave.produkti/
+COPY --chown=plone:plone src/nadomescanja.podoba/ /plone/instance/src/nadomescanja.podoba/
+COPY --chown=plone:plone src/nadomescanja.produkti/ /plone/instance/src/nadomescanja.produkti/
+COPY --chown=plone:plone src/collective.easyform/ /plone/instance/src/collective.easyform/
 
 RUN mkdir -p var/filestorage var/blobstorage var/log var/.python-eggs products && \
     chown -R plone:plone /plone/instance
@@ -53,6 +60,10 @@ RUN mkdir -p var/filestorage var/blobstorage var/log var/.python-eggs products &
 USER plone
 
 RUN buildout -c buildout.cfg
+
+# At runtime docker-compose bind-mounts ./src over /plone/instance/src, so
+# edits to package code and migration scripts are immediately visible without
+# rebuilding the image. Only dependency/config changes require a rebuild.
 
 EXPOSE 8090
 CMD ["bin/instance", "console"]
