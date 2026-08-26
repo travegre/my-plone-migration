@@ -1,0 +1,8 @@
+var/
+src/export/
+src/check_easyform_import.py
+src/plone43_inventory_runtime_fix.py
+src/collective.easyform/
+.git/
+*.pyc
+__pycache__/
