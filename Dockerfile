@@ -52,7 +52,6 @@ COPY --chown=plone:plone src/preiskave.podoba/ /plone/instance/src/preiskave.pod
 COPY --chown=plone:plone src/preiskave.produkti/ /plone/instance/src/preiskave.produkti/
 COPY --chown=plone:plone src/nadomescanja.podoba/ /plone/instance/src/nadomescanja.podoba/
 COPY --chown=plone:plone src/nadomescanja.produkti/ /plone/instance/src/nadomescanja.produkti/
-COPY --chown=plone:plone src/collective.easyform/ /plone/instance/src/collective.easyform/
 
 RUN mkdir -p var/filestorage var/blobstorage var/log var/.python-eggs products && \
     chown -R plone:plone /plone/instance
