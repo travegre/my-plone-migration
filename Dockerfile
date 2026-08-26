@@ -35,8 +35,16 @@ RUN pip install --no-cache-dir \
 
 WORKDIR /plone/instance
 
+# Copy only buildout configuration and package metadata needed to resolve
+# dependencies before the expensive buildout layer.  Ordinary source/tool
+# edits are copied later and therefore do not invalidate dependency installs.
 COPY --chown=plone:plone buildout-base.cfg /plone/instance/buildout-base.cfg
 COPY --chown=plone:plone buildout.cfg /plone/instance/buildout.cfg
+
+# Develop eggs listed in buildout.cfg must exist when buildout runs.  Copy the
+# package trees here; docker-compose bind-mounts ./src at runtime, so future
+# script/source edits do not require an image rebuild at all.  This layer is
+# only invalidated when the dependency-bearing src tree itself changes.
 COPY --chown=plone:plone src/ /plone/instance/src/
 
 RUN mkdir -p var/filestorage var/blobstorage var/log var/.python-eggs products && \
