@@ -193,6 +193,16 @@ def set_easyform_attr(node, name, value):
     node.set('{%s}%s' % (EASYFORM_NS, name), to_unicode(value))
 
 
+def dynamic_vocabulary_name(props):
+    """Map legacy PFG TALES vocabularies to Plone 5 named vocabularies."""
+    tales = to_unicode(props.get('fgTVocabulary') or u'')
+    if 'getSampleVocabulary50' in tales:
+        # The old helper returned (email-or-id, employee title) tuples from
+        # seznam_zaposlenih.  The new named vocabulary preserves that contract.
+        return u'imi.form.staff_email'
+    return None
+
+
 def append_pfg_field(schema, obj):
     mapping = {
         'FormStringField': 'zope.schema.TextLine',
@@ -218,8 +228,12 @@ def append_pfg_field(schema, obj):
     default = props.get('fgDefault')
     if default not in (None, u'', '') and not isinstance(default, (list, tuple)):
         add_text(field, 'default', default)
+
+    named_vocabulary = dynamic_vocabulary_name(props)
     vocabulary = props.get('fgVocabulary')
-    if vocabulary:
+    if named_vocabulary and target_type == 'zope.schema.Choice':
+        add_text(field, 'vocabulary', named_vocabulary)
+    elif vocabulary:
         if target_type == 'zope.schema.Set':
             value_type = etree.SubElement(field, '{%s}value_type' % SCHEMA_NS)
             value_type.set('type', 'zope.schema.Choice')
