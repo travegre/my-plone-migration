@@ -101,6 +101,36 @@ def rich_raw(value):
     return to_unicode(raw if raw is not None else value)
 
 
+def metadata(site, obj):
+    state = None
+    try:
+        state = site.portal_workflow.getInfoFor(obj, 'review_state', None)
+    except Exception:
+        pass
+    local_roles = []
+    try:
+        local_roles = [[to_unicode(p), [to_unicode(r) for r in roles]]
+                       for p, roles in obj.get_local_roles()]
+    except Exception:
+        pass
+    blocked = False
+    try:
+        blocked = bool(obj.get_local_role_block())
+    except Exception:
+        pass
+    exclude = None
+    try:
+        exclude = bool(obj.getExcludeFromNav())
+    except Exception:
+        pass
+    return {
+        'workflow_state': state,
+        'local_roles': local_roles,
+        'local_role_block': blocked,
+        'exclude_from_nav': exclude,
+    }
+
+
 def new_model():
     model = etree.Element('{%s}model' % SCHEMA_NS,
                           nsmap={None: SCHEMA_NS,
@@ -272,7 +302,7 @@ def fix_model_expressions(model):
     return model
 
 
-def export_form(site_name, obj):
+def export_form(site, site_name, obj):
     return {
         'site': site_name,
         'source_path': object_path(obj),
@@ -283,6 +313,7 @@ def export_form(site_name, obj):
         'fields_model': fix_model_expressions(fields_model(obj)),
         'actions_model': fix_model_expressions(actions_model(obj)),
         'form_tabbing': False,
+        'metadata': metadata(site, obj),
     }
 
 
@@ -308,7 +339,7 @@ def run(app, output_dir):
             for brain in brains:
                 try:
                     obj = brain.getObject()
-                    record = export_form(site_name, obj)
+                    record = export_form(site, site_name, obj)
                     thanks_id = safe_call(obj, 'getThanksPage', None)
                     thanks = obj.get(thanks_id, None) if thanks_id else None
                     if thanks is not None:
