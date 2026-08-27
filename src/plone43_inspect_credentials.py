@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 """Inspect Plone 4.3 PAS credential storage without exporting credentials.
 
-Read-only.  Reports user-source/authentication plugin classes and, where the
-standard ZODBUserManager exposes stored passwords, only the encoding prefix
-(e.g. ``{SSHA}``) -- never the encoded password itself.
+Read-only. Reports PAS plugin classes and, where a plugin exposes a password
+mapping such as ZODBUserManager ``_user_passwords``, only aggregate encoding
+prefixes (e.g. ``{SSHA}``) -- never usernames, hashes, or passwords.
 
 Run::
 
@@ -33,17 +33,53 @@ def scheme(value):
     match = re.match(r'^(\{[^}]+\})', value)
     if match:
         return match.group(1)
-    # Some older encodings do not use a brace prefix.  Do not print any value.
     return '<unprefixed>'
 
 
+def mapping_values(value):
+    """Return values from dict/PersistentMapping/BTrees without assuming dict."""
+    if value is None:
+        return None
+    values = getattr(value, 'values', None)
+    if callable(values):
+        try:
+            return list(values())
+        except Exception:
+            pass
+    items = getattr(value, 'items', None)
+    if callable(items):
+        try:
+            return [item[1] for item in items()]
+        except Exception:
+            pass
+    return None
+
+
 def plugin_ids(pas, interface_name):
+    # PAS interface locations vary a little across old versions. Try both.
+    candidates = []
     try:
         from Products.PluggableAuthService import interfaces
-        iface = getattr(interfaces, interface_name)
-        return list(pas.plugins.listPluginIds(iface))
+        candidates.append(getattr(interfaces, interface_name, None))
     except Exception:
-        return []
+        pass
+    try:
+        module = __import__(
+            'Products.PluggableAuthService.interfaces.plugins',
+            fromlist=[interface_name])
+        candidates.append(getattr(module, interface_name, None))
+    except Exception:
+        pass
+    for iface in candidates:
+        if iface is None:
+            continue
+        try:
+            ids = list(pas.plugins.listPluginIds(iface))
+            if ids:
+                return ids
+        except Exception:
+            pass
+    return []
 
 
 def inspect_site(site_id, site):
@@ -51,46 +87,53 @@ def inspect_site(site_id, site):
     print('\n[%s]' % site_id)
     print('PAS: %s' % dotted(pas))
 
+    print('contained plugins:')
+    for plugin_id in pas.objectIds():
+        try:
+            plugin = pas[plugin_id]
+            print('  %s -> %s' % (plugin_id, dotted(plugin)))
+        except Exception:
+            pass
+
     for interface_name in ('IUserEnumerationPlugin', 'IUserAdderPlugin',
                            'IAuthenticationPlugin', 'IPropertiesPlugin',
                            'IGroupsPlugin'):
         ids = plugin_ids(pas, interface_name)
         if ids:
-            print('%s: %s' % (interface_name, ', '.join(ids)))
-            for plugin_id in ids:
-                try:
-                    plugin = pas[plugin_id]
-                    print('  %s -> %s' % (plugin_id, dotted(plugin)))
-                except Exception:
-                    pass
+            print('%s active: %s' % (interface_name, ', '.join(ids)))
 
-    # Standard PAS ZODBUserManager stores encoded passwords in
-    # ``_user_passwords``.  Only aggregate the encoding schemes.
     found = False
     for plugin_id in pas.objectIds():
         try:
             plugin = pas[plugin_id]
         except Exception:
             continue
-        passwords = getattr(plugin, '_user_passwords', None)
-        if not isinstance(passwords, dict):
-            continue
-        found = True
-        counts = {}
-        for encoded in passwords.values():
-            name = scheme(encoded)
-            counts[name] = counts.get(name, 0) + 1
-        rendered = ', '.join('%s=%d' % item for item in sorted(counts.items()))
-        print('credential store %s (%s): %d users; schemes: %s' %
-              (plugin_id, dotted(plugin), len(passwords), rendered or '<empty>'))
+        for attr in ('_user_passwords', '_passwords'):
+            try:
+                store = getattr(plugin, attr, None)
+            except Exception:
+                store = None
+            values = mapping_values(store)
+            if values is None:
+                continue
+            found = True
+            counts = {}
+            for encoded in values:
+                name = scheme(encoded)
+                counts[name] = counts.get(name, 0) + 1
+            rendered = ', '.join('%s=%d' % item for item in sorted(counts.items()))
+            print('credential store %s.%s (%s): %d users; schemes: %s' %
+                  (plugin_id, attr, dotted(plugin), len(values),
+                   rendered or '<empty>'))
+
     if not found:
-        print('credential store: no standard _user_passwords mapping found')
+        print('credential store: no password mapping found on contained plugins')
 
 
 def run(app):
     for site_id in SITES:
         inspect_site(site_id, app.unrestrictedTraverse(site_id))
-    print('\nNo password hashes or SMTP passwords were printed.')
+    print('\nNo usernames, password hashes, passwords, or SMTP passwords were printed.')
 
 
 if 'app' not in globals():
