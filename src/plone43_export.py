@@ -314,6 +314,43 @@ def catalog_objects(site, errors, site_name):
                            'operation': 'catalog.getObject', 'error': repr(exc)})
 
 
+def zodb_objects(root):
+    """Walk contained ZODB content without relying on portal_catalog."""
+    stack = [root]
+    seen = set()
+    while stack:
+        obj = stack.pop()
+        marker = id(obj)
+        if marker in seen:
+            continue
+        seen.add(marker)
+        yield obj
+        values = getattr(obj, 'objectValues', None)
+        if callable(values):
+            try:
+                children = list(values())
+            except Exception:
+                children = []
+            stack.extend(reversed(children))
+
+
+def uncataloged_records(site, catalog_paths):
+    result = []
+    site_path = object_path(site) or ''
+    for obj in zodb_objects(site):
+        path = object_path(obj)
+        if not path or path == site_path or path in catalog_paths:
+            continue
+        result.append({
+            'source_path': path,
+            'portal_type': portal_type(obj),
+            'class': '%s.%s' % (obj.__class__.__module__, obj.__class__.__name__),
+            'title': safe_call(obj, 'Title', getattr(obj, 'title', None)),
+        })
+    result.sort(key=lambda item: item['source_path'])
+    return result
+
+
 def run(app, outdir):
     if not os.path.isdir(outdir):
         os.makedirs(outdir)
@@ -326,10 +363,13 @@ def run(app, outdir):
     pfg_pathname = os.path.join(outdir, 'pfg.jsonl')
     errors = []
     counts = {}
+    uncataloged = {}
     with open(object_pathname, 'wb') as objects_handle, open(pfg_pathname, 'wb') as pfg_handle:
         for site_name in SITES:
             site = app.unrestrictedTraverse(site_name)
             site_counts = {}
+            catalog_paths = set(brain.getPath() for brain in
+                                site.portal_catalog.unrestrictedSearchResults())
             for obj in catalog_objects(site, errors, site_name):
                 record = export_object(obj, site, site_name, binary_dir, errors)
                 pt = record.get('portal_type') or '<none>'
@@ -339,6 +379,7 @@ def run(app, outdir):
                 else:
                     objects_handle.write(json_line(record))
             counts[site_name] = site_counts
+            uncataloged[site_name] = uncataloged_records(site, catalog_paths)
     manifest = {
         'schema_version': 1,
         'read_only_source': True,
@@ -349,9 +390,16 @@ def run(app, outdir):
         'pfg_file': 'pfg.jsonl',
         'binary_dir': 'binaries',
         'error_count': len(errors),
+        'uncataloged_count_by_site': dict((name, len(items)) for name, items in uncataloged.items()),
     }
     with open(os.path.join(outdir, 'manifest.json'), 'wb') as handle:
         handle.write(json_line(manifest))
+    with open(os.path.join(report_dir, 'uncataloged-zodb.json'), 'wb') as handle:
+        rendered = json.dumps(normalize_json(uncataloged), ensure_ascii=False,
+                              indent=2, sort_keys=True)
+        if isinstance(rendered, unicode_type):
+            rendered = rendered.encode('utf-8')
+        handle.write(rendered)
     with open(os.path.join(report_dir, 'errors.json'), 'wb') as handle:
         rendered = json.dumps(normalize_json(errors), ensure_ascii=False, indent=2, sort_keys=True)
         if isinstance(rendered, unicode_type):
@@ -361,6 +409,7 @@ def run(app, outdir):
     print('Objects: %s' % object_pathname)
     print('PFG: %s' % pfg_pathname)
     print('Errors: %d' % len(errors))
+    print('Uncataloged ZODB objects: %d' % sum(len(v) for v in uncataloged.values()))
 
 
 if 'app' not in globals():
