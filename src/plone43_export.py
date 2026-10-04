@@ -118,6 +118,24 @@ def safe_call(obj, name, default=None):
         return default
 
 
+def owner_id(obj):
+    try:
+        owner = obj.getOwner()
+        if owner is not None:
+            getter = getattr(owner, 'getId', None)
+            if callable(getter):
+                return to_unicode(getter())
+    except Exception:
+        pass
+    try:
+        owner = obj.getOwnerTuple()
+        if owner and len(owner) > 1:
+            return to_unicode(owner[-1])
+    except Exception:
+        pass
+    return None
+
+
 def metadata(obj, site):
     workflow = getattr(site, 'portal_workflow', None)
     state = None
@@ -143,6 +161,7 @@ def metadata(obj, site):
     return {
         'uid': safe_call(obj, 'UID'),
         'creators': list(safe_call(obj, 'Creators', ()) or ()),
+        'owner': owner_id(obj),
         'created': getattr(obj, 'creation_date', None),
         'modified': getattr(obj, 'modification_date', None),
         'effective': safe_call(obj, 'effective'),
