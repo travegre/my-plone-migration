@@ -15,7 +15,6 @@ from __future__ import print_function
 import json
 import os
 import sys
-import stat
 
 SITES = ('portal', 'dezurstva', 'kiestra', 'preiskave', 'nadomescanja')
 SCRIPT = 'plone43_export_security_settings.py'
@@ -276,6 +275,8 @@ def run(app, outdir):
         record = site_record(site, site_id)
         payload['sites'].append(record)
         credentials['sites'][site_id] = site_credentials(site, record['users'])
+        print('  site-local password hashes: %d/%d (other PAS/root users are not exported)' %
+              (len(credentials['sites'][site_id]['password_hashes']), len(record['users'])))
         print('%s: %d users, %d groups' %
               (site_id, len(record['users']), len(record['groups'])))
 
