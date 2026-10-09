@@ -7,15 +7,15 @@ Read-only.  Run with the old instance stopped::
     bin/instance run src/plone43_export_security_settings.py \
         --output-dir=/plone/instance/src/export
 
-Passwords are intentionally NOT exported by this file.  They require a
-separate credential-migration decision because PAS password storage is plugin
-specific and must never be committed to Git.
+Credentials are exported separately to security-credentials.json (mode 0600).
+This file contains sensitive password hashes and SMTP passwords: never commit it.
 """
 from __future__ import print_function
 
 import json
 import os
 import sys
+import stat
 
 SITES = ('portal', 'dezurstva', 'kiestra', 'preiskave', 'nadomescanja')
 SCRIPT = 'plone43_export_security_settings.py'
@@ -222,6 +222,45 @@ def site_record(site, site_id):
     }
 
 
+
+def site_credentials(site, site_users):
+    """Extract hashes from the standard site-local PAS ZODBUserManager only."""
+    hashes = {}
+    source = getattr(getattr(site, 'acl_users', None), 'source_users', None)
+    stored = getattr(source, '_user_passwords', None)
+    if stored is not None:
+        for user in site_users:
+            user_id = user['id']
+            value = stored.get(user_id)
+            if value:
+                hashes[user_id] = text(value)
+    mh = getattr(site, 'MailHost', None)
+    smtp_pwd = getattr(mh, 'smtp_pwd', None) if mh is not None else None
+    return {'password_hashes': hashes,
+            'smtp_password': text(smtp_pwd) if smtp_pwd else None}
+
+
+def write_credentials(outdir, payload):
+    """Write a private file without following an existing symlink."""
+    path = os.path.join(outdir, 'security-credentials.json')
+    flags = os.O_WRONLY | os.O_CREAT | os.O_TRUNC
+    if hasattr(os, 'O_NOFOLLOW'):
+        flags |= os.O_NOFOLLOW
+    fd = os.open(path, flags, 0600)
+    try:
+        os.fchmod(fd, 0600)
+        rendered = json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True)
+        if isinstance(rendered, text_type):
+            rendered = rendered.encode('utf-8')
+        with os.fdopen(fd, 'wb') as handle:
+            fd = None
+            handle.write(rendered)
+    finally:
+        if fd is not None:
+            os.close(fd)
+    return path
+
+
 def run(app, outdir):
     if not os.path.isdir(outdir):
         os.makedirs(outdir)
@@ -231,10 +270,12 @@ def run(app, outdir):
         'passwords_exported': False,
         'sites': [],
     }
+    credentials = {'schema_version': 1, 'sites': {}}
     for site_id in SITES:
         site = app.unrestrictedTraverse(site_id)
         record = site_record(site, site_id)
         payload['sites'].append(record)
+        credentials['sites'][site_id] = site_credentials(site, record['users'])
         print('%s: %d users, %d groups' %
               (site_id, len(record['users']), len(record['groups'])))
 
@@ -245,7 +286,9 @@ def run(app, outdir):
     with open(path, 'wb') as handle:
         handle.write(rendered)
     print('Security/settings export: %s' % path)
-    print('Passwords: NOT exported; SMTP password: NOT exported')
+    private_path = write_credentials(outdir, credentials)
+    print('Sensitive credentials exported separately to %s (mode 0600)' % private_path)
+    print('WARNING: contains password hashes and SMTP secrets; do not commit or share.')
 
 
 if 'app' not in globals():
